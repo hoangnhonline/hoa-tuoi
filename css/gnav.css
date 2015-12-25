@@ -1,0 +1,180 @@
+@charset "UTF-8";
+
+/* Bootstrap menu */
+.gnav-menu .navbar-default {
+  background-color: #9c0080;
+  border: none;
+  min-height: auto;
+  border-bottom: 1px solid #ccc;
+  border-top: 1px solid #f199e1;
+  -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0; }
+
+.gnav-menu .navbar-default .navbar-brand {
+  background-color: transparent;
+  color: #555;
+  height: 36px;
+  line-height: 36px;
+  padding: 0 10px;
+  display: none; }
+  
+.gnav-menu .navbar-default .navbar-collapse {
+  background-color: transparent;
+  padding: 0; }
+
+.gnav-menu .navbar-nav > li > a,
+.gnav-menu .navbar-nav > li > a:focus {
+  color: #fff;
+  padding: 0 18px;
+  line-height: 46px;
+  text-decoration: none;
+  font-weight: nomarl;
+  font-size: 15px;
+  text-shadow: none;
+  text-transform: uppercase;
+  border-right: none;
+  text-shadow: 0 1px 2px #777; }
+
+.gnav-menu .navbar-nav > li:first-child > a {
+  border-left: none;
+  margin-left: 0; }
+
+.gnav-menu .navbar-nav > li:last-child > a {
+  border-right: none; }
+
+.gnav-menu .navbar-nav > li:hover ul.dropdown-menu {
+  display: block !important; }
+
+.gnav-menu .navbar-nav > li > a:hover {
+  background-color: #8a0272;
+  color: #EAEC37; }
+
+.gnav-menu .navbar-default .navbar-nav > .open > a {
+  background-color: #668F28;
+  color: #fff;
+  border-bottom: none; }
+
+.gnav-menu .navbar-nav > .active > a, 
+.gnav-menu .navbar-nav > .active > a:focus, 
+.gnav-menu .navbar-nav > .active > a:hover {
+  background-color: #8a0272;
+  color: #fff; }
+
+.gnav-menu .navbar-nav > li > .dropdown-menu {
+  padding: 0;
+  -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0; }
+  
+.gnav-menu .navbar-nav .dropdown-menu > li:hover {
+  background-color: #668F28; }
+
+.gnav-menu .navbar-nav .dropdown-menu > li > a {
+  padding: 7px 20px;
+  font-size: 14px;
+  border-bottom: 1px solid #f0f0f0; }
+
+.gnav-menu .navbar-nav .dropdown-menu > li > a:hover {
+  background-color: transparent;
+  color: #fff; }
+  
+
+@media (max-width: 980px) {
+.gnav-menu {
+  display: block;
+}
+}
+
+@media (max-width: 768px) {
+/* Bootstrap menu */
+.gnav-menu .navbar-header {
+  background-color: #9c0080;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0; }
+
+.gnav-menu .navbar-default .navbar-brand {
+  background-color: none;
+  background: none;
+  color: #FFF;
+  text-transform: uppercase;
+  line-height: 40px;
+  display: block; }
+  
+.gnav-menu .navbar-toggle,
+.gnav-menu .navbar-toggle:focus {
+  background-color: #0883c7;
+  border: none;
+  color: #fff;
+  margin: 5px;
+  padding: 9px 7px;
+  border: 1px solid #0883c7; }
+
+.gnav-menu .navbar-toggle:hover {
+  background-color: #3073C1; }
+
+.gnav-menu .navbar-toggle .icon-bar {
+  background-color: #fff; }
+
+.gnav-menu .navbar-default .navbar-collapse {
+  padding-right: 15px;
+  padding-left: 15px;
+  border-style: solid;
+  border-color: #e2e2e2;
+  border-width: 0 1px 0; }
+
+.gnav-menu .navbar-nav {
+  margin: 0px -15px 0; }
+
+.gnav-menu .navbar-nav .open .dropdown-menu {
+  background-color: #fff; 
+  -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0; }
+
+.gnav-menu .navbar-nav > li.dropdown.open {
+  border-bottom: 1px solid #e2e2e2; }
+
+.gnav-menu .navbar-nav > li > a,
+.gnav-menu .navbar-nav > li > a:focus {
+  background: #e9e9e9;
+  color: #333;
+  font-size: 13px;
+  text-transform: uppercase;
+  padding: 7px 12px;
+  line-height: 25px;
+  text-decoration: none;
+  border-style: solid;
+  text-shadow: none;
+  font-weight: normal;
+  border-color: #e0e0e0;
+  border-width: 0px 0px 1px; }
+
+.gnav-menu .navbar-nav > li:first-child > a {
+  margin-left: 0; }
+
+.gnav-menu .navbar-nav > li:last-child > a {
+  border-right: none; }
+
+.gnav-menu .navbar-nav > li > a:hover {
+  background-color: #e3e3e3;
+  border-style: solid;
+  border-color: #000;
+  border-width: 0 0 0 1px;
+  color: #000; }
+
+.gnav-menu .navbar-default .navbar-nav > .open > a {
+  background-color: #E7E7E7;
+  color: #222;
+  border-left: 1px solid #000;
+  border-bottom: 1px solid #E2E2E2; }
+
+.gnav-menu .navbar-default .navbar-nav > .active > a, 
+.gnav-menu .navbar-default .navbar-nav > .active > a:focus, 
+.gnav-menu .navbar-default .navbar-nav > .active > a:hover {
+  background-color: #e7e7e7;
+  color: #222;
+  border-left: 2px solid #0883c7;
+  border-bottom: none;
+  border-right: none; }
+
+}
+
+/* 
+----------------------------------------------------------------------------------------------------
+ □ THE AND
+---------------------------------------------------------------------------------------------------- */
