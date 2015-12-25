@@ -7,9 +7,9 @@ if(!isset($_SESSION)){
 class Backend {
 
     function __construct() {
-        if($_SERVER['SERVER_NAME']=='lktartimage.dev'){
+        if($_SERVER['SERVER_NAME']=='hoatuoi.dev'){
             mysql_connect('localhost', 'root', '') or die("Can't connect to server");
-               mysql_select_db('lkt_art') or die("Can't connect database");
+               mysql_select_db('hoatuoi') or die("Can't connect database");
         }else{
 			mysql_connect('localhost', 'lkt_art', 'TSel$D6]Uou5') or die("Can't connect to server");
 			mysql_select_db('lkt_art') or die("Can't connect database");  
@@ -155,9 +155,9 @@ class Backend {
 
             if(!empty($arrCustom)){
                 $sql.= " WHERE 1 = 1 ";
-                foreach ($arrCustom as $column => $value) {
-                    if($value > 0){
-                        $sql.= " AND $column = $value ";
+                foreach ($arrCustom as $column => $value) {                    
+                    if((is_numeric($value) && $value > -1) || (!is_numeric($value) && $value != '')){
+                        $sql.= " AND $column = '$value' ";
                     }
                 }
             }
@@ -307,7 +307,37 @@ class Backend {
         $sql = "UPDATE users SET password = '$password' WHERE id = $user_id";
         mysql_query($sql);
 
-    } 
+    }
+    public function getListCateParent(){
+        $arr = array();
+        $sql = "SELECT * FROM cate WHERE parent_id = 0 ORDER BY display_order ASC";
+        $rs = mysql_query($sql) or die(mysql_error());
+        while($row = mysql_fetch_assoc($rs)){           
+            $arr[$row['id']] = $row;           
+        }
+        return $arr;
+    }
+    public function getListCateTree(){
+        $arr = array();
+        $sql = "SELECT * FROM cate WHERE parent_id = 0 ORDER BY display_order ASC";
+        $rs = mysql_query($sql) or die(mysql_error());
+        while($row = mysql_fetch_assoc($rs)){
+            $id = $row['id'];
+            $arr[$id] = $row;
+            $arrChild = $this->getListByParent($id);
+            if(!empty($arrChild)){
+                $arr[$id]['child'] = $arrChild;                
+            }
+        }
+        return $arr;
+    }
+    public function getListByParent($parent_id){
+        $count = 0;
+        $sql = "SELECT * FROM cate WHERE parent_id = $parent_id ";
+        $rs = mysql_query($sql) or die(mysql_error());
+        $count = mysql_num_rows($rs);
+        return $count;
+    }
     public function Login(){
 
         $email = trim(strip_tags($_POST['email']));
@@ -321,9 +351,10 @@ class Backend {
         $user = mysql_query($sql) or die(mysql_error());
 
         $row = mysql_num_rows($user);
-        if ($row == 1) {//success
+
+        if ($row == 1) {
             $chitiet = mysql_fetch_assoc($user);
-            $_SESSION['user_id'] = $chitiet['id'];
+            $_SESSION['user_id'] = $chitiet['user_id'];
             $_SESSION['email'] = $chitiet['email'];            
             header("location:index.php");
         }

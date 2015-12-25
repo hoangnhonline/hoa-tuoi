@@ -13,17 +13,17 @@
     <ul class="sidebar-menu">
        <li class="treeview active">
           <a href="#">
-            <i class="fa fa-folder"></i> <span>Album</span>
+            <i class="fa fa-folder"></i> <span>Danh mục</span>
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
             <li>
-                <a href="<?php echo BASE_URL; ?>album&act=form">
-                    <i class="fa fa-circle-o"></i> <span>Add new</span> <!--<small class="badge pull-right bg-green">new</small>-->            </a>
+                <a href="<?php echo BASE_URL; ?>cate&act=form">
+                    <i class="fa fa-circle-o"></i> <span>Tạo mới</span> <!--<small class="badge pull-right bg-green">new</small>-->            </a>
             </li>
             <li>
-                <a href="<?php echo BASE_URL; ?>album&act=list">
-                    <i class="fa fa-circle-o"></i> <span>List</span> <!--<small class="badge pull-right bg-green">new</small>-->            </a>
+                <a href="<?php echo BASE_URL; ?>cate&act=list">
+                    <i class="fa fa-circle-o"></i> <span>Danh sách</span> <!--<small class="badge pull-right bg-green">new</small>-->            </a>
             </li>     
             
           </ul>

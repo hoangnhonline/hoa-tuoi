@@ -3409,7 +3409,7 @@ div.button{padding:10px;}
 span.required{color:red;margin-top: 3px}
 td.error_data{color:red;font-style: italic;font-weight: bold}
 .col_sm_nowrap {white-space: nowrap;width: 1%}
-div.box_search{padding:10px;text-align:right;background-color:#CCC}
+div.box_search{padding:10px}
 input.text_search{width:200px;border:1px solid #ccc;height: 25px}
 select.select_search{border:1px solid #ccc;height: 25px;max-width: 110px}
 .myDragClass{background-color: orange;color:#FFF;}
@@ -3455,4 +3455,13 @@ img.img-up{
 }
 #load_hinh{
   margin-top: 15px;
+}
+label.error{
+  color:red !important;
+  font-size: 13px;
+  font-style: italic;
+  margin-top: 3px;
+}
+.box-title{
+  font-size: 22px;
 }

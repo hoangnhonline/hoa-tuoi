@@ -32,7 +32,7 @@ $(function() {
         });       
         return flag;
     });
-    $('a.link_delete').click(function(){
+    $('a.link-delete').click(function(){
         var obj = $(this);
         var alias = obj.attr('alias');
         if(confirm('Bạn chắc chắn xóa "' + alias +'" ?')){
