@@ -3465,3 +3465,13 @@ label.error{
 .box-title{
   font-size: 22px;
 }
+body.dragging, body.dragging * {
+  cursor: move !important;
+  color: red;
+}
+.highlight {
+    border: 1px solid red;
+    font-weight: bold;        
+    background-color: lightblue;
+}
+.checkbox label{margin-left: 10px}

@@ -10,6 +10,10 @@ $id = $_POST['id'];
 
 $mod = $_POST['mod'];
 
+mysql_query("DELETE FROM $mod WHERE id = $id");
+exit();
+
+
 if($mod=='album'){
    
     // xoa project

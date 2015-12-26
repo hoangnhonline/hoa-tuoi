@@ -148,7 +148,7 @@ class Backend {
         $row = mysql_fetch_assoc($rs);
         return $row;
     }
-    function getList($table,$offset = -1 , $limit = -1, $arrCustom = array()){
+    function getList($table,$offset = -1 , $limit = -1, $arrCustom = array(), $order = 0){
         try{
             $arrResult = array();
             $sql = "SELECT * FROM $table";
@@ -161,7 +161,12 @@ class Backend {
                     }
                 }
             }
-            $sql .= " ORDER BY id DESC ";
+            if($order == 1){
+                $sql .= " ORDER BY display_order ASC ";
+            }else{
+                $sql .= " ORDER BY id DESC ";
+            }
+
             if ($limit > 0 && $offset >= 0)
                 $sql .= " LIMIT $offset,$limit";
             //echo $sql."<br>";
@@ -170,6 +175,40 @@ class Backend {
                $arrResult['data'][$row['id']] = $row;
             }
             $arrResult['total'] = mysql_num_rows($rs);
+            return $arrResult;
+        }catch(Exception $ex){
+            $arrLog = array('time'=>date('d-m-Y H:i:s'),'model'=> 'Post','function' => 'getListEstateType' , 'error'=>$ex->getMessage(),'sql'=>$sql);
+            $this->logError($arrLog);
+        }
+    }
+
+    function getListArray($table,$offset = -1 , $limit = -1, $arrCustom = array(), $order = 0){
+        try{
+            $arrResult = array();
+            $sql = "SELECT * FROM $table";
+
+            if(!empty($arrCustom)){
+                $sql.= " WHERE 1 = 1 ";
+                foreach ($arrCustom as $column => $value) {                    
+                    if((is_numeric($value) && $value > -1) || (!is_numeric($value) && $value != '')){
+                        $sql.= " AND $column = '$value' ";
+                    }
+                }
+            }
+            if($order == 1){
+                $sql .= " ORDER BY display_order ASC ";
+            }else{
+                $sql .= " ORDER BY id DESC ";
+            }
+
+            if ($limit > 0 && $offset >= 0)
+                $sql .= " LIMIT $offset,$limit";
+            //echo $sql."<br>";
+            $rs = mysql_query($sql) or die(mysql_error());
+            while($row = mysql_fetch_assoc($rs)){
+               $arrResult[$row['id']] = $row;
+            }
+                        
             return $arrResult;
         }catch(Exception $ex){
             $arrLog = array('time'=>date('d-m-Y H:i:s'),'model'=> 'Post','function' => 'getListEstateType' , 'error'=>$ex->getMessage(),'sql'=>$sql);
@@ -317,9 +356,29 @@ class Backend {
         }
         return $arr;
     }
-    public function getListCateTree(){
+    public function getListCateByCateType($cate_type_id){
         $arr = array();
-        $sql = "SELECT * FROM cate WHERE parent_id = 0 ORDER BY display_order ASC";
+        $sql = "SELECT * FROM cate WHERE parent_id = 0 AND cate_type_id = $cate_type_id ORDER BY display_order ASC";
+        $rs = mysql_query($sql) or die(mysql_error());
+        $count = mysql_num_rows($rs);
+        return $count;
+    }
+    function updateOrder($table, $id, $display_order){
+        $sql = "UPDATE $table SET display_order = $display_order WHERE id = $id";
+        mysql_query($sql) or die(mysql_error());
+    }
+    public function getListCateType(){
+        $arr = array();
+        $sql = "SELECT * FROM cate_type ORDER BY display_order ASC";
+        $rs = mysql_query($sql) or die(mysql_error());
+        while($row = mysql_fetch_assoc($rs)){           
+            $arr[$row['id']] = $row;           
+        }
+        return $arr;
+    }
+    public function getListCateTree($cate_type_id){
+        $arr = array();
+        $sql = "SELECT * FROM cate WHERE parent_id = 0 AND cate_type_id = $cate_type_id ORDER BY display_order ASC";
         $rs = mysql_query($sql) or die(mysql_error());
         while($row = mysql_fetch_assoc($rs)){
             $id = $row['id'];
@@ -328,10 +387,19 @@ class Backend {
             if(!empty($arrChild)){
                 $arr[$id]['child'] = $arrChild;                
             }
-        }
+        }        
         return $arr;
     }
     public function getListByParent($parent_id){
+        $arr = array();
+        $sql = "SELECT * FROM cate WHERE parent_id = $parent_id ";
+        $rs = mysql_query($sql) or die(mysql_error());
+        while ($row = mysql_fetch_assoc($rs)) {
+            $arr[$row['id']] = $row;
+        }
+        return $arr;
+    }
+    public function countListByParent($parent_id){
         $count = 0;
         $sql = "SELECT * FROM cate WHERE parent_id = $parent_id ";
         $rs = mysql_query($sql) or die(mysql_error());

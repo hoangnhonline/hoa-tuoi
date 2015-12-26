@@ -37,6 +37,7 @@ $model = new Backend;
         <link href="static/css/jquery-ui.css" rel="stylesheet" type="text/css" /> 
         <link href="css/jquery-ui.css" rel="stylesheet" type="text/css" /> 
         <link href="css/skins/all.css" rel="stylesheet">
+
     </head>
     <body class="skin-blue">        
         <header class="header">

@@ -1,16 +1,58 @@
 <?php
 $id = 0;
+$is_detail = false;
+$cate_type_id = $parent_id = $menu_type = 0;
 if(isset($_GET['id'])){
     $id = (int) $_GET['id'];
     require_once "model/Backend.php";
     $model = new Backend;
-    $detail = $model->getDetail("cate",$id);    
+    $detail = $model->getDetail("cate",$id);   
+    $is_detail = true; 
 }
-$cateParentArr = $model->getListCateParent();
+
+$cateTypeArr = $model->getListCateType();
+if($is_detail){
+    $cate_type_id = $detail['cate_type_id'];
+    $detailCateType = $model->getDetail('cate_type', $cate_type_id);
+
+    $parent_id = $detail['parent_id'];
+    $detailParent = $model->getDetail('cate', $parent_id);
+
+    $menu_type = $detail['menu_type'];
+}else{
+    if(isset($_GET['cate_type_id']) && $_GET['cate_type_id'] > 0){
+        $cate_type_id = $_GET['cate_type_id'];
+        $detailCateType = $model->getDetail('cate_type', $cate_type_id);
+    }
+    if(isset($_GET['parent_id']) && $_GET['parent_id'] > 0){
+        $parent_id = $_GET['parent_id'];
+        $detailParent = $model->getDetail('cate', $parent_id);
+        $cate_type_id = $detailParent['cate_type_id'];
+    } 
+    if(isset($_GET['menu_type']) && $_GET['menu_type'] > 0){
+        $menu_type = $_GET['menu_type'];        
+    }    
+}
+if($cate_type_id > 0){
+    $cateParentArr = $model->getListArray('cate', -1, -1, array('parent_id' => 0, 'cate_type_id' => $cate_type_id));
+}else{
+    $cateParentArr = $model->getListCateParent();
+}
 ?>
 <div class="row">
     <div class="col-md-12">
-
+        <section class="content-header">     
+          <ol class="breadcrumb">
+            <li><a href="index.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+            <li><a href="index.php?mod=cate&act=list">Danh mục</a></li>     
+            <?php if(isset($_GET['cate_type_id']) && $_GET['cate_type_id'] > 0){ ?>
+            <li><a href="index.php?mod=cate&act=list&cate_type_id=<?php echo $cate_type_id; ?>"><?php echo $detailCateType['name_vi']; ?></a></li>
+            <?php } ?>
+            <?php if(isset($_GET['parent_id']) && $_GET['parent_id'] > 0){ ?>
+            <li><a href="index.php?mod=cate&act=list&cate_type_id=<?php echo $cate_type_id; ?>&parent_id=<?php echo $parent_id; ?>"><?php echo $detailParent['name_vi']; ?></a></li>
+            <?php } ?>            
+          </ol>
+        </section>
         <!-- Custom Tabs -->
         <button class="btn btn-primary btn-sm" onclick="location.href='index.php?mod=cate&act=list'">
             Danh sách
@@ -39,12 +81,30 @@ $cateParentArr = $model->getListCateParent();
                         <th width="43%" style="text-align:center">Tiếng Anh <img src="img/en.png" /></th>
                     </tr>
                     <tr>
+                        <td>Loại sản phẩm</td>
+                        <td colspan="2">
+                            <select name="cate_type_id" id="cate_type_id" class="form-control">
+                                <option value="0">-- Chọn loại sản phẩm --</option>
+                                <?php 
+                                if(!empty($cateTypeArr)){
+                                foreach ($cateTypeArr as $cateType) {
+                                ?>
+                                <option value="<?php echo $cateType['id']; ?>" 
+                                    <?php if((isset($cate_type_id) && $cate_type_id == $cateType['id'])) echo "selected"; ?>>
+                                    <?php echo $cateType['name_vi']; ?>
+                                </option>
+                                <?php } } ?>
+                                
+                            </select>
+                        </td>                        
+                    </tr>
+                    <tr id="loai-menu">
                         <td>Thuộc Menu</td>
                         <td colspan="2">
-                            <select name="menu_type" id="menu_type" class="form-control" aria-required="true" required="required">
+                            <select name="menu_type" id="menu_type" class="form-control">
                                 <option value="0">-- Chọn menu --</option>
-                                <option value="1" <?php if(isset($detail) && $detail['menu_type'] == 1) echo "selected"; ?>>Menu ngang</option>
-                                <option value="2" <?php if(isset($detail) && $detail['menu_type'] == 2) echo "selected"; ?>>Menu dọc</option>
+                                <option value="1" <?php if((isset($detail) && $detail['menu_type'] == 1) || (isset($_GET['menu_type']) && $_GET['menu_type'] == 1)) echo "selected"; ?>>Menu ngang</option>
+                                <option value="2" <?php if((isset($detail) && $detail['menu_type'] == 2) || (isset($_GET['menu_type']) && $_GET['menu_type'] == 2)) echo "selected"; ?>>Menu dọc</option>
                             </select>
                         </td>                        
                     </tr>
@@ -73,7 +133,7 @@ $cateParentArr = $model->getListCateParent();
                             <input aria-required="true" required="required" type="text" name="name_en" id="name_en" value="<?php if(isset($detail)) echo $detail['name_en']; ?>" class="form-control">
                         </td>
                     </tr>
-                     <tr>
+                     <!--<tr>
                         <td>Mô tả</td>
                         <td>
                             <textarea class="form-control" name="description_vi" rows="5" id="description_vi"><?php if(isset($detail)) echo $detail['description_vi']; ?></textarea>                            
@@ -81,7 +141,7 @@ $cateParentArr = $model->getListCateParent();
                         <td>
                             <textarea class="form-control" name="description_en" rows="5" id="description_en"><?php if(isset($detail)) echo $detail['description_en']; ?></textarea>
                         </td>
-                    </tr>                   
+                    </tr>-->                   
                    
                     <tr>
                         <td></td>
@@ -150,14 +210,27 @@ $cateParentArr = $model->getListCateParent();
 </div>
 <script type="text/javascript" src="js/validate.js"></script>
 <script type="text/javascript" src="js/form.js"></script>
-<link rel="stylesheet" type="text/css" href="css/sweet.css">
-<script type="text/javascript" src="js/sweet.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function(){
         $('#dataForm').validate({
             rules: {
-           menu_type: { min: 1 }
-          }
+                menu_type: { min: 1 },
+                cate_type_id: { min: 1 }
+            }
         });    
+        <?php if(isset($cate_type_id) && $cate_type_id == 1){ ?>            
+            $('#loai-menu').show();
+        <?php }else{ ?>           
+            $('#loai-menu').hide();
+        <?php } ?>
+        $('#cate_type_id').change(function(){            
+            if($(this).val()==1){                
+                $('#loai-menu').show();
+            }else{                
+                $('#loai-menu').hide();
+            }
+        });
+
     });
 </script>

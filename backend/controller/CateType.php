@@ -1,5 +1,5 @@
 <?php
-$list_url = "../index.php?mod=cate&act=list";
+$list_url = "../index.php?mod=cate-type&act=list";
 require_once "../model/Backend.php";
 $model = new Backend;
 
@@ -11,21 +11,13 @@ $arrData['name_en'] = $name_en = $model->processData($_POST['name_en']);
 $arrData['alias_vi'] = $model->changeTitle($name_vi);
 $arrData['alias_en'] = $model->changeTitle($name_en);
 
-$arrData['description_vi'] = addslashes($_POST['description_vi']);
-$arrData['description_en'] = addslashes($_POST['description_en']);
+$arrData['icon_url'] = $icon_url = $_POST['icon_url'];
 
-$arrData['image_url'] = $image_url = $_POST['image_url'];
-
-$arrData['menu_type'] = $menu_type = (int) $_POST['menu_type'];
-
-
-$arrData['show_menu'] = isset($_POST['show_menu']) ? (int) $_POST['show_menu'] : 0;
-
-$arrData['parent_id'] = $parent_id = (int) $_POST['parent_id'];
-
-$arrData['cate_type_id'] = $cate_type_id = (int) $_POST['cate_type_id'];
-
-$arrData['display_order'] = 1;
+$rs = mysql_query("SELECT * FROM cate_type");
+$count = mysql_num_rows($rs);
+if($id == 0){
+	$arrData['display_order'] = $count + 1;
+}
 
 $meta_title_vi = $model->processData($_POST['meta_title_vi']);
 if($meta_title_vi == '') $meta_title_vi = $name_vi;
@@ -55,7 +47,7 @@ $arrData['meta_keyword_vi'] = $meta_keyword_vi;
 $arrData['meta_keyword_en'] = $meta_keyword_en;
 
 
-$table = "cate";
+$table = "cate_type";
 
 if($id > 0) {	
 
@@ -74,5 +66,5 @@ if($id > 0) {
 	$id = $model->insert($table, $arrData);	
 
 }
-header('location:'.$list_url."&cate_type_id=".$cate_type_id."&parent_id=".$parent_id."&menu_type=".$menu_type);
+header('location:'.$list_url);
 ?>

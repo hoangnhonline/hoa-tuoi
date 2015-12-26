@@ -1,5 +1,8 @@
 $(function() {
     "use strict";
+    $(".change-submit").change(function(){
+        $("#formSearch").submit();
+    });
     $('button.btnSave').click(function(){        
         var flag = true;
         $('input.required').each(function(){
