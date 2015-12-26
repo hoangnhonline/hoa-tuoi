@@ -102,7 +102,7 @@ if($cate_type_id > 0){
                     <tr>
                         <td>Danh mục</td>
                         <td colspan="2">            
-                           <label class="error" id="error_name_en">Vui lòng nhập chọn ít nhất 1 danh mục.</label>                
+                           <label class="error" id="error_cate_id">Vui lòng nhập chọn ít nhất 1 danh mục.</label>                
                            <div class="col-md-12" id="list-cate">
 
                            </div>
@@ -133,12 +133,12 @@ if($cate_type_id > 0){
                             ?>                     
                             <div class="col-md-6">                                
                                 <div class="checkbox">
-                                  <input type="checkbox" <?php if($is_new == 1) echo "checked"; ?> value="1" name="is_new"><label>Sản phẩm mới</label>
+                                  <input type="checkbox" <?php if($is_new == 1) echo "checked"; ?> value="1" name="is_new" id="is_new"><label>Sản phẩm mới</label>
                                 </div>
                             </div>
                             <div class="col-md-6">                                
                                 <div class="checkbox">
-                                  <input type="checkbox" <?php if($is_sale == 1) echo "checked"; ?> value="1" name="show_menu"><label>Sản phẩm khuyến mãi</label>
+                                  <input type="checkbox" <?php if($is_sale == 1) echo "checked"; ?> value="1" name="is_sale" id="is_sale"><label>Sản phẩm khuyến mãi</label>
                                 </div>
                             </div>
                         </td>
@@ -165,7 +165,7 @@ if($cate_type_id > 0){
                             <div class="col-md-6">                                
                                 <div class="form-group">
                                     <label>Giá khuyến mãi</label>
-                                   <input type="text" name="price_sale" id="price_sale" value="<?php if(isset($detail['price_sale']) && $detail['price_sale'] > 0) echo number_format($detail['price_sale']); ?>" class="form-control">
+                                   <input type="text" name="price_sale" id="price_sale" value="<?php if(isset($detail['price_sale']) && $detail['price_sale'] > 0) echo number_format($detail['price_sale']); ?>" class="form-control number">
                                    <label class="error" id="error_price_sale">Vui lòng nhập vào trường này.</label>
                                 </div>
                             </div>
@@ -250,7 +250,7 @@ if($cate_type_id > 0){
                     <tr>
                         <td></td>
                         <td colspan="2">
-                            <button class="btn btn-primary btnSave" type="submit">Save</button>
+                            <button class="btn btn-primary" id="btnSave" type="submit" onclick="return validateData();">Save</button>
                             <button class="btn btn-primary" type="reset" onclick="location.href='index.php?mod=cate&act=list'">Cancel</button>
                         </td>
                     </tr>                           
@@ -319,6 +319,57 @@ function SetFileFieldIcon( fileUrl, data ){
 }
 </script>
 <script type="text/javascript">
+function validateData(){
+    var countError = 0;
+    if($('#cate_type_id').val()==0){
+        $('#error_cate_type_id').show();
+        countError++;
+    }else{
+        $('#error_cate_type_id').hide();
+    }
+    if($('#cate_type_id').val()>0){
+        if($('.cate_id:checked').length == 0){
+            $('#error_cate_id').show();
+            countError++;
+        }else{
+            $('#error_cate_id').hide();
+        }
+    }
+    if($('#name_vi').val()==''){
+        $('#error_name_vi').show();
+        countError++;
+    }else{
+        $('#error_name_vi').hide();   
+    }
+    if($('#name_en').val()==''){
+        $('#error_name_en').show();
+        countError++;
+    }else{
+        $('#error_name_en').hide();   
+    }
+    if($('#price').val()==''){
+        $('#error_price').show();
+        countError++;
+    }else{
+        $('#error_price').hide();   
+    }
+    if($('#is_sale').prop('checked') == true){
+        if($('#price_sale').val()==''){
+            $('#error_price_sale').show();
+            countError++;
+        }else{            
+            $('#error_price_sale').hide();            
+        }
+    }
+    if(countError == 0){
+        return true;
+    }else{
+         $('html, body').animate({
+            scrollTop: $("label.error").parent().parent().offset().top
+        }, 500);
+        return false;        
+    }
+}
 $(function(){
     $('#choose_img_sv').on('ifChecked', function(event){
         $('#from_sv').show();
@@ -354,7 +405,27 @@ $(function(){
 </script>
 <script type="text/javascript">
     $(document).ready(function(){
-         
+        $('#name_vi').change(function(){
+            if($(this).val()==''){
+                $('#error_name_vi').show();
+            }else{
+                $('#error_name_vi').hide();
+            }
+        });
+        $('#name_en').change(function(){
+            if($(this).val()==''){
+                $('#error_name_en').show();
+            }else{
+                $('#error_name_en').hide();
+            }
+        });
+         $('#price').change(function(){
+            if($(this).val()==''){
+                $('#error_price').show();
+            }else{
+                $('#error_price').hide();
+            }
+        });
         <?php if(isset($cate_type_id) && $cate_type_id == 1){ ?>            
             $('#loai-menu').show();
         <?php }else{ ?>           
@@ -362,6 +433,11 @@ $(function(){
         <?php } ?>
         $('#cate_type_id').change(function(){            
             var cate_type_id = $(this).val();
+            if(cate_type_id > 0){
+                $('#error_cate_type_id').hide();
+            }else{
+                $('#error_cate_type_id').show();
+            }
             $.ajax({
                 url: "ajax/process.php",
                 type: "POST",
@@ -377,9 +453,7 @@ $(function(){
         });
 
     });
-function validateData(){
-    
-}
+
 </script>
 <script type="text/javascript">
 

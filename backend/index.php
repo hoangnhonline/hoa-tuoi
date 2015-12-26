@@ -74,9 +74,10 @@ $model = new Backend;
     <script src="<?php echo STATIC_URL; ?>js/jquery-ui.js"></script>
     <script src="<?php echo STATIC_URL; ?>js/AdminLTE/dashboard.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/jquery.datetimepicker.js"></script>
+    <script type="text/javascript" src="js/number.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
-       
+        $('.number').number(true,0);
        $("img.lazy").lazyload();
        $('input[type=checkbox], input[type=radio]').iCheck({
            checkboxClass: 'icheckbox_square',

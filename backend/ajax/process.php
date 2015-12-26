@@ -37,6 +37,7 @@ if($action=="updateOrder"){
 }	
 if($action == "getCate"){
 	$cate_type_id = $_POST['cate_type_id'];
+	if($cate_type_id > 0){
 	$arrList = $model->getListCateTree($cate_type_id);
 	
 		if(!empty($arrList)){
@@ -44,11 +45,11 @@ if($action == "getCate"){
 				echo '<div class="col-md-12"><div class="panel panel-default"><div class="panel-heading">Menu dọc</div><div class="panel-body">';
 				echo "<ul class='list-cate-parent'>";
 				foreach ($arrList as $key => $value) {
-					echo '<li><div class="checkbox"><input type="checkbox" value="'.$value['id'].'" name="cate_id[]" class="min"><label class="parent">'.$value['name_vi'].'</label></div>';
+					echo '<li><div class="checkbox"><input type="checkbox" value="'.$value['id'].'" name="cate_id[]" class="cate_id"><label class="parent">'.$value['name_vi'].'</label></div>';
 					if(!empty($value['child'])){
 						echo "<ul class='list-cate-child'>";
 						foreach ($value['child'] as $cate) {
-							echo '<li><div class="checkbox"><input type="checkbox" value="'.$cate['id'].'" name="cate_id[]" class="min"><label>'.$cate['name_vi'].'</label></div></li>';					
+							echo '<li><div class="checkbox"><input data-type="child" data-parent="'.$value['id'].'" type="checkbox" value="'.$cate['id'].'" name="cate_id[]" class="cate_id"><label>'.$cate['name_vi'].'</label></div></li>';					
 						}
 						echo "</ul>";
 					}
@@ -67,11 +68,11 @@ if($action == "getCate"){
 						echo '<div class="col-md-6"><div class="panel panel-default"><div class="panel-heading">Menu ngang</div><div class="panel-body">';
 						echo "<ul class='list-cate-parent'>";
 						foreach ($arrNgang as $ngang) {
-							echo '<li><div class="checkbox"><input type="checkbox" value="'.$ngang['id'].'" name="cate_id[]" class="min"><label class="parent">'.$ngang['name_vi'].'</label></div>';
+							echo '<li><div class="checkbox"><input type="checkbox" value="'.$ngang['id'].'" name="cate_id[]" class="cate_id"><label class="parent">'.$ngang['name_vi'].'</label></div>';
 							if(!empty($ngang['child'])){
 								echo "<ul class='list-cate-child'>";
 								foreach ($ngang['child'] as $ngangCate) {
-									echo '<li><div class="checkbox"><input type="checkbox" value="'.$ngangCate['id'].'" name="cate_id[]" class="min"><label>'.$ngangCate['name_vi'].'</label></div></li>';					
+									echo '<li><div class="checkbox"><input type="checkbox" data-type="child" data-parent="'.$ngang['id'].'" value="'.$ngangCate['id'].'" name="cate_id[]" class="cate_id"><label>'.$ngangCate['name_vi'].'</label></div></li>';					
 								}
 								echo "</ul>";
 							}
@@ -83,11 +84,11 @@ if($action == "getCate"){
 						echo '<div class="col-md-6"><div class="panel panel-default"><div class="panel-heading">Menu dọc</div><div class="panel-body">';
 						echo "<ul class='list-cate-parent'>";
 						foreach ($arrDoc as $doc) {
-							echo '<li><div class="checkbox"><input type="checkbox" value="'.$doc['id'].'" name="cate_id[]" class="min"><label class="parent">'.$doc['name_vi'].'</label></div>';
+							echo '<li><div class="checkbox"><input type="checkbox" value="'.$doc['id'].'" name="cate_id[]" class="cate_id"><label class="parent">'.$doc['name_vi'].'</label></div>';
 							if(!empty($doc['child'])){
 								echo "<ul class='list-cate-child'>";
 								foreach ($doc['child'] as $docCate) {
-									echo '<li><div class="checkbox"><input type="checkbox" value="'.$docCate['id'].'" name="cate_id[]" class="min"><label>'.$docCate['name_vi'].'</label></div></li>';					
+									echo '<li><div class="checkbox"><input data-type="child" data-parent="'.$doc['id'].'" type="checkbox" value="'.$docCate['id'].'" name="cate_id[]" class="cate_id"><label>'.$docCate['name_vi'].'</label></div></li>';					
 								}
 								echo "</ul>";
 							}
@@ -107,6 +108,25 @@ if($action == "getCate"){
 	            radioClass: 'iradio_square',
 	            increaseArea: '20%' // optional
 	       });
+			 $('.cate_id').on('ifChecked', function(event){
+			 	var obj = $(this);
+			 	var type = obj.attr('data-type');
+
+			 	if(type == 'child'){
+			 		var parent = obj.attr('data-parent');
+			 		$('.cate_id[value=' + parent + ']').iCheck('check');
+			 	}
+	            $('#error_cate_id').hide();
+	        });
+         $('.cate_id').on('ifUnchecked', function(event){
+            if($('.cate_id:checked').length > 0){            	
+                $('#error_cate_id').hide();
+
+            }else{
+                $('#error_cate_id').show();
+            }
+            
+        });
 		});
 	</script>
 	<style type="text/css">
@@ -116,5 +136,6 @@ if($action == "getCate"){
 	</style>
 	
 	<?php
+	}
 }
 ?>
