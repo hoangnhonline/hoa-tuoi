@@ -543,7 +543,7 @@ input[type="text"], input[type="password"], select { }
   -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;
 }
 .category-nav .tit-box {
-  background-color: #9c0080;
+  background-color: #ce13ad;
   color: #f9f9f9;
   font-weight: 600;
   font-size: 15px;
@@ -559,7 +559,7 @@ input[type="text"], input[type="password"], select { }
   display: none;
 }
 .category-nav ul {
-  background-color: #ce13ad;
+  background-color: #fe59dc;
   padding: 5px 0;
   height: 309px;
   overflow-x: hidden;
@@ -1048,7 +1048,7 @@ input[type="text"], input[type="password"], select { }
 }
 
 .product-sale-block .title-section .title-inner {
-  background: #9c0080;
+  background: #ce13ad;
   padding: 10px;
   border-bottom: none;
   text-shadow: none;
@@ -1550,7 +1550,7 @@ input[type="text"], input[type="password"], select { }
   -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px;
 }
 .block-title {
-  background-color: #9c0080;
+  background-color: #ce13ad;
   color: #f9f9f9;
   font-weight: 600;
   font-size: 15px;
@@ -1600,7 +1600,7 @@ input[type="text"], input[type="password"], select { }
  ▽ Footer Panel
 -------------------------------------------------- */
 #footer-panel {
-	background-color: #930a7a;
+	background-color: #e403b5;
 	color: #fff;
 }
 
@@ -1608,13 +1608,9 @@ input[type="text"], input[type="password"], select { }
 	text-decoration: none;
 }
 .fnav {
-  background-color: #83076d;
+  background-color: #ce13ad;
   position: relative;
-  background: #96097c;
-  background: -moz-linear-gradient(top,  #96097c 0%, #930a7a 48%, #83076d 100%);
-  background: -webkit-linear-gradient(top,  #96097c 0%,#930a7a 48%,#83076d 100%);
-  background: linear-gradient(to bottom,  #96097c 0%,#930a7a 48%,#83076d 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#96097c', endColorstr='#83076d',GradientType=0 );
+  background: #ce13ad; 
 }
 .fnav ul {
   text-align: left;
