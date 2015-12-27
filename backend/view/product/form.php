@@ -7,18 +7,17 @@ if(isset($_GET['id'])){
     require_once "model/Backend.php";
     $model = new Backend;
     $detail = $model->getDetail("product",$id);   
-    $is_detail = true; 
+    $is_detail = true;
+    $arrCateSelected = $model->getListProductCate($id);
+    foreach ($arrCateSelected as $key => $value) {
+        $arrCateId[] = $value['parent_id']."-".$value['cate_id'];
+    }
 }
 
 $cateTypeArr = $model->getListCateType();
 if($is_detail){
     $cate_type_id = $detail['cate_type_id'];
     $detailCateType = $model->getDetail('cate_type', $cate_type_id);
-
-    $parent_id = $detail['parent_id'];
-    $detailParent = $model->getDetail('cate', $parent_id);
-
-    $menu_type = $detail['menu_type'];
 }else{
     if(isset($_GET['cate_type_id']) && $_GET['cate_type_id'] > 0){
         $cate_type_id = $_GET['cate_type_id'];
@@ -54,7 +53,7 @@ if($cate_type_id > 0){
           </ol>
         </section>
         <!-- Custom Tabs -->
-        <button class="btn btn-primary btn-sm" onclick="location.href='index.php?mod=cate&act=list'">
+        <button class="btn btn-primary btn-sm" onclick="location.href='index.php?mod=product&act=list'">
             Danh sách
         </button>
         <div style="clear:both;margin-bottom:10px"></div>
@@ -62,16 +61,16 @@ if($cate_type_id > 0){
         <div class="box box-primary">
             <div class="box-header">
                 <h2 class="box-title" style="text-tranform:uppercase !important;color: #B10007">
-                    <?php echo ($id > 0) ? "Cập nhật" : "Tạo mới" ?> danh mục <?php echo ($id > 0) ? ': "'.$detail['name_vi'].'"' : ""; ?>
+                    <?php echo ($id > 0) ? "Cập nhật" : "Tạo mới" ?> sản phẩm <?php echo ($id > 0) ? ': "'.$detail['name_vi'].'"' : ""; ?>
                 </h2>
                 <div class="clearfix"></div>
             </div><!-- /.box-header -->
             <div class="clearfix"></div>
             <div class="box-body">
             <!-- form start -->
-            <form role="form" method="post" id="dataForm" action="controller/Cate.php" >
+            <form role="form" method="post" id="dataForm" action="controller/Product.php" enctype="multipart/form-data">
                 <?php if($id> 0){ ?>
-                <input type="hidden" value="<?php echo $id; ?>" name="id" />
+                <input type="hidden" value="<?php echo $id; ?>" name="id" id="product_id" />
                 <?php } ?>
                 <input type="hidden" name="image_url" value="" />
                 <table class="table table-bordered">
@@ -104,7 +103,7 @@ if($cate_type_id > 0){
                         <td colspan="2">            
                            <label class="error" id="error_cate_id">Vui lòng nhập chọn ít nhất 1 danh mục.</label>                
                            <div class="col-md-12" id="list-cate">
-
+                            <h4 style="color:#0066FF">Chọn loại sản phẩm phía trên để hiển thị danh mục tương ứng.</h4>
                            </div>
                         </td>                        
                     </tr>
@@ -175,48 +174,59 @@ if($cate_type_id > 0){
                         <td>Hình ảnh</td>
                         <td colspan="2">
                             <div class="form-group">                                
-                                <input type="radio" id="choose_img_sv" name="choose_img" value="1" checked="checked"/> Chọn ảnh từ server
+                                <!--<input type="radio" id="choose_img_sv" name="choose_img" value="1" checked="checked"/> Chọn ảnh từ server
                                 &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="choose_img_cp" name="choose_img" value="2" /> Chọn ảnh từ máy tính
-                                <div id="from_sv">
+                                <div id="from_sv">-->
+                                    <input type="file" name="image_url_upload" id="image_url_upload" />
+
                                     <input type="hidden" name="image_url" id="image_url" class="form-control" value="<?php if(!empty($detail['image_url'])) echo "../".$detail['image_url']; ?>" /><br />
                                     <?php if(!empty($detail['image_url'])){ ?>
-                                    <img id="img_thumnails" class="img-thumbnail" src="../<?php echo $detail['image_url']; ?>" height="150" />
+                                    <img id="img_thumnails" class="img-thumbnail" src="../<?php echo $detail['image_url']; ?>" width="150" />
                                     <?php }else{ ?>
                                     <img id="img_thumnails" class="img-thumbnail"  src="static/img/no_image.jpg" width="150" />
                                     <?php } ?>
-                                    <button class="btn btn-default " type="button" onclick="BrowseServer('Images:/','image_url')" >Upload</button>
-                                </div>
-                                <div id="from_cp" style="display:none;padding:15px;margin-bottom:10px">
-                                    <input type="file" name="image_url_upload" />
-                                </div>                               
+                                    <!--<button class="btn btn-default " type="button" onclick="BrowseServer('Images:/','image_url')" >Upload</button>-->
+                                <!--</div>
+                                <div id="from_cp" style="display:none;padding:15px;margin-bottom:10px">-->
+                                    
+                                <!--</div>-->
                             </div>
                         </td>
                     </tr> 
                     <tr>
-                        <td>Mô tả</td>
+                        <td>Mô tả ngắn</td>
                         <td>
-                            <textarea class="form-control" name="description_vi" rows="5" id="description_vi"><?php if(isset($detail)) echo $detail['description_vi']; ?></textarea>                            
+                            <textarea class="form-control" name="description_vi" rows="5" id="description_vi"><?php if(isset($detail)) echo stripslashes($detail['description_vi']); ?></textarea>                            
                         </td>
                         <td>
-                            <textarea class="form-control" name="description_en" rows="5" id="description_en"><?php if(isset($detail)) echo $detail['description_en']; ?></textarea>
+                            <textarea class="form-control" name="description_en" rows="5" id="description_en"><?php if(isset($detail)) echo stripslashes($detail['description_en']); ?></textarea>
                         </td>
                     </tr>
                     <tr>
                         <td>Quà tặng</td>
                         <td>
-                            <textarea class="form-control" name="gift_vi" rows="3" id="gift_vi"><?php if(isset($detail)) echo $detail['gift_vi']; ?></textarea>                            
+                            <textarea class="form-control" name="gift_vi" rows="3" id="gift_vi"><?php if(isset($detail)) echo stripslashes($detail['gift_vi']); ?></textarea>                            
                         </td>
                         <td>
-                            <textarea class="form-control" name="gift_en" rows="3" id="gift_en"><?php if(isset($detail)) echo $detail['gift_en']; ?></textarea>
+                            <textarea class="form-control" name="gift_en" rows="3" id="gift_en"><?php if(isset($detail)) echo stripslashes($detail['gift_en']); ?></textarea>
                         </td>
                     </tr>
                     <tr>
                         <td>Chi tiết</td>
                         <td>
-                            <textarea class="form-control" name="content_vi" id="content"><?php if(isset($detail)) echo $detail['content_vi']; ?></textarea>
+                            <textarea class="form-control" name="content_vi" id="content"><?php if(isset($detail)) echo stripslashes($detail['content_vi']); ?></textarea>
                         </td>
                         <td>
-                            <textarea class="form-control" name="content_en" id="content_en"><?php if(isset($detail)) echo $detail['content_en']; ?></textarea>
+                            <textarea class="form-control" name="content_en" id="content_en"><?php if(isset($detail)) echo stripslashes($detail['content_en']); ?></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ghi chú</td>
+                        <td>
+                            <textarea class="form-control" name="note_vi" rows="3" id="note_vi"><?php if(isset($detail)) echo $detail['note_vi']; ?></textarea>                            
+                        </td>
+                        <td>
+                            <textarea class="form-control" name="note_en" rows="3" id="note_en"><?php if(isset($detail)) echo $detail['note_en']; ?></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -370,7 +380,7 @@ function validateData(){
         return false;        
     }
 }
-$(function(){
+$(function(){    
     $('#choose_img_sv').on('ifChecked', function(event){
         $('#from_sv').show();
         $('#from_cp').hide();
@@ -431,6 +441,29 @@ $(function(){
         <?php }else{ ?>           
             $('#loai-menu').hide();
         <?php } ?>
+        <?php if(isset($detail['cate_type_id']) && $detail['cate_type_id']){ ?>
+            $.ajax({
+                url: "ajax/process.php",
+                type: "POST",
+                async: false,
+                data: {
+                    action : 'getCate',
+                    product_id : $('#product_id').val(),
+                    cate_type_id : <?php echo $detail['cate_type_id']; ?>
+                },
+                success: function(data){
+                    $('#list-cate').html(data);
+                    <?php if(!empty($arrCateId)) { 
+                        foreach ($arrCateId as $strCateId) {                          
+                            ?>
+                            $('.cate_id[value="<?php echo $strCateId; ?>"]').iCheck('check');
+                            <?php
+                        }
+                    } ?>
+
+                }
+            }); 
+        <?php } ?>
         $('#cate_type_id').change(function(){            
             var cate_type_id = $(this).val();
             if(cate_type_id > 0){
@@ -444,7 +477,8 @@ $(function(){
                 async: false,
                 data: {
                     action : 'getCate',
-                    cate_type_id : cate_type_id
+                    cate_type_id : cate_type_id,
+                    product_id : $('#product_id').val()
                 },
                 success: function(data){
                     $('#list-cate').html(data); 

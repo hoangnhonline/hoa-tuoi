@@ -137,11 +137,11 @@ class Backend {
         return $num > 0 ? false : true;        
     }
     function getNameById($table, $id){
-        $sql = "SELECT name FROM $table WHERE id = $id";
+        $sql = "SELECT name_vi FROM $table WHERE id = $id";
         $rs = mysql_query($sql);
         $row = mysql_fetch_assoc($rs);
-        return $row['name'];
-    }
+        return $row['name_vi'];
+    }    
     function getDetail($table, $id){
         $sql = "SELECT * FROM $table WHERE id = $id";
         $rs = mysql_query($sql);
@@ -215,56 +215,70 @@ class Backend {
             $this->logError($arrLog);
         }
     }
-    
+    function getListProductCate($id){
+        $arr = array();
+        $sql = "SELECT parent_id, cate_id FROM product_cate WHERE product_id = $id ORDER BY parent_id ";
+        $rs = mysql_query($sql);
+        while($row = mysql_fetch_assoc($rs)){
+            $arr[] = $row;
+        }
+        return $arr;
+    }
+    function getListProduct($arrCustom, $cate_id, $name, $offset,$limit) {
+        try{            
+            $arrReturn = array();            
+            if($cate_id == 0){
+                $sql = "SELECT * FROM product WHERE 1 = 1 ";                     
+                if(!empty($arrCustom)){                    
+                    foreach ($arrCustom as $column => $value) {                    
+                        if(is_numeric($value) && $value > -1){
+                            $sql.= " AND $column = '$value' ";
+                        }
+                    }
+                }
+                if($name != ''){
+                    $sql.=" AND (name_vi LIKE '%".$name."%' OR name_en LIKE '%".$name."%' OR '$name' = '' ) ";
+                }  
+            }else{
+                $sql = "SELECT product.* , product_cate.cate_id as cate_id FROM product, product_cate WHERE 1 = 1 ";                     
+                
+                if($name != ''){
+                    $sql.=" AND (name_vi LIKE '%".$name."%' OR name_en LIKE '%".$name."%' OR '$name' = '' ) ";
+                }                
 
-    function getListUserPost($status=-1,$district_id=-1,$type_id=-1,$estate_type_id=-1,$direction_id=-1,$legal_id=-1,$project_type_id=-1,$offset = -1, $limit = -1) {
-        try{
-            $arrResult = array();
-            $sql = "SELECT * FROM post WHERE (district_id = $district_id OR $district_id = -1) AND (status = $status OR $status = -1)  ";
-            $sql.=" AND (type_id = $type_id OR $type_id = -1) AND (estate_type_id = $estate_type_id OR $estate_type_id = -1) ";
-            $sql.=" AND (direction_id = $direction_id OR $direction_id = -1) ";
-            $sql.=" AND (legal_id = $legal_id OR $legal_id = -1) ";
-            $sql.=" AND (project_type_id = $project_type_id OR $project_type_id = -1) ";
-            $sql.=" AND user_id > 1 ORDER BY creation_time DESC ";
-            if ($limit > 0 && $offset >= 0)
+                $sql.= " AND product.id = product_cate.product_id ";
+
+                if($cate_id > 0){
+                    $sql.= " AND product_cate.cate_id = $cate_id ";
+                }
+                if(!empty($arrCustom)){                    
+                    foreach ($arrCustom as $column => $value) {                    
+                        if(is_numeric($value) && $value > -1){
+                            $sql.= " AND $column = '$value' ";
+                        }
+                    }
+                }                
+            }            
+
+            $sql.=" ORDER BY id DESC ";
+           
+            if ($limit > 0 && $offset >= 0){
                 $sql .= " LIMIT $offset,$limit";
+            }     
+             //echo $sql . "<br>";                 
             $rs = mysql_query($sql) or die(mysql_error());
             while($row = mysql_fetch_assoc($rs)){
-               $arrResult['data'][] = $row;
+               $arrReturn['data'][] = $row;
             }
+            $arrReturn['total'] = mysql_num_rows($rs);        
+            
 
-            $arrResult['total'] = mysql_num_rows($rs);
-            return $arrResult;
-        }catch(Exception $ex){
-            $arrLog = array('time'=>date('d-m-Y H:i:s'),'model'=> 'Post','function' => 'getListUserPost' , 'error'=>$ex->getMessage(),'sql'=>$sql);
+        }catch(Exception $ex){            
+            $arrLog = array('time'=>date('d-m-Y H:i:s'),'model'=> 'Product','function' => 'getListProduct' , 'error'=>$ex->getMessage(),'sql'=>$sql);
             $this->logError($arrLog);
         }
+        return $arrReturn;
     }
-    function getListPost($district_id=-1,$type_id=-1,$estate_type_id=-1,$direction_id=-1,$area_id=-1,$legal_id=-1,$price_id=-1,$project_type_id=-1,$offset = -1, $limit = -1) {
-        try{
-            $arrResult = array();
-            $sql = "SELECT * FROM post WHERE (district_id = $district_id OR $district_id = -1) ";
-            $sql.=" AND (type_id = $type_id OR $type_id = -1) AND (estate_type_id = $estate_type_id OR $estate_type_id = -1) ";
-            $sql.=" AND (direction_id = $direction_id OR $direction_id = -1) AND (area_id = $area_id OR $area_id = -1) ";
-            $sql.=" AND (legal_id = $legal_id OR $legal_id = -1) AND (price_id = $price_id OR $price_id = -1) ";
-            $sql.=" AND (project_type_id = $project_type_id OR $project_type_id = -1) ";
-            $sql.=" AND status = 1 ORDER BY creation_time DESC ";
-            if ($limit > 0 && $offset >= 0)
-                $sql .= " LIMIT $offset,$limit";
-
-            $rs = mysql_query($sql) or die(mysql_error());
-            while($row = mysql_fetch_assoc($rs)){
-               $arrResult['data'][] = $row;
-            }
-
-            $arrResult['total'] = mysql_num_rows($rs);
-            return $arrResult;
-        }catch(Exception $ex){
-            $arrLog = array('time'=>date('d-m-Y H:i:s'),'model'=> 'Post','function' => 'getListPost' , 'error'=>$ex->getMessage(),'sql'=>$sql);
-            $this->logError($arrLog);
-        }
-    }
-    
     function logError($arrLog){
         $time = date('d-m-Y H:i:s');
          ////put content to file
@@ -517,7 +531,7 @@ class Backend {
             || ($file_upload["type"] == "image/jpeg" || $file_upload['type'] == "application/pdf")) 
             && in_array($extension, $allowedExts))
               {
-              if ($file_upload["error"] > 0)
+                if ($file_upload["error"] > 0)
                 {
                 //echo "Return Code: " . $file_upload["error"] . "<br />";
                 }
@@ -540,15 +554,20 @@ class Backend {
                     $img = preg_replace('/(.*)(_\d+x\d+)/', '$1', implode('.', $arrPartImage));
                     
                     $img = $this->changeTitle($img);
-                    $img = $this->countImage($url,$img);                    
-                    $name = "{$img}.{$imgExt}";
-
-         
+                    $img = $this->countImage($url,$img);                                                
                    
-                    if(move_uploaded_file($file_upload["tmp_name"],$url. $name)==true){                                    
+                    $name = "{$img}.{$imgExt}";                    
+
+                    $name1 = "{$img}_190x190.{$imgExt}";
+
+                    if(move_uploaded_file($file_upload["tmp_name"],$url.$name)==true){
+                            
+                        $this->resizeHoang($url.$name, 512, 512, $name, $url, -1);
+                        $this->resizeHoang($url.$name, 190, 190, $name1, $url, -1);
                         $hinh = str_replace("../","",$url). $name;
-                        $arrReturn['filename'] = $hinh;               
+                        $arrReturn['filename'] = $hinh;   
                     }
+
                   }
                 }
                 
@@ -556,6 +575,19 @@ class Backend {
               
         return $arrReturn;      
    
+    }
+    function resizeHoang($file,$width,$height,$file_name,$des,$tile=1){    
+
+        require_once "../lib/class.resize.php";
+
+        $re = new resizes;
+
+        $re->load($file);
+
+        $re->resize($width,$height,$tile); // giu kich thuoc that cua hinh
+
+        $re->save($des.$file_name); 
+
     }
     function countImage($url,$img){
           $dh  = opendir($url);

@@ -30,14 +30,14 @@ class CKFinder_Connector_CommandHandler_ImageResize extends CKFinder_Connector_C
         if (isset($GLOBALS['config']['plugin_imageresize'])) {
             $config = $GLOBALS['config']['plugin_imageresize'];
         }
-        if (!isset($config['smallThumb'])) {
+        /*if (!isset($config['smallThumb'])) {
             $config['smallThumb'] = "90x90";
         }
         if (!isset($config['mediumThumb'])) {
             $config['mediumThumb'] = "120x120";
-        }
+        }*/
         if (!isset($config['largeThumb'])) {
-            $config['largeThumb'] = "180x180";
+            $config['largeThumb'] = "190x190";
         }
         return $config;
     }

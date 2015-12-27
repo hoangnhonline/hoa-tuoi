@@ -85,7 +85,7 @@ ATTENTION: The trailing slash is required.
 //$baseDir = "/home/thietken/public_html/marinehotel.com.vn/upload/";
 //$baseDir = "C:/Appserv/www/baby/upload/";
 
-$baseDir = "/home/myphamhang/public_html/upload/";
+$baseDir = "C:/xampp/htdocs/hoa-tuoi/upload/";
 
 /*
  * ### Advanced Settings
@@ -96,8 +96,8 @@ Thumbnails : thumbnails settings. All thumbnails will end up in the same
 directory, no matter the resource type.
 */
 $config['Thumbnails'] = Array(
-		'url' => $baseUrl . '_thumbs',
-		'directory' => $baseDir . '_thumbs',
+		'url' => $baseUrl . 'images',
+		'directory' => $baseDir . 'images',
 		'enabled' => true,
 		'directAccess' => false,
 		'maxWidth' => 100,
@@ -308,6 +308,4 @@ $config['ForceAscii'] = false;
 include_once "plugins/imageresize/plugin.php";
 include_once "plugins/fileeditor/plugin.php";
 
-$config['plugin_imageresize']['smallThumb'] = '90x90';
-$config['plugin_imageresize']['mediumThumb'] = '120x120';
-$config['plugin_imageresize']['largeThumb'] = '180x180';
+$config['plugin_imageresize']['largeThumb'] = '190x190';
