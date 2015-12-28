@@ -7,6 +7,11 @@
   min-height: auto;
   border-bottom: 1px solid #ccc;
   border-top: 1px solid #f199e1;
+  background: #ed09bb;
+  background: -moz-linear-gradient(top,  #ed09bb 0%, #dd06b9 100%);
+  background: -webkit-linear-gradient(top,  #ed09bb 0%,#dd06b9 100%);
+  background: linear-gradient(to bottom,  #ed09bb 0%,#dd06b9 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ed09bb', endColorstr='#dd06b9',GradientType=0 );
   -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0; }
 
 .gnav-menu .navbar-default .navbar-brand {
@@ -45,18 +50,18 @@
   display: block !important; }
 
 .gnav-menu .navbar-nav > li > a:hover {
-  background-color: #ce13ad;
+  background-color: #ed0abe;
   color: #EAEC37; }
 
 .gnav-menu .navbar-default .navbar-nav > .open > a {
-  background-color: #668F28;
+  background-color: #ed0abe;
   color: #fff;
   border-bottom: none; }
 
 .gnav-menu .navbar-nav > .active > a, 
 .gnav-menu .navbar-nav > .active > a:focus, 
 .gnav-menu .navbar-nav > .active > a:hover {
-  background-color: #ce13ad;
+  background-color: #ed0abe;
   color: #fff; }
 
 .gnav-menu .navbar-nav > li > .dropdown-menu {
