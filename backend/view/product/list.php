@@ -5,7 +5,7 @@ $link = $link_back = "index.php?mod=product&act=list";
 $link_form = "index.php?mod=product&act=form";
 
 if (isset($_GET['name']) && $_GET['name'] != '') {
-    $name = $_GET['name'];      
+    $name = $model->processData($_GET['name']);
     $link.="&name=".$name;    
     $link_back.="&name=".$name;
 } else {
@@ -196,19 +196,19 @@ $cateTypeArr = $model->getListCateType();
                         </td>
                         <td width="10%" style="text-align:center">
                             <div class="checkbox">
-                                <input data-value="<?php echo $row['id']; ?>" data-column="is_new" class="change-column" type="checkbox" <?php if($row['is_new'] == 1) echo "checked"; ?>>                               
+                                <input data-value="<?php echo $row['id']; ?>" data-table="product" data-column="is_new" class="change-column" type="checkbox" <?php if($row['is_new'] == 1) echo "checked"; ?>>                               
                             </div>
                         </td>
                         <td width="10%" style="text-align:center">
                             <div class="checkbox">
-                                <input data-value="<?php echo $row['id']; ?>" data-column="is_sale" class="change-column" type="checkbox" <?php if($row['is_sale'] == 1) echo "checked"; ?>>                                
+                                <input data-value="<?php echo $row['id']; ?>" data-table="product" data-column="is_sale" class="change-column" type="checkbox" <?php if($row['is_sale'] == 1) echo "checked"; ?>>                                
                             </div>
                         </td>
                         <td style="width: 1%;white-space:nowrap">                            
-                            <a class="btn btn-info btn-sm" href="index.php?mod=product&act=form&id=<?php echo $row['id']; ?>&cate_type_id=<?php echo $row['cate_type_id']; ?>">
+                            <a class="btn btn-info btn-xs" href="index.php?mod=product&act=form&id=<?php echo $row['id']; ?>&cate_type_id=<?php echo $row['cate_type_id']; ?>">
                                 Chỉnh sửa
                             </a>
-                            <a class="btn btn-danger btn-sm link-delete" href="javascript:;" alias="<?php echo $row['name_vi']; ?>" id="<?php echo $row['id']; ?>" mod="cate" class="link_delete" >
+                            <a class="btn btn-danger btn-xs link-delete" href="javascript:;" alias="<?php echo $row['name_vi']; ?>" id="<?php echo $row['id']; ?>" mod="cate" class="link_delete" >
                                 Xóa
                             </a>
 

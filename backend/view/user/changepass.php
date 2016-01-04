@@ -35,7 +35,7 @@ $detail=$model->getDetailUser($user_id);
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <button class="btn btn-primary " id="btnChangePass" type="button">Save</button>
-                    <button class="btn btn-primary" type="reset" onclick="location.href='index.php'">Cancel</button>
+                    <button class="btn btn-warning" type="reset" onclick="location.href='index.php'">Cancel</button>
                 </div>
             </form>
         </div>

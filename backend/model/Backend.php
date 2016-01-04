@@ -96,6 +96,7 @@ class Backend {
         if($type > 0){
             $sql.=" AND object_type = $type";
         }
+        //echo $sql;
         $rs = mysql_query($sql);
         while( $row = mysql_fetch_assoc($rs)){
             $arr[] = $row;
@@ -155,12 +156,15 @@ class Backend {
 
             if(!empty($arrCustom)){
                 $sql.= " WHERE 1 = 1 ";
-                foreach ($arrCustom as $column => $value) {                    
-                    if((is_numeric($value) && $value > -1) || (!is_numeric($value) && $value != '')){
+                foreach ($arrCustom as $column => $value) {
+                    if($column == "name_vi"){
+                        $sql.= " AND name_vi LIKE '%".$value."%' ";
+                    }else{
                         $sql.= " AND $column = '$value' ";
                     }
                 }
             }
+            
             if($order == 1){
                 $sql .= " ORDER BY display_order ASC ";
             }else{
@@ -559,13 +563,14 @@ class Backend {
                     $name = "{$img}.{$imgExt}";                    
 
                     $name1 = "{$img}_190x190.{$imgExt}";
+                    $name2 = "{$img}_512x512.{$imgExt}";                    
 
                     if(move_uploaded_file($file_upload["tmp_name"],$url.$name)==true){
                             
-                        $this->resizeHoang($url.$name, 512, 512, $name, $url, -1);
+                        $this->resizeHoang($url.$name, 512, 512, $name2, $url, -1);
                         $this->resizeHoang($url.$name, 190, 190, $name1, $url, -1);
                         $hinh = str_replace("../","",$url). $name;
-                        $arrReturn['filename'] = $hinh;   
+                        $arrReturn['filename'] = $hinh;
                     }
 
                   }
@@ -575,6 +580,12 @@ class Backend {
               
         return $arrReturn;      
    
+    }
+    function countChildByParent($table, $column, $value){
+        $sql = "SELECT count(id) as total FROM $table WHERE $column = $value";
+        $rs = mysql_query($sql);
+        $row = mysql_fetch_assoc($rs);
+        return $row['total'];
     }
     function resizeHoang($file,$width,$height,$file_name,$des,$tile=1){    
 

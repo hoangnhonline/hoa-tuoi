@@ -80,7 +80,7 @@ if($cate_type_id > 0){
                         <th width="43%" style="text-align:center">Tiếng Anh <img src="img/en.png" /></th>
                     </tr>
                     <tr>
-                        <td>Loại sản phẩm</td>
+                        <td>Loại sản phẩm<span class="error">*</span></td>
                         <td colspan="2">
                             <select name="cate_type_id" id="cate_type_id" class="form-control">
                                 <option value="0">-- Chọn loại sản phẩm --</option>
@@ -99,7 +99,7 @@ if($cate_type_id > 0){
                         </td>                        
                     </tr>                    
                     <tr>
-                        <td>Danh mục</td>
+                        <td>Danh mục<span class="error">*</span></td>
                         <td colspan="2">            
                            <label class="error" id="error_cate_id">Vui lòng nhập chọn ít nhất 1 danh mục.</label>                
                            <div class="col-md-12" id="list-cate">
@@ -108,7 +108,7 @@ if($cate_type_id > 0){
                         </td>                        
                     </tr>
                     <tr>
-                        <td>Tên sản phẩm</td>
+                        <td>Tên sản phẩm<span class="error">*</span></td>
                         <td>
                             <input aria-required="true" required="required" type="text" name="name_vi" id="name_vi" value="<?php if(isset($detail)) echo $detail['name_vi']; ?>" class="form-control">
                             <label class="error" id="error_name_vi">Vui lòng nhập vào trường này.</label>
@@ -156,7 +156,7 @@ if($cate_type_id > 0){
                             ?>                     
                             <div class="col-md-6" >                                
                                 <div class="form-group">
-                                    <label>Giá</label>
+                                    <label>Giá<span class="error">*</span></label>
                                    <input aria-required="true" required="required" type="text" name="price" id="price" value="<?php if(isset($detail)) echo number_format($detail['price']); ?>" class="form-control number">
                                    <label class="error" id="error_price">Vui lòng nhập vào trường này.</label>
                                 </div>
@@ -261,7 +261,7 @@ if($cate_type_id > 0){
                         <td></td>
                         <td colspan="2">
                             <button class="btn btn-primary" id="btnSave" type="submit" onclick="return validateData();">Save</button>
-                            <button class="btn btn-primary" type="reset" onclick="location.href='index.php?mod=cate&act=list'">Cancel</button>
+                            <button class="btn btn-warning" type="reset" onclick="location.href='index.php?mod=cate&act=list'">Cancel</button>
                         </td>
                     </tr>                           
                 </table>               

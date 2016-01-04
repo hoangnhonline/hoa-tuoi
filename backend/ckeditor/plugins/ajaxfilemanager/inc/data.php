@@ -1,8 +1,8 @@
 <pre>Array
 (
     [currentFolderPath] => ../../../../upload/
-    [new_folder] => luocgiaikinhphaphoa
+    [new_folder] => sgdsg
 )
 </pre>
 
-17/Dec/2012 05:28:44
+02/Jan/2016 12:36:55

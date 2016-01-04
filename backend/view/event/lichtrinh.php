@@ -101,9 +101,9 @@ if(isset($_GET['id'])){
                     <tr>
                         <td colspan="3"> 
                             <?php if(!empty($lichArr)){ ?>                           
-                            <button class="btn btn-primary" type="reset" onclick="location.href='index.php?mod=event&act=lichtrinh_sua&id=<?php echo $id; ?>'">Cập nhật lịch trình</button>
+                            <button class="btn btn-warning" type="reset" onclick="location.href='index.php?mod=event&act=lichtrinh_sua&id=<?php echo $id; ?>'">Cập nhật lịch trình</button>
                             <?php }else{ ?>
-                            <button class="btn btn-primary" type="reset" onclick="location.href='index.php?mod=event&act=lichtrinh_them&id=<?php echo $id; ?>'">Thêm lịch trình</button>
+                            <button class="btn btn-warning" type="reset" onclick="location.href='index.php?mod=event&act=lichtrinh_them&id=<?php echo $id; ?>'">Thêm lịch trình</button>
                             <?php } ?>
                             <button class="btn btn-default" type="reset" onclick="location.href='index.php?mod=event&act=list'">Back</button>
                         </td>

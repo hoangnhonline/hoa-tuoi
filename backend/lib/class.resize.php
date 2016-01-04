@@ -56,6 +56,7 @@
  
       return imagesy($this->image);
    }
+
    function resizeToHeight($height) {
  
       $ratio = $height / $this->getHeight();
@@ -63,6 +64,7 @@
       $this->resize($width,$height);
    }
  
+
    function resizeToWidth($width) {
       $ratio = $width / $this->getWidth();
       $height = $this->getheight() * $ratio;
@@ -76,7 +78,7 @@
       $height = $this->getheight() * $scale/100;
       $this->resize($width,$height);
    }
- 
+    
    function resize($width,$height,$tile=1) {
       if($tile>-1){
          $new_image = imagecreatetruecolor($this->getWidth()/$tile, $this->getHeight()/$tile);

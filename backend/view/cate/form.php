@@ -81,7 +81,7 @@ if($cate_type_id > 0){
                         <th width="43%" style="text-align:center">Tiếng Anh <img src="img/en.png" /></th>
                     </tr>
                     <tr>
-                        <td>Loại sản phẩm</td>
+                        <td>Loại sản phẩm<span class="error">*</span></td>
                         <td colspan="2">
                             <select name="cate_type_id" id="cate_type_id" class="form-control">
                                 <option value="0">-- Chọn loại sản phẩm --</option>
@@ -99,7 +99,7 @@ if($cate_type_id > 0){
                         </td>                        
                     </tr>
                     <tr id="loai-menu">
-                        <td>Thuộc Menu</td>
+                        <td>Thuộc Menu<span class="error">*</span></td>
                         <td colspan="2">
                             <select name="menu_type" id="menu_type" class="form-control">
                                 <option value="0">-- Chọn menu --</option>
@@ -109,7 +109,7 @@ if($cate_type_id > 0){
                         </td>                        
                     </tr>
                     <tr>
-                        <td>Danh mục cha</td>
+                        <td>Danh mục cha<span class="error">*</span></td>
                         <td colspan="2">                            
                             <select name="parent_id" id="parent_id" class="form-control" aria-required="true" required="required">
                                 <option value="0">--Danh mục gốc--</option>
@@ -125,7 +125,7 @@ if($cate_type_id > 0){
                         </td>                        
                     </tr>
                     <tr>
-                        <td>Tên danh mục</td>
+                        <td>Tên danh mục<span class="error">*</span></td>
                         <td>
                             <input aria-required="true" required="required" type="text" name="name_vi" id="name_vi" value="<?php if(isset($detail)) echo $detail['name_vi']; ?>" class="form-control">
                         </td>
@@ -193,7 +193,7 @@ if($cate_type_id > 0){
                         <td></td>
                         <td colspan="2">
                             <button class="btn btn-primary btnSave" type="submit">Save</button>
-                            <button class="btn btn-primary" type="reset" onclick="location.href='index.php?mod=cate&act=list'">Cancel</button>
+                            <button class="btn btn-warning" type="reset" onclick="location.href='index.php?mod=cate&act=list'">Cancel</button>
                         </td>
                     </tr>                           
                 </table>               

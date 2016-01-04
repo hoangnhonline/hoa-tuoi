@@ -196,10 +196,10 @@ $cateTypeArr = $model->getListCateType();
                             </div>                            
                         </td>
                         <td style="width: 1%;white-space:nowrap">                            
-                            <a class="btn btn-info btn-sm" href="index.php?mod=cate&act=form&id=<?php echo $row['id']; ?>&parent_id=<?php echo $row['parent_id'];?>&cate_type_id=<?php echo $row['cate_type_id']; ?>&menu_type=<?php echo $row['menu_type']; ?>">
+                            <a class="btn btn-info btn-xs" href="index.php?mod=cate&act=form&id=<?php echo $row['id']; ?>&parent_id=<?php echo $row['parent_id'];?>&cate_type_id=<?php echo $row['cate_type_id']; ?>&menu_type=<?php echo $row['menu_type']; ?>">
                                 Chỉnh sửa
                             </a>
-                            <a class="btn btn-danger btn-sm link-delete" href="javascript:;" alias="<?php echo $row['name_vi']; ?>" id="<?php echo $row['id']; ?>" mod="cate" class="link_delete" >
+                            <a class="btn btn-danger btn-xs link-delete" href="javascript:;" alias="<?php echo $row['name_vi']; ?>" id="<?php echo $row['id']; ?>" mod="cate" class="link_delete" >
                                 Xóa
                             </a>
 

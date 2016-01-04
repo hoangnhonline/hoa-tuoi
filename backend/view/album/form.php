@@ -85,7 +85,7 @@ if(isset($_GET['id'])){
                 </div><!-- /.box-body -->    
                 <div class="box-footer">
                      <button class="btn btn-primary btnSave" type="submit">Save</button>
-                     <button class="btn btn-primary" type="reset" onclick="location.href='index.php?mod=album&act=list'">Cancel</button>
+                     <button class="btn btn-warning" type="reset" onclick="location.href='index.php?mod=album&act=list'">Cancel</button>
                 </div>
             </form>
         </div>

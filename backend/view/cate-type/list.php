@@ -100,10 +100,10 @@ $list = $model->getList($table, $offset, 100, $arrCustom, 1);
                         </td>
                         
                         <td style="width: 1%;white-space:nowrap">                            
-                            <a class="btn btn-info btn-sm" href="index.php?mod=cate-type&act=form&id=<?php echo $row['id']; ?>">
+                            <a class="btn btn-info btn-xs" href="index.php?mod=cate-type&act=form&id=<?php echo $row['id']; ?>">
                                 Chỉnh sửa
                             </a>
-                            <a class="btn btn-danger btn-sm link-delete" href="javascript:;" alias="<?php echo $row['name_vi']; ?>" id="<?php echo $row['id']; ?>" mod="cate_type" class="link_delete" >
+                            <a class="btn btn-danger btn-xs link-delete" href="javascript:;" alias="<?php echo $row['name_vi']; ?>" id="<?php echo $row['id']; ?>" mod="cate_type" class="link_delete" >
                                 Xóa
                             </a>
 

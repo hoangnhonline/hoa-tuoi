@@ -14,20 +14,20 @@ if($action=="check_md5"){
 	}
 }
 if($action=="updateShowMenu"){
-	$cate_id = $_POST['cate_id'];
+	$show_menu = $_POST['show_menu'];
 	$table = $_POST['table'];
 	$id = $_POST['id'];
 	$arrData['id'] = $id;
-	$arrData['cate_id'] = $cate_id;
+	$arrData['show_menu'] = $show_menu;
 	$model->update($table, $arrData);
 	
 }
-if($action=="updateProduct"){
+if($action=="updateColumn"){
 	$column = $_POST['column'];
 	$id = $_POST['id'];
-	$value = $_POST['value'];	
-	mysql_query("UPDATE product SET $column = $value WHERE id = $id");
-	
+	$value = $_POST['value'];
+	$table = $_POST['table'];	
+	mysql_query("UPDATE $table SET $column = $value WHERE id = $id");	
 }
 if($action=="updateOrder"){
 	$str_id_order = $_POST['str_id_order'];
@@ -44,7 +44,7 @@ if($action=="updateOrder"){
 }	
 if($action == "getCate"){
 	$cate_type_id = $_POST['cate_type_id'];
-	$product_id = $_POST['product_id'];
+	$product_id = isset($_POST['id']) ? $_POST['product_id'] : 0;
 	if($cate_type_id > 0){
 	$arrList = $model->getListCateTree($cate_type_id);
 	$arrCateId = array();

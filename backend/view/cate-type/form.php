@@ -44,7 +44,7 @@ if(isset($_GET['id'])){
                     </tr>
                    
                     <tr>
-                        <td>Tên loại sản phẩm</td>
+                        <td>Tên loại sản phẩm<span class="error">*</span></td>
                         <td>
                             <input aria-required="true" required="required" type="text" name="name_vi" id="name_vi" value="<?php if(isset($detail)) echo $detail['name_vi']; ?>" class="form-control">
                         </td>
@@ -85,7 +85,7 @@ if(isset($_GET['id'])){
                         <td></td>
                         <td colspan="2">
                             <button class="btn btn-primary btnSave" type="submit">Save</button>
-                            <button class="btn btn-primary" type="reset" onclick="location.href='index.php?mod=cate-type&act=list'">Cancel</button>
+                            <button class="btn btn-warning" type="reset" onclick="location.href='index.php?mod=cate-type&act=list'">Cancel</button>
                         </td>
                     </tr>                           
                 </table>               

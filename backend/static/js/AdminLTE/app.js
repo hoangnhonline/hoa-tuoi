@@ -13,7 +13,46 @@ var left_side_width = 220; //Sidebar width in pixels
 
 $(function() {
     "use strict";
-
+    $('.change-column').on('ifChecked', function(event){
+        var id = $(this).attr('data-value');
+        var column = $(this).attr('data-column');
+        var table = $(this).attr('data-table');
+        $.ajax({
+            url: "ajax/process.php",
+            type: "POST",
+            async: false,
+            data: {
+                action : 'updateColumn',
+                column : column,                
+                value : 1,
+                id  : id,
+                table : table
+            },
+            success: function(data){
+                                      
+            }
+        }); 
+    });
+    $('.change-column').on('ifUnchecked', function(event){
+        var id = $(this).attr('data-value');
+        var column = $(this).attr('data-column');
+        var table = $(this).attr('data-table');
+        $.ajax({
+            url: "ajax/process.php",
+            type: "POST",
+            async: false,
+            data: {
+                action : 'updateColumn',
+                column : column,                
+                value : 0,
+                id  : id,
+                table : table
+            },
+            success: function(data){
+                                      
+            }
+        }); 
+    });
     //Enable sidebar toggle
     $("[data-toggle='offcanvas']").click(function(e) {
         e.preventDefault();

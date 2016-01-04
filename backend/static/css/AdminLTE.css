@@ -19,6 +19,7 @@ body {
 a {
   color: #3c8dbc;
 }
+span.error{color:red; font-weight: bold;font-size: 20px}
 a:hover,
 a:active,
 a:focus {
@@ -1002,12 +1003,7 @@ body > .header .logo .icon {
    All form elements including input, select, textarea etc.
 -----------------------------------------------------------------
 */
-.form-control {
-  -webkit-border-radius: 0px !important;
-  -moz-border-radius: 0px !important;
-  border-radius: 0px !important;
-  box-shadow: none;
-}
+
 .form-control:focus {
   border-color: #3c8dbc !important;
   box-shadow: none;
@@ -2502,7 +2498,10 @@ Component: timeline
 }
 .skin-blue .treeview-menu > li.active > a,
 .skin-blue .treeview-menu > li > a:hover {
-  color: #111;
+  color: #B10007;
+}
+.skin-blue .treeview-menu > li > a.active {
+  color: #B10007;
 }
 .skin-blue .sidebar-form {
   -webkit-border-radius: 2px;

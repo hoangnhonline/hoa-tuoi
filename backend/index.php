@@ -1,4 +1,10 @@
 <?php
+$url = "upload/images/2015/12/28/desert-1.jpg";
+
+//$abc = "123451";
+//echo $str = str_replace("1", "6", $abc);die;
+
+
 //var_dump($_SERVER['DOCUMENT_ROOT']);
 //ini_set('display_errors',1);
 //echo time();
@@ -18,6 +24,11 @@ if(isset($_GET['mod']))
 {
     $mod = $_GET['mod'];
 }
+$act = isset($_GET['act']) ? $_GET['act'] : "list";
+$mod = isset($_GET['mod']) ? $_GET['mod'] : "product";
+$dataLinkParent = $mod;
+$dataLinkChild = $mod."-".$act;
+
 require_once "model/Backend.php";
 $model = new Backend;
 ?>
@@ -56,10 +67,8 @@ $model = new Backend;
             <aside class="right-side">
                 <!-- Main content -->
                 <section class="content">
-                    <?php
-                     $act = isset($_GET['act']) ? $_GET['act'] : "";
-
-                    if ($mod=="") include "view/album/list.php";
+                    <?php                     
+                    if ($mod=="") include "view/product/list.php";
                     else include "view/".$mod.'/'.$act.'.php';
 
                     ?>
@@ -78,12 +87,17 @@ $model = new Backend;
     <script type="text/javascript">
     $(document).ready(function(){
         $('.number').number(true,0);
-       $("img.lazy").lazyload();
-       $('input[type=checkbox], input[type=radio]').iCheck({
-           checkboxClass: 'icheckbox_square',
+        $("img.lazy").lazyload();
+        $('input[type=checkbox], input[type=radio]').iCheck({
+            checkboxClass: 'icheckbox_square',
             radioClass: 'iradio_square',
             increaseArea: '20%' // optional
-       });
+        });        
+        var objectMenu = $('li[data-link=<?php echo $dataLinkParent; ?>]');
+        objectMenu.addClass('active');
+        objectMenu.find('.treeview-menu').css('display', 'block');
+        objectMenu.find('i.pull-right').removeClass('fa-angle-left').addClass('fa-angle-down');
+        $('a[data-link=<?php echo $dataLinkChild; ?>]').addClass('active');
     });
     </script>
     </body>
