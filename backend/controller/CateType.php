@@ -11,7 +11,17 @@ $arrData['name_en'] = $name_en = $model->processData($_POST['name_en']);
 $arrData['alias_vi'] = $model->changeTitle($name_vi);
 $arrData['alias_en'] = $model->changeTitle($name_en);
 
-$arrData['icon_url'] = $icon_url = $_POST['icon_url'];
+
+$image_url_upload = $_FILES['image_url_upload'];
+
+if(($image_url_upload['name']!='')){
+	$arrRe = $model->uploadImages($image_url_upload);	
+	$image_url = $arrRe['filename'];
+}else{
+	$image_url = str_replace('../', '', $_POST['image_url']);
+}
+
+$arrData['icon_url'] = $image_url;
 
 $rs = mysql_query("SELECT * FROM cate_type");
 $count = mysql_num_rows($rs);

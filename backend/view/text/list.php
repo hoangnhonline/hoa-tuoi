@@ -34,9 +34,10 @@ $list = $model->getList('text', $offset, $limit);
             <div class="box-body">
                 <table class="table table-bordered table-striped">
                     <tbody><tr>
-                        <th style="width: 10px">No.</th>
-                        <th>Nội dung</th>
-                        <th style="width: 40px">Action</th>
+                        <th style="width: 5%">No.</th>
+                        <th style="width:45%">Nội dung <img src="img/vn.png" ></th>
+                        <th style="width:45%">Nội dung <img src="img/en.png" ></th>
+                        <th style="width: 5%;text-align:center">Action</th>
                     </tr>
                     <?php
                     $i = ($page-1) * LIMIT;
@@ -45,16 +46,16 @@ $list = $model->getList('text', $offset, $limit);
                     $i++;
                     ?>
                     <tr>
-                        <td><?php echo $row['id']; ?></td>
-                        <td><?php echo $row['text']; ?> </td>
+                        <td style="text-align:center"><?php echo $i."<span style='display:none'> - ".$row['id']."</span>"; ?></td>
+                        <td><?php echo $row['text_vi']; ?> </td>
+                        <td><?php echo $row['text_en']; ?> </td>
                         <td style="white-space:nowrap">
-                            <a href="index.php?mod=text&act=form&id=<?php echo $row['id']; ?>">
-                                <i class="fa fa-fw fa-edit"></i>
+                            <a class="btn btn-info btn-xs" href="index.php?mod=text&act=form&id=<?php echo $row['id']; ?>">
+                                Chỉnh sửa
                             </a>
-                            <a href="javascript:;"  id="<?php echo $row['id']; ?>" mod="text" class="link_delete" >
-                                <i class="fa fa-fw fa-trash-o"></i>
+                            <a class="btn btn-danger btn-xs link-delete" href="javascript:;" alias="<?php echo $row['text_vi']; ?>" id="<?php echo $row['id']; ?>" mod="text" class="link_delete" >
+                                Xóa
                             </a>
-
                         </td>
                     </tr>
                     <?php } } ?>

@@ -261,7 +261,7 @@ if($cate_type_id > 0){
                         <td></td>
                         <td colspan="2">
                             <button class="btn btn-primary" id="btnSave" type="submit" onclick="return validateData();">Save</button>
-                            <button class="btn btn-warning" type="reset" onclick="location.href='index.php?mod=cate&act=list'">Cancel</button>
+                            <button class="btn btn-warning" type="reset" onclick="location.href='index.php?mod=product&act=list'">Cancel</button>
                         </td>
                     </tr>                           
                 </table>               

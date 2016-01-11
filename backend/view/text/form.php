@@ -26,14 +26,18 @@ if(isset($_GET['id'])){
                 <?php } ?>
                 <div class="box-body">
                     <div class="form-group">
-                        <label for="text">Nội dung</label>
-                        <textarea name="text" id="text" class="form-control required" rows="10"><?php echo isset($detail['text'])  ? $detail['text'] : "" ?></textarea>                        
+                        <label for="text">Nội dung <img src="img/vn.png"></label>
+                        <textarea name="text_vi" id="text_vi" class="form-control required" rows="5"><?php echo isset($detail['text_vi'])  ? $detail['text_vi'] : "" ?></textarea>                        
+                    </div>
+                     <div class="form-group">
+                        <label for="text">Nội dung <img src="img/en.png"></label>
+                        <textarea name="text_en" id="text_en" class="form-control required" rows="5"><?php echo isset($detail['text_en'])  ? $detail['text_en'] : "" ?></textarea>                        
                     </div>
                 </div><!-- /.box-body -->
 
                 <div class="box-footer">
                      <button class="btn btn-primary btnSave" type="submit">Save</button>
-                     <button class="btn btn-primary" type="reset">Cancel</button>
+                     <button class="btn btn-primary" type="reset"  onclick="location.href='index.php?mod=text&act=list'">Cancel</button>
                 </div>
             </form>
         </div>

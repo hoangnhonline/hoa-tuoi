@@ -103,9 +103,11 @@ $list = $model->getList($table, $offset, 100, $arrCustom, 1);
                             <a class="btn btn-info btn-xs" href="index.php?mod=cate-articles&act=form&id=<?php echo $row['id']; ?>">
                                 Chỉnh sửa
                             </a>
+                            <?php if($model->countChildByParent('articles','cate_id', $row['id']) == 0 ){?>
                             <a class="btn btn-danger btn-xs link-delete" href="javascript:;" alias="<?php echo $row['name_vi']; ?>" id="<?php echo $row['id']; ?>" mod="articles_cate" class="link_delete" >
                                 Xóa
                             </a>
+                            <?php } ?>
 
                         </td>
                     </tr>

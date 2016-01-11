@@ -5,7 +5,8 @@ $model = new Backend;
 
 $id = (int) $_POST['id'];
 
-$arrData['text'] = $text = trim($_POST['text']);
+$arrData['text_vi'] = $text = trim($_POST['text_vi']);
+$arrData['text_en'] = $text = trim($_POST['text_en']);
 
 $table = "text";
 if($id > 0) {	

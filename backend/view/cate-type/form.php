@@ -31,7 +31,7 @@ if(isset($_GET['id'])){
             <div class="clearfix"></div>
             <div class="box-body">
             <!-- form start -->
-            <form role="form" method="post" id="dataForm" action="controller/CateType.php" >
+            <form role="form" method="post" id="dataForm" action="controller/CateType.php"  enctype="multipart/form-data">
                 <?php if($id> 0){ ?>
                 <input type="hidden" value="<?php echo $id; ?>" name="id" />
                 <?php } ?>
@@ -52,7 +52,28 @@ if(isset($_GET['id'])){
                             <input aria-required="true" required="required" type="text" name="name_en" id="name_en" value="<?php if(isset($detail)) echo $detail['name_en']; ?>" class="form-control">
                         </td>
                     </tr>
-                   
+                    <tr>
+                        <td>Icon</td>
+                        <td colspan="2">
+                            <div class="form-group">                            
+                            <input type="radio" id="choose_img_sv" name="choose_img" value="1" checked="checked"/> Chọn ảnh từ server
+                            &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="choose_img_cp" name="choose_img" value="2" /> Chọn ảnh từ máy tính
+                            <div id="from_sv">
+                                <input type="hidden" name="image_url" id="image_url" class="form-control" value="<?php if(!empty($detail['icon_url'])) echo "../".$detail['icon_url']; ?>" /><br />
+                                <?php if(!empty($detail['icon_url'])){ ?>
+                                <img id="img_thumnails" src="../<?php echo $detail['icon_url']; ?>" width="30" />
+                                <?php }else{ ?>
+                                <img id="img_thumnails" src="static/img/no_image.jpg" width="30" />
+                                <?php } ?>
+                                <button class="btn btn-default " type="button" onclick="BrowseServer('Images:/','image_url')" >Upload</button>
+                            </div>
+                            <div id="from_cp" style="display:none;padding:15px;margin-bottom:10px">
+                                <input type="file" name="image_url_upload" />
+                            </div>
+
+                        </div>
+                        </td>
+                    </tr>
                     <tr>
                         <td>Meta Title</td>
                         <td>
@@ -102,9 +123,57 @@ if(isset($_GET['id'])){
 </div>
 <script type="text/javascript" src="js/validate.js"></script>
 <script type="text/javascript" src="js/form.js"></script>
+<script type="text/javascript" src="ckfinder/ckfinder.js"></script>
 
+<script type="text/javascript">
+
+
+function split(val) {
+    return val.split(/;\s*/);
+}
+
+function extractLast(term) {
+    return split(term).pop();
+}
+function BrowseServer( startupPath, functionData ){    
+    var finder = new CKFinder();
+    finder.basePath = 'ckfinder/'; //Đường path nơi đặt ckfinder
+    finder.startupPath = startupPath; //Đường path hiện sẵn cho user chọn file
+    finder.selectActionFunction = SetFileField; // hàm sẽ được gọi khi 1 file được chọn
+    finder.selectActionData = functionData; //id của text field cần hiện địa chỉ hình
+    //finder.selectThumbnailActionFunction = ShowThumbnails; //hàm sẽ được gọi khi 1 file thumnail được chọn    
+    finder.popup(); // Bật cửa sổ CKFinder
+} //BrowseServer
+
+function SetFileField( fileUrl, data ){
+    document.getElementById( data["selectActionData"] ).value = fileUrl;
+    $('#img_thumnails').attr('src',fileUrl).show();
+}
+function BrowseServerIcon( startupPath, functionData ){    
+    var finder = new CKFinder();
+    finder.basePath = 'ckfinder/'; //Đường path nơi đặt ckfinder
+    finder.startupPath = startupPath; //Đường path hiện sẵn cho user chọn file
+    finder.selectActionFunction = SetFileFieldIcon; // hàm sẽ được gọi khi 1 file được chọn
+    finder.selectActionData = functionData; //id của text field cần hiện địa chỉ hình
+    //finder.selectThumbnailActionFunction = ShowThumbnails; //hàm sẽ được gọi khi 1 file thumnail được chọn    
+    finder.popup(); // Bật cửa sổ CKFinder
+} //BrowseServer
+
+function SetFileFieldIcon( fileUrl, data ){
+    document.getElementById( data["selectActionData"] ).value = fileUrl;
+    $('#img_icon').attr('src', fileUrl).show();
+}
+</script>
 <script type="text/javascript">
     $(document).ready(function(){
         $('#dataForm').validate();    
     });
+    $('#choose_img_sv').on('ifChecked', function(event){
+        $('#from_sv').show();
+        $('#from_cp').hide();
+    });
+    $('#choose_img_cp').on('ifChecked', function(event){
+        $('#from_cp').show();
+        $('#from_sv').hide();
+    });    
 </script>

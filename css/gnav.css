@@ -50,7 +50,7 @@
   display: block !important; }
 
 .gnav-menu .navbar-nav > li > a:hover {
-  background-color: #ed0abe;
+  background-color: #9c0080;
   color: #EAEC37; }
 
 .gnav-menu .navbar-default .navbar-nav > .open > a {
@@ -61,7 +61,7 @@
 .gnav-menu .navbar-nav > .active > a, 
 .gnav-menu .navbar-nav > .active > a:focus, 
 .gnav-menu .navbar-nav > .active > a:hover {
-  background-color: #ed0abe;
+  background-color: #9c0080;
   color: #fff; }
 
 .gnav-menu .navbar-nav > li > .dropdown-menu {

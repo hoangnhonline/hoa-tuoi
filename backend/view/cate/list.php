@@ -17,8 +17,9 @@ if (isset($_GET['menu_type']) && $_GET['menu_type'] > 0) {
     $link.="&menu_type=".$arrCustom['menu_type'];
     $link_back.="&menu_type=".$arrCustom['menu_type']; 
     $link_form.="&menu_type=".$arrCustom['menu_type']; 
-} else {
-    $arrCustom['menu_type'] = -1;
+    $menu_type = $arrCustom['menu_type'];
+}else{
+    $menu_type = -1;
 }
 if (isset($_GET['parent_id']) && $_GET['parent_id'] > 0) {
     $arrCustom['parent_id'] = $_GET['parent_id'];      
@@ -39,7 +40,7 @@ if (isset($_GET['cate_type_id']) && $_GET['cate_type_id'] > 0) {
 $cate_type_id = $arrCustom['cate_type_id'];
 $detailCateType = $model->getDetail('cate_type', $cate_type_id); 
 $parent_id = $arrCustom['parent_id'];
-$menu_type = $arrCustom['menu_type'];
+
 $table = "cate";
 $listTotal = $model->getList($table, -1, -1, $arrCustom, 1);
 
@@ -107,9 +108,9 @@ $cateTypeArr = $model->getListCateType();
                          <div class="form-group">
                             <label for="name">Thuộc menu</label>
                              <select class="form-control change-submit"  name="menu_type" id="menu_type">
-                                <option value="-1" <?php if($arrCustom['menu_type'] == -1) echo "selected"; ?>>Tất cả</option>
-                                <option value="1" <?php if($arrCustom['menu_type'] == 1) echo "selected"; ?>>Menu ngang</option>
-                                <option value="2" <?php if($arrCustom['menu_type'] == 2) echo "selected"; ?>>Menu dọc</option>
+                                <option value="-1" <?php if($menu_type == -1) echo "selected"; ?>>Tất cả</option>
+                                <option value="1" <?php if($menu_type == 1) echo "selected"; ?>>Menu ngang</option>
+                                <option value="2" <?php if($menu_type == 2) echo "selected"; ?>>Menu dọc</option>
                             </select>
                         </div>
                     </div>
@@ -199,9 +200,11 @@ $cateTypeArr = $model->getListCateType();
                             <a class="btn btn-info btn-xs" href="index.php?mod=cate&act=form&id=<?php echo $row['id']; ?>&parent_id=<?php echo $row['parent_id'];?>&cate_type_id=<?php echo $row['cate_type_id']; ?>&menu_type=<?php echo $row['menu_type']; ?>">
                                 Chỉnh sửa
                             </a>
+                            <?php if($model->countListByParent($row['id']) == 0) { ?>
                             <a class="btn btn-danger btn-xs link-delete" href="javascript:;" alias="<?php echo $row['name_vi']; ?>" id="<?php echo $row['id']; ?>" mod="cate" class="link_delete" >
                                 Xóa
                             </a>
+                            <?php } ?>
 
                         </td>
                     </tr>

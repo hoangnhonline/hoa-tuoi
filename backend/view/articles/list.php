@@ -121,7 +121,11 @@ $cateArr = $model->getList('articles_cate', -1, -1);
                     <tr id="row-<?php echo $row['id']; ?>">
                         <td width="1%"><span class="order"><?php echo $i; ?></span></td>
                         <td>
-                            <img src="../<?php echo $row['image_url']; ?>" width="100" class="img-thumbnail" />
+                            <?php if(!empty($row['image_url'])){ ?>
+                            <img id="img_thumnails" src="../<?php echo $row['image_url']; ?>" width="100" />
+                            <?php }else{ ?>
+                            <img id="img_thumnails" src="static/img/no_image.jpg" width="100" />
+                            <?php } ?>
                         </td>
                         <td width="50%">
                             <a style="font-size:19px;color:#B10007" href="index.php?mod=articles&act=form&id=<?php echo $row['id']; ?>">

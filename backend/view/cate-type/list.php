@@ -68,7 +68,9 @@ $list = $model->getList($table, $offset, 100, $arrCustom, 1);
             <div class="box-body">
                 <table class="table table-bordered table-striped" id="tbl_list">
                     <tbody><tr>
-                        <th width="1%">No.</th>                        
+                        <th width="1%">No.</th>
+                        <th width="10%">Icon</th>   
+                                            
                         <th width="50%">Tên loại sản phẩm</th>                       
                         
                         <th style="text-align:center;width: 1%;white-space:nowrap">Thứ tự hiển thị</th>
@@ -85,7 +87,13 @@ $list = $model->getList($table, $offset, 100, $arrCustom, 1);
                     ?>
                     <tr id="row-<?php echo $row['id']; ?>">
                         <td width="1%"><span class="order"><?php echo $i; ?></span></td>
-                        
+                        <td>
+                            <?php if(!empty($row['icon_url'])){ ?>
+                            <img id="img_thumnails" src="../<?php echo $row['icon_url']; ?>" width="30" />
+                            <?php }else{ ?>
+                            <img id="img_thumnails" src="static/img/no_image.jpg" width="30" />
+                            <?php } ?>                            
+                        </td>  
                         <td width="50%">
                             <a href="index.php?mod=cate-type&act=form&id=<?php echo $row['id']; ?>&parent_id=<?php echo $row['parent_id'];?>&cate_type_id=<?php echo $row['cate_type_id']; ?>&menu_type=<?php echo $row['menu_type']; ?>">
                                 <?php echo $row['name_vi']; ?>                                
@@ -103,9 +111,11 @@ $list = $model->getList($table, $offset, 100, $arrCustom, 1);
                             <a class="btn btn-info btn-xs" href="index.php?mod=cate-type&act=form&id=<?php echo $row['id']; ?>">
                                 Chỉnh sửa
                             </a>
+                            <?php if($model->getListCateByCateType($row['id']) ==0 ){ ?>
                             <a class="btn btn-danger btn-xs link-delete" href="javascript:;" alias="<?php echo $row['name_vi']; ?>" id="<?php echo $row['id']; ?>" mod="cate_type" class="link_delete" >
                                 Xóa
                             </a>
+                            <?php } ?>
 
                         </td>
                     </tr>

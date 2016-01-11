@@ -34,6 +34,14 @@ class Backend {
         return $row;
 
     }
+    function deleteImageProduct($id){
+        $detail = $this->getDetail('product', $id);
+        $image_url = $detail['image_url'];
+        var_dump("../../".$image_url);        
+        unlink("../../".$image_url);
+        unlink("../../".str_replace(".", "_190x190.", $image_url));
+        unlink("../../".str_replace(".", "_512x512.", $image_url));
+    }
     function changeTitle($str) {
         $str = $this->stripUnicode($str);
         $str = str_replace("?", "", $str);

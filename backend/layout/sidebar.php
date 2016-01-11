@@ -96,6 +96,23 @@
             
           </ul>
         </li>
+        <li class="treeview" data-link="pages">
+          <a href="#">
+            <i class="fa fa-folder"></i> <span>Trang nội dung</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li>
+                <a href="<?php echo BASE_URL; ?>pages&act=form" data-link="pages-form">
+                    <i class="fa fa-circle-o"></i> <span>Tạo mới</span> <!--<small class="badge pull-right bg-green">new</small>-->            </a>
+            </li>
+            <li>
+                <a href="<?php echo BASE_URL; ?>pages&act=list" data-link="pages-list">
+                    <i class="fa fa-circle-o"></i> <span>Danh sách</span> <!--<small class="badge pull-right bg-green">new</small>-->            </a>
+            </li>     
+            
+          </ul>
+        </li>
         <li class="treeview active">
           <a href="#">
             <i class="fa fa-folder"></i> <span>Thông tin chung</span>
@@ -112,45 +129,10 @@
                 </a>
             </li>    
             <li>
-                <a href="<?php echo BASE_URL; ?>addon&act=list">
-                    <i class="fa fa-circle-o"></i> <span>Tiện ích</span> <!--<small class="badge pull-right bg-green">new</small>-->            </a>
-            </li>
-            <li>
-                <a href="<?php echo BASE_URL; ?>convenient&act=list">
-                    <i class="fa fa-circle-o"></i> <span>Tiện nghi</span> <!--<small class="badge pull-right bg-green">new</small>-->            </a>
-            </li>     
-            <li>
-                <a href="<?php echo BASE_URL; ?>services&act=list">
-                    <i class="fa fa-circle-o"></i> <span>Dịch vụ</span> <!--<small class="badge pull-right bg-green">new</small>-->            </a>
-            </li> 
-             <li>
-                <a href="<?php echo BASE_URL; ?>direction&act=list">
-                    <i class="fa fa-circle-o"></i> <span>Hướng nhà</span> <!--<small class="badge pull-right bg-green">new</small>-->            </a>
-            </li>
-            <li>
-                <a href="<?php echo BASE_URL; ?>purpose&act=list">
-                    <i class="fa fa-circle-o"></i> <span>Mục đích sử dụng</span> <!--<small class="badge pull-right bg-green">new</small>-->            </a>
-            </li>              
-            <li>
-                <a href="<?php echo BASE_URL; ?>city&act=list">
-                    <i class="fa fa-circle-o"></i> <span>Tỉnh / Thành</span> <!--<small class="badge pull-right bg-green">new</small>-->            </a>
-            </li>         
-            <li>
-                <a href="<?php echo BASE_URL; ?>district&act=list">
-                    <i class="fa fa-circle-o"></i> <span>Quận/Huyện</span> <!--<small class="badge pull-right bg-green">new</small>-->            </a>
-            </li>      
-            <li>
-                <a href="<?php echo BASE_URL; ?>ward&act=list">
-                    <i class="fa fa-circle-o"></i> <span>Phường / Xã</span> <!--<small class="badge pull-right bg-green">new</small>-->            </a>
-            </li>       
-            <li>
-                <a href="<?php echo BASE_URL; ?>price&act=list">
-                    <i class="fa fa-circle-o"></i> <span>Khoảng giá</span> <!--<small class="badge pull-right bg-green">new</small>-->            </a>
-            </li>
-            <li>
-                <a href="<?php echo BASE_URL; ?>seo&act=list">
-                    <i class="fa fa-circle-o"></i> <span>SEO</span> <!--<small class="badge pull-right bg-green">new</small>-->            </a>
-            </li> 
+                <a href="index.php?mod=footer&act=list" data-link="footer">
+                    <i class="fa fa-circle-o"></i> Nội dung footer
+                </a>
+            </li>    
                     
           </ul>
         </li>

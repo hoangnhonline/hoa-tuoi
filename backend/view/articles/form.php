@@ -168,7 +168,7 @@ $cateArr = $model->getList('articles_cate', -1, -1);
                         <td></td>
                         <td colspan="2">
                             <button class="btn btn-primary" id="btnSave" type="submit" onclick="return validateData();">Save</button>
-                            <button class="btn btn-warning" type="reset" onclick="location.href='index.php?mod=cate&act=list'">Cancel</button>
+                            <button class="btn btn-warning" type="reset" onclick="location.href='index.php?mod=articles&act=list'">Cancel</button>
                         </td>
                     </tr>                           
                 </table>               

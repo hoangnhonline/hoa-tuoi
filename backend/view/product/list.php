@@ -208,7 +208,7 @@ $cateTypeArr = $model->getListCateType();
                             <a class="btn btn-info btn-xs" href="index.php?mod=product&act=form&id=<?php echo $row['id']; ?>&cate_type_id=<?php echo $row['cate_type_id']; ?>">
                                 Chỉnh sửa
                             </a>
-                            <a class="btn btn-danger btn-xs link-delete" href="javascript:;" alias="<?php echo $row['name_vi']; ?>" id="<?php echo $row['id']; ?>" mod="cate" class="link_delete" >
+                            <a class="btn btn-danger btn-xs link-delete" href="javascript:;" alias="<?php echo $row['name_vi']; ?>" id="<?php echo $row['id']; ?>" mod="product" class="link_delete" >
                                 Xóa
                             </a>
 
