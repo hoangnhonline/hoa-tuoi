@@ -50,7 +50,7 @@ $arrList = $model->getChild("banner", "position_id", $position_id);
                             <td width="1%" style="white-space:nowrap"><?php echo $value['name_vi']; ?></td>
                            
                             <td width="70%">
-                                <img src="../<?php echo $value['image_url'];?>" width="300px" />
+                                <img class="lazy" data-original="../<?php echo $value['image_url'];?>" width="300px" />
                             </td>   
                                         
                          

@@ -178,9 +178,9 @@ $cateTypeArr = $model->getListCateType();
                         <td width="1%"><span class="order"><?php echo $i; ?></span></td>
                         <td>
                             <?php if(!empty($row['image_url'])){ ?>
-                            <img id="img_thumnails" src="../<?php echo $row['image_url']; ?>" width="50" />
+                            <img id="img_thumnails" class="lazy" data-original="../<?php echo $row['image_url']; ?>" width="50" />
                             <?php }else{ ?>
-                            <img id="img_thumnails" src="static/img/no_image.jpg" width="50" />
+                            <img id="img_thumnails" class="lazy" data-original="static/img/no_image.jpg" width="50" />
                             <?php } ?>                            
                         </td> 
                         <td width="10%">

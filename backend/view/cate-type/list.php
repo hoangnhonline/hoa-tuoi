@@ -89,9 +89,9 @@ $list = $model->getList($table, $offset, 100, $arrCustom, 1);
                         <td width="1%"><span class="order"><?php echo $i; ?></span></td>
                         <td>
                             <?php if(!empty($row['icon_url'])){ ?>
-                            <img id="img_thumnails" src="../<?php echo $row['icon_url']; ?>" width="30" />
+                            <img id="img_thumnails" class="lazy" data-original="../<?php echo $row['icon_url']; ?>" width="30" />
                             <?php }else{ ?>
-                            <img id="img_thumnails" src="static/img/no_image.jpg" width="30" />
+                            <img id="img_thumnails" class="lazy" data-original="static/img/no_image.jpg" width="30" />
                             <?php } ?>                            
                         </td>  
                         <td width="50%">

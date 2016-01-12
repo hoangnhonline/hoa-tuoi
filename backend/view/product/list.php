@@ -147,7 +147,7 @@ $cateTypeArr = $model->getListCateType();
                     <tr id="row-<?php echo $row['id']; ?>">
                         <td width="1%" style="text-align:center"><span class="order"><?php echo $i; ?></span></td>
                         <td width="18%">
-                            <img class="img-thumbnail" src="../<?php echo $row['image_url']; ?>" width="150">
+                            <img class="img-thumbnail lazy" data-original="../<?php echo $row['image_url']; ?>" width="150">
                         </td>
                         <td width="30%">
                             <a style="font-size:19px;color:#B10007" href="index.php?mod=product&act=form&id=<?php echo $row['id']; ?>&cate_type_id=<?php echo $row['cate_type_id']; ?>">

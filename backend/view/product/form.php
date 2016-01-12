@@ -181,9 +181,9 @@ if($cate_type_id > 0){
 
                                     <input type="hidden" name="image_url" id="image_url" class="form-control" value="<?php if(!empty($detail['image_url'])) echo "../".$detail['image_url']; ?>" /><br />
                                     <?php if(!empty($detail['image_url'])){ ?>
-                                    <img id="img_thumnails" class="img-thumbnail" src="../<?php echo $detail['image_url']; ?>" width="150" />
+                                    <img id="img_thumnails" class="img-thumbnail lazy" data-original="../<?php echo $detail['image_url']; ?>" width="150" />
                                     <?php }else{ ?>
-                                    <img id="img_thumnails" class="img-thumbnail"  src="static/img/no_image.jpg" width="150" />
+                                    <img id="img_thumnails" class="img-thumbnail lazy" data-original="static/img/no_image.jpg" width="150" />
                                     <?php } ?>
                                     <!--<button class="btn btn-default " type="button" onclick="BrowseServer('Images:/','image_url')" >Upload</button>-->
                                 <!--</div>
