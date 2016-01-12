@@ -164,8 +164,8 @@ $cateTypeArr = $model->getListCateType();
                         <th style="text-align:center;width: 1%;white-space:nowrap">Danh mục con</th>
                         <?php } ?>
                         <th style="text-align:center;width: 1%;white-space:nowrap">Hiện menu</th>
-                        <th style="text-align:center;width: 1%;white-space:nowrap">Mẫu hoa mới</th>
                         <th style="text-align:center;width: 1%;white-space:nowrap">HOT</th>
+                        <th style="text-align:center;width: 1%;white-space:nowrap">Mẫu hoa mới</th>
                         <th style="width: 1%;white-space:nowrap">Thao tác</th>
                     </tr>
                     <?php

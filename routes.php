@@ -351,6 +351,10 @@ switch ($mod) {
         $bannerArr2 = $model->getListBannerByPosition(3, 1);
         $adsArr1 = $model->getListBannerByPosition(4, -1);
         $adsArr2 = $model->getListBannerByPosition(5, -1);
+
+        //mau hoa moi
+        $newArr = $model->getList('cate', -1, -1, array('is_new' => 1), 1);
+        $hotArr = $model->getList('cate', -1, -1, array('is_hot' => 1), 1);
         break;
 }
 ?>
