@@ -14,7 +14,20 @@ $arrData['alias_en'] = $model->changeTitle($name_en);
 $arrData['description_vi'] = addslashes($_POST['description_vi']);
 $arrData['description_en'] = addslashes($_POST['description_en']);
 
-$arrData['image_url'] = $image_url = $_POST['image_url'];
+
+$image_url_upload = $_FILES['image_url_upload'];
+
+if(($image_url_upload['name']!='')){
+	$arrRe = $model->uploadImages($image_url_upload);	
+	$image_url = $arrRe['filename'];
+}else{
+	$image_url = str_replace('../', '', $_POST['image_url']);
+}
+
+$arrData['image_url'] = $image_url;
+
+$arrData['is_new'] = isset($_POST['is_new']) ? (int) $_POST['is_new'] : 0;
+$arrData['is_hot'] = isset($_POST['is_hot']) ? (int) $_POST['is_hot'] : 0;
 
 $arrData['menu_type'] = $menu_type = (int) $_POST['menu_type'];
 

@@ -152,7 +152,8 @@ $cateTypeArr = $model->getListCateType();
             <div class="box-body">
                 <table class="table table-bordered table-striped" id="tbl_list">
                     <tbody><tr>
-                        <th width="1%">No.</th>                        
+                        <th width="1%">No.</th>
+                        <th width="1%">Hình ảnh</th>                        
                         <th width="10%">Tên danh mục</th>                       
                        
                         <th width="5%">Menu</th>
@@ -162,7 +163,9 @@ $cateTypeArr = $model->getListCateType();
                         <?php if($parent_id == 0){ ?>
                         <th style="text-align:center;width: 1%;white-space:nowrap">Danh mục con</th>
                         <?php } ?>
-                        <th style="text-align:center;width: 1%;white-space:nowrap">Hiện trên menu</th>
+                        <th style="text-align:center;width: 1%;white-space:nowrap">Hiện menu</th>
+                        <th style="text-align:center;width: 1%;white-space:nowrap">Mẫu hoa mới</th>
+                        <th style="text-align:center;width: 1%;white-space:nowrap">HOT</th>
                         <th style="width: 1%;white-space:nowrap">Thao tác</th>
                     </tr>
                     <?php
@@ -173,7 +176,13 @@ $cateTypeArr = $model->getListCateType();
                     ?>
                     <tr id="row-<?php echo $row['id']; ?>">
                         <td width="1%"><span class="order"><?php echo $i; ?></span></td>
-                        
+                        <td>
+                            <?php if(!empty($row['image_url'])){ ?>
+                            <img id="img_thumnails" src="../<?php echo $row['image_url']; ?>" width="50" />
+                            <?php }else{ ?>
+                            <img id="img_thumnails" src="static/img/no_image.jpg" width="50" />
+                            <?php } ?>                            
+                        </td> 
                         <td width="10%">
                             <a href="index.php?mod=cate&act=form&id=<?php echo $row['id']; ?>&parent_id=<?php echo $row['parent_id'];?>&cate_type_id=<?php echo $row['cate_type_id']; ?>&menu_type=<?php echo $row['menu_type']; ?>">
                                 <?php echo $row['name_vi']; ?>                                
@@ -194,6 +203,16 @@ $cateTypeArr = $model->getListCateType();
                         <td style="text-align:center;width: 1%;white-space:nowrap">
                             <div class="checkbox">
                                 <input data-value="<?php echo $row['id']; ?>" class="show-menu" type="checkbox" <?php if($row['show_menu'] == 1) echo "checked"; ?>>                                
+                            </div>                            
+                        </td>
+                        <td style="text-align:center;width: 1%;white-space:nowrap">
+                            <div class="checkbox">
+                                <input data-value="<?php echo $row['id']; ?>" data-table="cate" data-column="is_hot" class="change-column" type="checkbox" <?php if($row['is_hot'] == 1) echo "checked"; ?>>                                           
+                            </div>                            
+                        </td>
+                        <td style="text-align:center;width: 1%;white-space:nowrap">
+                            <div class="checkbox">
+                               <input data-value="<?php echo $row['id']; ?>" data-table="cate" data-column="is_new" class="change-column" type="checkbox" <?php if($row['is_new'] == 1) echo "checked"; ?>>                                
                             </div>                            
                         </td>
                         <td style="width: 1%;white-space:nowrap">                            

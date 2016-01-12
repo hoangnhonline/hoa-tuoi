@@ -196,12 +196,12 @@ $cateTypeArr = $model->getListCateType();
                         </td>
                         <td width="10%" style="text-align:center">
                             <div class="checkbox">
-                                <input data-value="<?php echo $row['id']; ?>" data-table="product" data-column="is_new" class="change-column" type="checkbox" <?php if($row['is_new'] == 1) echo "checked"; ?>>                               
+                                <input data-value="<?php echo $row['id']; ?>" data-table="product" data-column="is_new" class="change-column" type="checkbox" <?php if($row['is_new'] == 1) echo "checked"; ?>>
                             </div>
                         </td>
                         <td width="10%" style="text-align:center">
                             <div class="checkbox">
-                                <input data-value="<?php echo $row['id']; ?>" data-table="product" data-column="is_sale" class="change-column" type="checkbox" <?php if($row['is_sale'] == 1) echo "checked"; ?>>                                
+                                <input data-value="<?php echo $row['id']; ?>" data-table="product" data-column="is_sale" class="change-column" type="checkbox" <?php if($row['is_sale'] == 1) echo "checked"; ?>>
                             </div>
                         </td>
                         <td style="width: 1%;white-space:nowrap">                            

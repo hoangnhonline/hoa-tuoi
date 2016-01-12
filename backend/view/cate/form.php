@@ -69,7 +69,7 @@ if($cate_type_id > 0){
             <div class="clearfix"></div>
             <div class="box-body">
             <!-- form start -->
-            <form role="form" method="post" id="dataForm" action="controller/Cate.php" >
+            <form role="form" method="post" id="dataForm" action="controller/Cate.php"  enctype="multipart/form-data">
                 <?php if($id> 0){ ?>
                 <input type="hidden" value="<?php echo $id; ?>" name="id" />
                 <?php } ?>
@@ -145,8 +145,7 @@ if($cate_type_id > 0){
                    
                     <tr>
                         <td></td>
-                        <td colspan="2">
-                           
+                        <td colspan="2">                           
                             <?php 
                                if(isset($detail)){
                                 $show_menu = $detail['show_menu'];
@@ -154,11 +153,51 @@ if($cate_type_id > 0){
                                 $show_menu = 1;
                                }
                             ?>                     
-                            <div class="col-md-12">                                
+                            <div class="col-md-4">                                
                                 <div class="checkbox">
                                   <input type="checkbox" <?php if($show_menu == 1) echo "checked"; ?> value="1" name="show_menu"><label>&nbsp;Hiện trên menu</label>
                                 </div>
                             </div>
+                            <?php 
+                               if(isset($detail)){
+                                    $is_new = $detail['is_new'];
+                                    $is_hot = $detail['is_hot'];                                    
+                               }else{
+                                    $is_new = $is_hot = 0;
+                               }
+                            ?>                     
+                            <div class="col-md-4">                                
+                                <div class="checkbox">
+                                  <input type="checkbox" <?php if($is_new == 1) echo "checked"; ?> value="1" name="is_new" id="is_new"><label>Mẫu hoa mới</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">                                
+                                <div class="checkbox">
+                                  <input type="checkbox" <?php if($is_hot == 1) echo "checked"; ?> value="1" name="is_hot" id="is_hot"><label>Danh mục HOT (trang chủ)</label>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Hình ảnh</td>
+                        <td colspan="2">
+                            <div class="form-group">                            
+                            <input type="radio" id="choose_img_sv" name="choose_img" value="1" checked="checked"/> Chọn ảnh từ server
+                            &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="choose_img_cp" name="choose_img" value="2" /> Chọn ảnh từ máy tính
+                            <div id="from_sv">
+                                <input type="hidden" name="image_url" id="image_url" class="form-control" value="<?php if(!empty($detail['image_url'])) echo "../".$detail['image_url']; ?>" /><br />
+                                <?php if(!empty($detail['image_url'])){ ?>
+                                <img id="img_thumnails" src="../<?php echo $detail['image_url']; ?>" width="100" />
+                                <?php }else{ ?>
+                                <img id="img_thumnails" src="static/img/no_image.jpg" width="100" />
+                                <?php } ?>
+                                <button class="btn btn-default " type="button" onclick="BrowseServer('Images:/','image_url')" >Upload</button>
+                            </div>
+                            <div id="from_cp" style="display:none;padding:15px;margin-bottom:10px">
+                                <input type="file" name="image_url_upload" />
+                            </div>
+
+                        </div>
                         </td>
                     </tr> 
                     <tr>
@@ -233,4 +272,57 @@ if($cate_type_id > 0){
         });
 
     });
+</script>
+<script type="text/javascript" src="ckfinder/ckfinder.js"></script>
+
+<script type="text/javascript">
+
+
+function split(val) {
+    return val.split(/;\s*/);
+}
+
+function extractLast(term) {
+    return split(term).pop();
+}
+function BrowseServer( startupPath, functionData ){    
+    var finder = new CKFinder();
+    finder.basePath = 'ckfinder/'; //Đường path nơi đặt ckfinder
+    finder.startupPath = startupPath; //Đường path hiện sẵn cho user chọn file
+    finder.selectActionFunction = SetFileField; // hàm sẽ được gọi khi 1 file được chọn
+    finder.selectActionData = functionData; //id của text field cần hiện địa chỉ hình
+    //finder.selectThumbnailActionFunction = ShowThumbnails; //hàm sẽ được gọi khi 1 file thumnail được chọn    
+    finder.popup(); // Bật cửa sổ CKFinder
+} //BrowseServer
+
+function SetFileField( fileUrl, data ){
+    document.getElementById( data["selectActionData"] ).value = fileUrl;
+    $('#img_thumnails').attr('src',fileUrl).show();
+}
+function BrowseServerIcon( startupPath, functionData ){    
+    var finder = new CKFinder();
+    finder.basePath = 'ckfinder/'; //Đường path nơi đặt ckfinder
+    finder.startupPath = startupPath; //Đường path hiện sẵn cho user chọn file
+    finder.selectActionFunction = SetFileFieldIcon; // hàm sẽ được gọi khi 1 file được chọn
+    finder.selectActionData = functionData; //id của text field cần hiện địa chỉ hình
+    //finder.selectThumbnailActionFunction = ShowThumbnails; //hàm sẽ được gọi khi 1 file thumnail được chọn    
+    finder.popup(); // Bật cửa sổ CKFinder
+} //BrowseServer
+
+function SetFileFieldIcon( fileUrl, data ){
+    document.getElementById( data["selectActionData"] ).value = fileUrl;
+    $('#img_icon').attr('src', fileUrl).show();
+}
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#choose_img_sv').on('ifChecked', function(event){
+        $('#from_sv').show();
+        $('#from_cp').hide();
+    });
+    $('#choose_img_cp').on('ifChecked', function(event){
+        $('#from_cp').show();
+        $('#from_sv').hide();
+    });    
+});    
 </script>
