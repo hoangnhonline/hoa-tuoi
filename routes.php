@@ -5,7 +5,7 @@ if(!isset($_SESSION)){
 require_once 'models/Home.php';
 $model = new Home;
 $mod = isset($_GET['mod']) ? $_GET['mod'] : "";
-//$arrText = $model->getListText();
+$arrText = $model->getListText();
 function checkCat($uri) {
 
     require_once 'models/Home.php';    
@@ -99,139 +99,7 @@ function checkCat($uri) {
             }
         }
     }
-    /*
-    var_dump($city_id);die;
-    if(count($arrTmp) == 4){
-        $mod = "detail";        
-    }elseif(strpos($uri, 'tin-tuc/')){
-
-        $mod = "detail-news";
-        
-    }elseif(strpos($uri, 'tim-kiem.')){
-
-        $mod = "search";
-        
-    }elseif(strpos($uri, 'dat-hang-thanh-cong.')){
-
-        $mod = "thanks";
-        
-    }elseif(strpos($uri, 'danh-muc/')){
-
-        $mod = "cate-news";
-        
-    }elseif(strpos($uri, 'dang-ky')){
-
-        $mod = "register";
-        if(!empty($_SESSION['user'])){  
-            $rel = isset($_GET['rel']) ? $_GET['rel'] : 'gio-hang';    
-            header('location:'.$rel.'.html');
-        }
-        
-    }elseif(strpos($uri, 'cap-nhat-thong-tin')){
-
-        $mod = "info";        
-        if(empty($_SESSION['user'])){         
-            header('location:dang-ky.html');
-        }
-       
-        
-    }elseif(strpos($uri, 'quan-ly-don-hang')){
-       
-        $mod = "order";               
-        if(empty($_SESSION['user'])){         
-            header('location:dang-ky.html');
-        }
-        
-    }elseif(strpos($uri, 'chi-tiet-don-hang')){
-       
-        $mod = "orderdetail";               
-        if(empty($_SESSION['user'])){         
-            header('location:dang-ky.html');
-        }
-        
-    }elseif(strpos($uri, 'doi-mat-khau')){
-        $mod = "changepass";
-        $seo = $model->getDetailSeo(9);
-        if(empty($_SESSION['user'])){         
-            header('location:dang-ky.html');
-        }
-    }else{
-    	if (preg_match($p_product_detail, $uri)) {
-            $mod = "product_detail";        
-        }
-        if (preg_match($p_cart, $uri)) {
-            $mod = "cart";        
-            if(empty($_SESSION['user'])){         
-            //    header('location:dang-ky.html');
-            }
-        }
-        if (preg_match($p_search, $uri)) {
-            $mod = "search";        
-        }	
-        if (preg_match($p_cate_page, $uri)) {           
-            
-            $uri =  substr($uri, 1);     
-            $tmp = explode(".", $uri);
-            
-            if($tmp[0] == "lien-he"){
-                $mod = "contact";
-            }elseif($tmp[0] == "thanh-toan"){
-                $mod = "thanhtoan";
-            }elseif($tmp[0] =="tin-tuc"){
-                $mod = "news";
-                $seo = $model->getDetailSeo(4);
-            }else{                
-                $row = $model->getDetailAlias($tmp[0]);
-                $mod = $row['type'] == 1 ? "cate" : "content";
-                $object_id = $row['object_id'];
-            }
-        }   
-       
-        if (preg_match($p_about, $uri)) {
-            $mod = "about";
-            $seo = $model->getDetailSeo(2);
-        }
-    	
-        if (preg_match($p_thanhtoan, $uri)) {
-            $mod = "thanhtoan";       
-            if(empty($_SESSION['user'])){         
-            //    header('location:dang-ky.html');
-            }
-        }        
-        if (preg_match($p_detail_news, $uri)) {
-            $mod = "detail-news";
-        }
-        if (preg_match($p_detail_event, $uri)) {
-            $mod = "detail-event";
-        }
-    	if (preg_match($p_tintuc, $uri)) {
-            $mod = "news";
-            $seo = $model->getDetailSeo(4);
-        }
-        if (preg_match($p_cate_news, $uri)) {
-            $mod = "cate-news";
-        }
-        
-        if (preg_match($p_cate, $uri)) {
-            $mod = "cate";
-        }
-        if (preg_match($p_content, $uri)) {
-            $mod = "content";
-        }
-    	if (preg_match($p_hot, $uri) || preg_match($p_sale, $uri)) {
-            $mod = "catetype";
-        }
-    	
-        if (preg_match($p_contact, $uri)) {
-            $mod = "contact";        
-        }
-        
-        if (preg_match($p_logout, $uri)) {        
-            session_destroy();
-            $mod = "";
-            $seo = $model->getDetailSeo(1);
-        }
-        */
+   
     
     return array("seo"=>$seo, "mod" =>$mod,'object_id' => $object_id, 'city_id' => $city_id, 'district_id' => $district_id,
         'price_id' => $price_id, 'type_id' => $type_id);
@@ -355,6 +223,9 @@ switch ($mod) {
         //mau hoa moi
         $newArr = $model->getList('cate', -1, -1, array('is_new' => 1), 1);
         $hotArr = $model->getList('cate', -1, -1, array('is_hot' => 1), 1);
+
+        //footer
+        $footerTextArr = $model->getList('footer', -1, -1, array(), 1);        
         break;
 }
 ?>

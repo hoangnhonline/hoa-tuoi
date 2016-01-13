@@ -2,7 +2,7 @@
   <div class="container">
   
     <div class="search-for-price">
-      <h4 class="tit">Tư vấn chọn hoa tươi</h4>
+      <h4 class="tit"><?php echo $arrText[15]['text_'.$lang]; ?></h4>
       <form method="" action="" name="" class="searchForm">
         <div class="clearfix">
           <div class="pull-left">
@@ -22,7 +22,7 @@
           </div>
         </div>        
         
-        <p class="txt">* Bạn có thể gọi nhanh cho chúng tôi theo số <span class="tel">0908.303.680</span> để đặt hoa theo thiết kế riêng </p>     
+        <p class="txt">* <?php echo $arrText[8]['text_'.$lang]; ?> </p>     
         
       </form>
     </div>

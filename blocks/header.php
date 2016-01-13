@@ -32,7 +32,7 @@
           
           <div class="search-basic col-sm-4 row">
             <form method="" action="" name="" class="input-group">
-              <input type="text" class="form-control" id="" name="" placeholder="Nhập từ khóa tìm kiếm...">
+              <input type="text" class="form-control" id="" name="" placeholder="<?php echo $arrText[1]['text_'.$lang]; ?>">
               <span class="input-group-btn">
                 <button type="submit" class="btn" id="" name=""><i class="fa fa-search"></i></button>
               </span>
@@ -57,7 +57,7 @@
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="http://<?php echo $_SERVER['SERVER_NAME']; ?>">Trang chủ</a></li>
+                <li class="active"><a href="http://<?php echo $_SERVER['SERVER_NAME']; ?>"><?php echo $arrText[16]['text_'.$lang]; ?></a></li>
                 <?php if(!empty($menuNgangParentArr['data'])){ 
                   foreach ($menuNgangParentArr['data'] as $value) {                
                 ?>

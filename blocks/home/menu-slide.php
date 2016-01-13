@@ -4,7 +4,7 @@
         
         <div class="col-sm-3 box-fl">
           <div class="category-nav">
-            <h3 class="tit-box"><i class="fa fa-bars"></i> Danh mục hoa tươi</h3>
+            <h3 class="tit-box"><i class="fa fa-bars"></i> <?php echo $arrText[9]['text_'.$lang]; ?></h3>
             <ul class="list">
               <?php if(!empty($menuDocArr['data'])){ 
                   foreach ($menuDocArr['data'] as $value) {                

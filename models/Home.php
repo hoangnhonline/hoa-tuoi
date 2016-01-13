@@ -3,10 +3,10 @@
 class Home {
     function __construct() {
 		if($_SERVER['SERVER_NAME']=='hoatuoi.dev'){
-            mysql_connect('localhost', 'root', '') or die("Can't connect to server");
-               mysql_select_db('hoatuoi') or die("Can't connect database");
+            mysql_connect('localhost', 'root', 'root') or die("Can't connect to server");
+            mysql_select_db('hoatuoi') or die("Can't connect database");
         }else{
-           mysql_connect('localhost', 'thietke7_hoatuoi', 'huyhoang157') or die("Can't connect to server");
+            mysql_connect('localhost', 'thietke7_hoatuoi', 'huyhoang157') or die("Can't connect to server");
             mysql_select_db('thietke7_hoatuoi') or die("Can't connect database");
         }
         mysql_query("SET NAMES 'utf8'") or die(mysql_error());
@@ -52,10 +52,10 @@ class Home {
     }
     function getListText(){
         $arrResult = array();
-        $sql = "SELECT * FROM text";
+        $sql = "SELECT id, text_vi, text_en FROM text";
         $rs = mysql_query($sql);
         while($row = mysql_fetch_assoc($rs)){
-            $arrResult[$row['id']] = $row['text'];
+            $arrResult[$row['id']] = $row;
         }
         return $arrResult;
     }

@@ -1,7 +1,7 @@
 <section class="category-home-block">
         
         <div class="container">
-            <h1 class="head-title"><i class="fa fa-hand-o-right"></i> Mẫu hoa mới</h1>
+            <h1 class="head-title"><i class="fa fa-hand-o-right"></i> <?php echo $arrText[7]['text_'.$lang]; ?></h1>
             <ul class="item-list">
               <?php if(!empty($newArr['data'])){ 
               foreach ($newArr['data'] as $value) {                

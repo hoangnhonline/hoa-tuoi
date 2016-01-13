@@ -22,7 +22,7 @@
     </ul>
     
     <div class="block">
-      <h3 class="block-title"><i class="fa fa-folder"></i> Tin mới nhất</h3>
+      <h3 class="block-title"><i class="fa fa-folder"></i> <?php echo $arrText[6]['text_'.$lang]; ?></h3>
       <div class="block-main">
         <div class="article-list-sblock">
           <article class="item">
