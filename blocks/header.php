@@ -17,8 +17,8 @@
           </ul>
           
           <ul class="lang-flag">
-            <li><a href="#" title="Vietnames"><img src="images/flag-vn.png" alt="" width="24" height="16"></a></li>
-            <li><a href="#" title="English"><img src="images/flag-en.png" alt="" width="24" height="16"></a></li>
+            <li><a href="javascript:void(0)" data-value="vi" class="lang" title="Vietnames"><img src="images/flag-vn.png" alt="Tiếng Việt" width="24" height="16"></a></li>
+            <li><a href="javascript:void(0)" data-value="en" class="lang" title="English"><img src="images/flag-en.png" alt="English" width="24" height="16"></a></li>
           </ul>
           
         </div><!-- End /.container -->
@@ -26,7 +26,7 @@
       
       <div class="header-main">
         <div class="container">
-          <h1 class="logo col-sm-2"><a href="#"><img class="imghover" src="images/logo.png" alt="Hoa Tươi Nguyễn Tín" width="150" height="100"></a></h1>
+          <h1 class="logo col-sm-2"><a href="http://<?php echo $_SERVER['SERVER_NAME']; ?>"><img class="imghover" src="images/logo.png" alt="Hoa Tươi Nguyễn Tín" width="150" height="100"></a></h1>
           
           <p class="logo-name col-sm-4"><img src="images/logo-name-nguyen-tin-flower.png" alt="Hoa Tươi Nguyễn Tín" width="412" height="40"></p>
           

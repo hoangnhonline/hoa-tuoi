@@ -1,7 +1,7 @@
 <?php 
 session_start();
 date_default_timezone_set ('Asia/Saigon');
-$lang = "vi";
+
 require_once 'routes.php';
 require_once "models/Home.php";
 $model = new Home;
@@ -22,6 +22,7 @@ $model = new Home;
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Home page</title>
+<base href="http://<?php echo $_SERVER['SERVER_NAME']; ?>" />
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="robots" content="index,follow" />
@@ -56,13 +57,13 @@ $model = new Home;
     
     <!-- ▼MAIN▼ -->
     <div id="main-panel">
-      
+      <?php if($mod == "home"){ ?>
       <?php include "blocks/home/menu-slide.php"; ?>
       
       <?php include "blocks/home/filter-ads.php"; ?>
       
       <?php include "blocks/home/new-model.php"; ?>
-      
+      <?php } ?>
       <section class="main-content">
         <div class="container">      
           <div class="row">
@@ -97,11 +98,67 @@ $model = new Home;
 <script>
   new WOW().init();
 </script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('a.lang').click(function(){
+      $.ajax({
+            url: "process/lang.php",
+            type: "POST",
+            async: true,           
+            data: {
+                lang : $(this).attr('data-value')
+            },
+            success: function(data){
+                location.href="http://<?php echo $_SERVER['SERVER_NAME']; ?>";
+            }
+        });
+    });
+    $('#load_more').click(function(){
+      var obj = $(this);
+      var phantrang = <?php echo $phantrang; ?>;
+      var total = $('#total_record').val();
+      var page_current = obj.attr('data-page');
+      var parent_id = obj.attr('data-parent');
+      var cate_type_id = obj.attr('data-catetype');
+      var total_current = obj.attr('total_current');
+      var cate_id = obj.attr('data-cate');
+      var conlai = $('#conlai').val();
+      $.ajax({
+            url: "process/product.php",
+            type: "POST",
+            async: true,
+            dataType : 'json',
+            data: {
+                cate_type_id : cate_type_id,
+                parent_id : parent_id,
+                cate_id : cate_id,
+                page : parseInt(page_current) + 1,
+                conlai : conlai                
+            },
+            success: function(data){
+                $('#product-list-ajax').append(data.html);
+                $('#conlai').val(data.conlai);
+                $('#span_conlai').html(data.spanconlai);
+                obj.attr('data-page', parseInt(page_current) + 1);
+                obj.attr('data-total', parseInt(total_current) + parseInt(data.total));
+                $("img.lazy").lazyload({
+                    effect : "fadeIn"
+                });
+                if(data.total == 0 || data.conlai == 0){                  
+                  $('.load-more-item').hide();
+                }
+            }
+        });
+    });
+  });
+  </script>
 <script>
+
 $(document).ready(function() {
   $("img.lazy").lazyload({
       effect : "fadeIn"
   });
+
   var owl = $('#product-sale-block');
   owl.owlCarousel({
       items:4,

@@ -8,7 +8,7 @@ class Backend {
 
     function __construct() {
         if($_SERVER['SERVER_NAME']=='hoatuoi.dev'){
-            mysql_connect('localhost', 'root', 'root') or die("Can't connect to server");
+            mysql_connect('localhost', 'root', '') or die("Can't connect to server");
                mysql_select_db('hoatuoi') or die("Can't connect database");
         }else{
 			mysql_connect('localhost', 'lkt_art', 'TSel$D6]Uou5') or die("Can't connect to server");

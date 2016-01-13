@@ -3,7 +3,7 @@
 class Home {
     function __construct() {
 		if($_SERVER['SERVER_NAME']=='hoatuoi.dev'){
-            mysql_connect('localhost', 'root', 'root') or die("Can't connect to server");
+            mysql_connect('localhost', 'root', '') or die("Can't connect to server");
             mysql_select_db('hoatuoi') or die("Can't connect database");
         }else{
             mysql_connect('localhost', 'thietke7_hoatuoi', 'huyhoang157') or die("Can't connect to server");
@@ -26,6 +26,7 @@ class Home {
         $row = mysql_fetch_assoc($rs);
         return $row;
     }
+
     function getListBannerByPosition($position_id){
         $arrReturn = array();
         $sql = mysql_query("SELECT * FROM banner WHERE position_id = $position_id");
@@ -40,6 +41,95 @@ class Home {
             $str = mysql_real_escape_string($str);
         }
         return $str;
+    }
+    function getListProduct($cate_type_id, $parent_id, $cate_id, $arrCustom = array(), $offset = -1, $limit = -1, $paging = -1) {
+        try{            
+            $arrReturn = $arrNoPaging = array();            
+            
+            $sql = "SELECT product.* , cate_id, parent_id FROM product, product_cate WHERE cate_type_id = $cate_type_id ";                       
+
+            $sql.= " AND product.id = product_cate.product_id ";
+
+            if($cate_id > 0){
+                $sql.= " AND product_cate.cate_id = $cate_id ";
+            }
+            if($parent_id > 0){
+                $sql.= " AND product_cate.parent_id = $parent_id ";
+            }
+            if(!empty($arrCustom)){                    
+                foreach ($arrCustom as $column => $value) {                    
+                    if(is_numeric($value) && $value > -1){
+                        $sql.= " AND $column = '$value' ";
+                    }
+                }
+            }
+            $sql.="  GROUP BY product_id ORDER BY id DESC ";
+            //echo $sql;
+            if ($limit > 0 && $offset >= 0){
+                $sql .= " LIMIT $offset,$limit";
+            }
+            //echo $sql;
+            $rs = mysql_query($sql) or die(mysql_error());
+            while($row = mysql_fetch_assoc($rs)){
+               $arrReturn['data'][] = $row;
+               $arrNoPaging[] = $row;
+            }
+            if($paging == 1){
+                $arrReturn['total'] = mysql_num_rows($rs);
+            }else{
+                $arrReturn = $arrNoPaging;
+            }            
+
+        }catch(Exception $ex){            
+            $arrLog = array('time'=>date('d-m-Y H:i:s'),'model'=> 'Product','function' => 'getListProduct' , 'error'=>$ex->getMessage(),'sql'=>$sql);
+            $this->logError($arrLog);
+        }
+        return $arrReturn;
+    }
+    function getListProductOther($product_id, $cate_type_id, $parent_id, $cate_id, $arrCustom = array(), $offset = -1, $limit = -1, $paging = -1) {
+        try{            
+            $arrReturn = $arrNoPaging = array();            
+            
+            $sql = "SELECT product.* , cate_id, parent_id FROM product, product_cate WHERE cate_type_id = $cate_type_id ";                       
+
+            $sql.= " AND product.id = product_cate.product_id ";
+
+            if($cate_id > 0){
+                $sql.= " AND product_cate.cate_id = $cate_id ";
+            }
+            if($parent_id > 0){
+                $sql.= " AND product_cate.parent_id = $parent_id ";
+            }
+            if(!empty($arrCustom)){                    
+                foreach ($arrCustom as $column => $value) {                    
+                    if(is_numeric($value) && $value > -1){
+                        $sql.= " AND $column = '$value' ";
+                    }
+                }
+            }
+            $sql.=" AND product.id <> $product_id ";
+            $sql.="  GROUP BY product_id ORDER BY id DESC ";
+            //echo $sql;
+            if ($limit > 0 && $offset >= 0){
+                $sql .= " LIMIT $offset,$limit";
+            }
+            //echo $sql;
+            $rs = mysql_query($sql) or die(mysql_error());
+            while($row = mysql_fetch_assoc($rs)){
+               $arrReturn['data'][] = $row;
+               $arrNoPaging[] = $row;
+            }
+            if($paging == 1){
+                $arrReturn['total'] = mysql_num_rows($rs);
+            }else{
+                $arrReturn = $arrNoPaging;
+            }            
+
+        }catch(Exception $ex){            
+            $arrLog = array('time'=>date('d-m-Y H:i:s'),'model'=> 'Product','function' => 'getListProduct' , 'error'=>$ex->getMessage(),'sql'=>$sql);
+            $this->logError($arrLog);
+        }
+        return $arrReturn;
     }
     function getListDistrictHaveRoom($city_id){
         $arr = array();
@@ -195,11 +285,23 @@ class Home {
         $num = mysql_num_rows($rs);
         return $num > 0 ? false : true;        
     }
-    function getNameById($table, $id){
-        $sql = "SELECT name FROM $table WHERE id = $id";
+    function getNameById($table, $id, $lang){
+        $sql = "SELECT name_vi, name_en FROM $table WHERE id = $id";
         $rs = mysql_query($sql);
         $row = mysql_fetch_assoc($rs);
-        return $row['name'];
+        return $row['name_'.$lang];
+    }
+    function getAliasById($table, $id, $lang){
+        $sql = "SELECT alias_vi, alias_en FROM $table WHERE id = $id";
+        $rs = mysql_query($sql);
+        $row = mysql_fetch_assoc($rs);
+        return $row['alias_'.$lang];
+    }
+    function getIdByAlias($table, $alias, $lang){
+        $sql = "SELECT id FROM $table WHERE alias_vi = '$alias' OR alias_en = '$alias' ";
+        $rs = mysql_query($sql);
+        $row = mysql_fetch_assoc($rs);
+        return $row['id'];
     }
     function getDetail($table, $id){
         $sql = "SELECT * FROM $table WHERE id = $id";
