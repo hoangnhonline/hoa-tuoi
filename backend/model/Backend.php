@@ -8,11 +8,11 @@ class Backend {
 
     function __construct() {
         if($_SERVER['SERVER_NAME']=='hoatuoi.dev'){
-            mysql_connect('localhost', 'root', '') or die("Can't connect to server");
+            mysql_connect('localhost', 'root', 'root') or die("Can't connect to server");
                mysql_select_db('hoatuoi') or die("Can't connect database");
         }else{
-			mysql_connect('localhost', 'lkt_art', 'TSel$D6]Uou5') or die("Can't connect to server");
-			mysql_select_db('lkt_art') or die("Can't connect database");  
+			mysql_connect('localhost', 'thietke7_hoatuoi', 'huyhoang157') or die("Can't connect to server");
+			mysql_select_db('thietke7_hoatuoi') or die("Can't connect database");  
         }
         mysql_query("SET NAMES 'utf8'") or die(mysql_error());
     }
@@ -33,14 +33,6 @@ class Backend {
 
         return $row;
 
-    }
-    function deleteImageProduct($id){
-        $detail = $this->getDetail('product', $id);
-        $image_url = $detail['image_url'];
-        var_dump("../../".$image_url);        
-        unlink("../../".$image_url);
-        unlink("../../".str_replace(".", "_190x190.", $image_url));
-        unlink("../../".str_replace(".", "_512x512.", $image_url));
     }
     function changeTitle($str) {
         $str = $this->stripUnicode($str);
