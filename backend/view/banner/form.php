@@ -103,24 +103,44 @@ $position_id = isset($_GET['position_id']) ? (int) $_GET['position_id'] : 0;
                     
                     <tr>
                         <td>Hình ảnh <span class="error">*</span></td>
-                        <td colspan="2">
+                        <td>
                             <div class="form-group">                            
-                            <input type="radio" id="choose_img_sv" name="choose_img" value="1" checked="checked"/> Chọn ảnh từ server
-                            &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="choose_img_cp" name="choose_img" value="2" /> Chọn ảnh từ máy tính
-                            <div id="from_sv">
-                                <input type="hidden" name="image_url" id="image_url" class="form-control" value="<?php if(!empty($detail['image_url'])) echo "../".$detail['image_url']; ?>" /><br />
-                                <?php if(!empty($detail['image_url'])){ ?>
-                                <img id="img_thumnails" class="lazy" data-original="../<?php echo $detail['image_url']; ?>" height="100" />
-                                <?php }else{ ?>
-                                <img id="img_thumnails" class="lazy" data-original="static/img/no_image.jpg" width="100" />
-                                <?php } ?>
-                                <button class="btn btn-default " type="button" onclick="BrowseServer('Images:/','image_url')" >Upload</button>
-                            </div>
-                            <div id="from_cp" style="display:none;padding:15px;margin-bottom:10px">
-                                <input type="file" name="image_url_upload" />
-                            </div>
+                                <input type="radio" id="choose_img_sv_vi" name="choose_img_vi" value="1" checked="checked"/> Chọn ảnh từ server
+                                &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="choose_img_cp_vi" name="choose_img_vi" value="2" /> Chọn ảnh từ máy tính
+                                <div id="from_sv_vi">
+                                    <input type="hidden" name="image_url_vi" id="image_url_vi" class="form-control" value="<?php if(!empty($detail['image_url_vi'])) echo "../".$detail['image_url_vi']; ?>" /><br />
+                                    <?php if(!empty($detail['image_url_vi'])){ ?>
+                                    <img id="img_thumnails_vi" class="lazy" data-original="../<?php echo $detail['image_url_vi']; ?>" height="100" />
+                                    <?php }else{ ?>
+                                    <img id="img_thumnails_vi" class="lazy" data-original="static/img/no_image.jpg" width="100" />
+                                    <?php } ?>
+                                    <button class="btn btn-default " type="button" onclick="BrowseServer('Images:/','image_url_vi')" >Upload</button>
+                                </div>
+                                <div id="from_cp_vi" style="display:none;padding:15px;margin-bottom:10px">
+                                    <input type="file" name="image_url_upload_vi" />
+                                </div>
 
-                        </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">                            
+                                <input type="radio" id="choose_img_sv_en" name="choose_img_en" value="1" checked="checked"/> Chọn ảnh từ server
+                                &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="choose_img_cp_en" name="choose_img_en" value="2" /> Chọn ảnh từ máy tính
+                                <div id="from_sv_en">
+                                    <input type="hidden" name="image_url_en" id="image_url_en" class="form-control" 
+                                    value="<?php if(!empty($detail['image_url_en'])) echo "../".$detail['image_url_en']; ?>" /><br />
+                                    <?php if(!empty($detail['image_url_en'])){ ?>
+                                    <img id="img_thumnails_en" class="lazy" data-original="../<?php echo $detail['image_url_en']; ?>" height="100" />
+                                    <?php }else{ ?>
+                                    <img id="img_thumnails_en" class="lazy" data-original="static/img/no_image.jpg" width="100" />
+                                    <?php } ?>
+                                    <button class="btn btn-default " type="button" onclick="BrowseServer2('Images:/','image_url_en')" >Upload</button>
+                                </div>
+                                <div id="from_cp_en" style="display:none;padding:15px;margin-bottom:10px">
+                                    <input type="file" name="image_url_upload_en" />
+                                </div>
+
+                            </div>
                         </td>
                     </tr>
                     <tr id="lien-ket" style="display:none;">
@@ -223,11 +243,24 @@ function BrowseServer( startupPath, functionData ){
     finder.popup(); // Bật cửa sổ CKFinder
 } //BrowseServer
 
-function SetFileField( fileUrl, data ){
+function SetFileField( fileUrl, data){
     document.getElementById( data["selectActionData"] ).value = fileUrl;
-    $('#img_thumnails').attr('src', fileUrl).show();
+    $('#img_thumnails_vi').attr('src', fileUrl).show();
 }
+function BrowseServer2( startupPath, functionData ){    
+    var finder = new CKFinder();
+    finder.basePath = 'ckfinder/'; //Đường path nơi đặt ckfinder
+    finder.startupPath = startupPath; //Đường path hiện sẵn cho user chọn file
+    finder.selectActionFunction = SetFileField2; // hàm sẽ được gọi khi 1 file được chọn
+    finder.selectActionData = functionData; //id của text field cần hiện địa chỉ hình
+    //finder.selectThumbnailActionFunction = ShowThumbnails; //hàm sẽ được gọi khi 1 file thumnail được chọn    
+    finder.popup(); // Bật cửa sổ CKFinder
+} //BrowseServer
 
+function SetFileField2( fileUrl, data){
+    document.getElementById( data["selectActionData"] ).value = fileUrl;
+    $('#img_thumnails_en' ).attr('src', fileUrl).show();
+}
 </script>
 <script type="text/javascript">
 $(function(){
@@ -267,13 +300,22 @@ $(function(){
     $('.datetime').datetimepicker({
         format:'d-m-Y H:i'
     });        
-    $('#choose_img_sv').on('ifChecked', function(event){
-        $('#from_sv').show();
-        $('#from_cp').hide();
+    $('#choose_img_sv_vi').on('ifChecked', function(event){
+        $('#from_sv_vi').show();
+        $('#from_cp_vi').hide();
     });
-    $('#choose_img_cp').on('ifChecked', function(event){
-        $('#from_cp').show();
-        $('#from_sv').hide();
+    $('#choose_img_cp_vi').on('ifChecked', function(event){
+        $('#from_cp_vi').show();
+        $('#from_sv_vi').hide();
+    });  
+
+    $('#choose_img_sv_en').on('ifChecked', function(event){
+        $('#from_sv_en').show();
+        $('#from_cp_en').hide();
+    });
+    $('#choose_img_cp_en').on('ifChecked', function(event){
+        $('#from_cp_en').show();
+        $('#from_sv_en').hide();
     });  
 });      
 </script>

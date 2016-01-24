@@ -19,6 +19,13 @@ if (isset($_GET['parent_id']) && $_GET['parent_id'] > 0) {
 } else {
     $parent_id = 0;
 }
+if (isset($_GET['menu_type']) && $_GET['menu_type'] > 0) {
+    $menu_type = $_GET['menu_type'];      
+    $link.="&menu_type=".$menu_type;  
+    $link_form.="&menu_type=".$menu_type;      
+} else {
+    $menu_type = -1;
+}
 if (isset($_GET['cate_type_id']) && $_GET['cate_type_id'] > 0) {
     $arrCustom['cate_type_id'] = $_GET['cate_type_id'];      
     $link.="&cate_type_id=".$arrCustom['cate_type_id'];  
@@ -87,7 +94,16 @@ $cateTypeArr = $model->getListCateType();
                             </select>
                         </div>
                     </div>                                       
-                
+                    <div class="col-md-2">
+                         <div class="form-group">
+                            <label for="name">Thuộc menu</label>
+                             <select class="form-control change-submit"  name="menu_type" id="menu_type">
+                                <option value="-1" <?php if($menu_type == -1) echo "selected"; ?>>Tất cả</option>
+                                <option value="1" <?php if($menu_type == 1) echo "selected"; ?>>Menu ngang</option>
+                                <option value="2" <?php if($menu_type == 2) echo "selected"; ?>>Menu dọc</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="col-md-3">
                          <div class="form-group">
                             <label for="name">Danh mục cha</label>

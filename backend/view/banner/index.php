@@ -30,6 +30,16 @@
             <a href="index.php?mod=banner&act=list&position_id=5">-Banner sidebar 2 (dưới Tin mới nhất)</a>
         </h3>
     </div>
+    <div class="col-md-12">
+        <h3>
+            <a href="index.php?mod=banner&act=list&position_id=6">-Logo</a>
+        </h3>
+    </div>
+    <div class="col-md-12">
+        <h3>
+            <a href="index.php?mod=banner&act=list&position_id=7">-Banner tên shop</a>
+        </h3>
+    </div>
 </div>
 <link href="static/css/jquery-ui.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>

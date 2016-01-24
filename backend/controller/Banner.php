@@ -34,15 +34,26 @@ if($type_id!=3) $arrData['link_url'] = '';
 //$size_default = $_POST['size_default'];
 
 
-$image_url_upload = $_FILES['image_url_upload'];
-if(($image_url_upload['name']!='')){
-	$arrRe = $model->uploadImages($image_url_upload);	
-	$image_url = $arrRe['filename'];
+$image_url_upload_vi = $_FILES['image_url_upload_vi'];
+if(($image_url_upload_vi['name']!='')){
+	$arrReVi = $model->uploadImages($image_url_upload_vi);	
+	$image_url_vi = $arrReVi['filename'];
 }else{
-	$image_url = str_replace('../', '', $_POST['image_url']);
+	$image_url_vi = str_replace('../', '', $_POST['image_url_vi']);
 }
 
-$arrData['image_url'] = $image_url;
+$arrData['image_url_vi'] = $image_url_vi;
+
+$image_url_upload_en = $_FILES['image_url_upload_en'];
+if(($image_url_upload_en['name']!='')){
+	$arrReEn = $model->uploadImages($image_url_upload_en);	
+	$image_url_en = $arrReEn['filename'];
+}else{
+	$image_url_en = str_replace('../', '', $_POST['image_url_en']);
+}
+
+$arrData['image_url_en'] = $image_url_en;
+
 if($type_id == 2){
 	$meta_title_vi = $model->processData($_POST['meta_title_vi']);
 	if($meta_title_vi == '') $meta_title_vi = $name_vi;
