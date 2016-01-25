@@ -8,7 +8,7 @@ $arrList = $model->getChild("banner", "position_id", $position_id);
 ?>
 <div class="row">
     <div class="col-md-12">               
-        <?php if($position_id !=2 && $position_id !=3 ){ ?>
+        <?php if(!in_array($position_id, array(2,3,6,7))) { ?>
         <button class="btn btn-primary btn-sm right" 
         onclick="location.href='index.php?mod=banner&act=form&position_id=<?php echo $position_id; ?>'">
         Tạo mới</button>        
