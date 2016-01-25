@@ -28,7 +28,8 @@ $arrList = $model->getChild("banner", "position_id", $position_id);
                             <th width="1%">STT</th>
                             <th width="1%" style="white-space:nowrap">Tên Banner</th>
                               
-                            <th width="70%">Ảnh banner</th>   
+                            <th width="35%">Ảnh banner <img src="img/vn.png" /></th>  
+                            <th width="35%">Ảnh banner <img src="img/en.png" /></th>   
                       
                             <th width="1%" style="white-space:nowrap">Thao tác</th>
                         </tr>
@@ -49,10 +50,12 @@ $arrList = $model->getChild("banner", "position_id", $position_id);
                            <td width="1%"><?php echo $i; ?></th>
                             <td width="1%" style="white-space:nowrap"><?php echo $value['name_vi']; ?></td>
                            
-                            <td width="70%">
-                                <img class="lazy" data-original="../<?php echo $value['image_url'];?>" width="300px" />
+                            <td width="35%">
+                                <img class="lazy" data-original="../<?php echo $value['image_url_vi'];?>" width="200px" />
                             </td>   
-                                        
+                            <td width="35%">
+                                <img class="lazy" data-original="../<?php echo $value['image_url_en'];?>" width="200px" />
+                            </td>             
                          
                             <td width="1%" style="white-space:nowrap;text-align:center">
 
