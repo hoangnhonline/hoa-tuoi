@@ -20,6 +20,7 @@ if (isset($_GET['username']) && $_GET['username'] != '') {
 if (isset($_GET['status']) && $_GET['status'] > -1) {    
     $back_url.="&status=".$_GET['status'];
 }
+var_dump($back_url);
 ?>
 <div class="row">
     <div class="col-md-8">

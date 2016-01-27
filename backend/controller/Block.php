@@ -2,9 +2,9 @@
 
 $url = "../index.php?mod=block&act=list";
 
-require_once "../model/Block.php";
+require_once "../model/Backend.php";
 
-$model = new Block;
+$model = new Backend;
 
 $block_id = (int) $_POST['block_id'];
 
