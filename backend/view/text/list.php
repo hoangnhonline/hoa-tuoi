@@ -50,9 +50,15 @@ $list = $model->getList('text', $offset, $limit);
                         <td><?php echo $row['text_vi']; ?> </td>
                         <td><?php echo $row['text_en']; ?> </td>
                         <td style="white-space:nowrap">
+                            <?php if($row['id']!=11){ ?>
                             <a class="btn btn-info btn-xs" href="index.php?mod=text&act=form&id=<?php echo $row['id']; ?>">
                                 Chỉnh sửa
                             </a>
+                            <?php }else{ ?>
+                            <a class="btn btn-info btn-xs" href="index.php?mod=lh&act=form">
+                                Chỉnh sửa
+                            </a>
+                            <?php } ?>
                             <a class="btn btn-danger btn-xs link-delete" href="javascript:;" alias="<?php echo $row['text_vi']; ?>" id="<?php echo $row['id']; ?>" mod="text" class="link_delete" >
                                 Xóa
                             </a>

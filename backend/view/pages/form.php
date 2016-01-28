@@ -253,7 +253,27 @@ $(function(){
 
 </script>
 <script type="text/javascript">
+var editor = CKEDITOR.replace( 'content',{
+                            uiColor : '#9AB8F3',
+                            language:'vi',
+                            skin:'office2003',
+                            filebrowserImageBrowseUrl : 'ckfinder/ckfinder.html?Type=Images',
+                            filebrowserFlashBrowseUrl : 'ckfinder/ckfinder.html?Type=Flash',
+                            filebrowserImageUploadUrl :'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+                            filebrowserFlashUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
 
+                            toolbar:[
+                            ['Source','-','Save'],
+                            ['Copy','Paste','PasteText','PasteFromWord'],
+                            ['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
+                            ['NumberedList','BulletedList'],
+                            ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+                            ['Link','Unlink','Anchor','Image'],                           
+                            ['Styles','Format','Font','FontSize'],
+                            ['TextColor','BGColor']                         
+                            ]
+                        });
+/*
 var editor = CKEDITOR.replace( 'content',{
 
     uiColor : '#9AB8F3',
@@ -285,10 +305,30 @@ var editor = CKEDITOR.replace( 'content',{
     ]
 
 });     
-
+*/
 </script>
 <script type="text/javascript">
+var editor2 = CKEDITOR.replace( 'content_en',{
+                            uiColor : '#9AB8F3',
+                            language:'vi',
+                            skin:'office2003',
+                            filebrowserImageBrowseUrl : 'ckfinder/ckfinder.html?Type=Images',
+                            filebrowserFlashBrowseUrl : 'ckfinder/ckfinder.html?Type=Flash',
+                            filebrowserImageUploadUrl :'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+                            filebrowserFlashUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
 
+                            toolbar:[
+                            ['Source','-','Save'],
+                            ['Copy','Paste','PasteText','PasteFromWord'],
+                            ['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
+                            ['NumberedList','BulletedList'],
+                            ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+                            ['Link','Unlink','Anchor','Image'],                           
+                            ['Styles','Format','Font','FontSize'],
+                            ['TextColor','BGColor']                         
+                            ]
+                        });
+/*
 var editor = CKEDITOR.replace( 'content_en',{
 
     uiColor : '#9AB8F3',
@@ -319,5 +359,6 @@ var editor = CKEDITOR.replace( 'content_en',{
     ]
 
 });     
+*/
 
 </script>

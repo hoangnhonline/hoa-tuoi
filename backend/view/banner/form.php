@@ -109,9 +109,16 @@ $position_id = isset($_GET['position_id']) ? (int) $_GET['position_id'] : 0;
                                 &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="choose_img_cp_vi" name="choose_img_vi" value="2" /> Chọn ảnh từ máy tính
                                 <div id="from_sv_vi">
                                     <input type="hidden" name="image_url_vi" id="image_url_vi" class="form-control" value="<?php if(!empty($detail['image_url_vi'])) echo "../".$detail['image_url_vi']; ?>" /><br />
-                                    <?php if(!empty($detail['image_url_vi'])){ ?>
+                                    <?php if(!empty($detail['image_url_vi'])){ 
+                                        if($position_id != 7){
+                                        ?>
                                     <img id="img_thumnails_vi" class="lazy" data-original="../<?php echo $detail['image_url_vi']; ?>" height="100" />
-                                    <?php }else{ ?>
+                                    <?php }else{
+                                        ?>
+                                        <img id="img_thumnails_vi" class="lazy" data-original="../<?php echo $detail['image_url_vi']; ?>" width="300" />
+                                        <?php
+                                    }
+                                }else{ ?>
                                     <img id="img_thumnails_vi" class="lazy" data-original="static/img/no_image.jpg" width="100" />
                                     <?php } ?>
                                     <button class="btn btn-default " type="button" onclick="BrowseServer('Images:/','image_url_vi')" >Upload</button>
@@ -129,9 +136,14 @@ $position_id = isset($_GET['position_id']) ? (int) $_GET['position_id'] : 0;
                                 <div id="from_sv_en">
                                     <input type="hidden" name="image_url_en" id="image_url_en" class="form-control" 
                                     value="<?php if(!empty($detail['image_url_en'])) echo "../".$detail['image_url_en']; ?>" /><br />
-                                    <?php if(!empty($detail['image_url_en'])){ ?>
+                                    <?php if(!empty($detail['image_url_en'])){ 
+                                        if($position_id != 7){
+                                    ?>
                                     <img id="img_thumnails_en" class="lazy" data-original="../<?php echo $detail['image_url_en']; ?>" height="100" />
-                                    <?php }else{ ?>
+                                    <?php }else{?>
+                                    <img id="img_thumnails_en" class="lazy" data-original="../<?php echo $detail['image_url_en']; ?>" width="300" />
+                                    <?php
+                                    } }else{ ?>
                                     <img id="img_thumnails_en" class="lazy" data-original="static/img/no_image.jpg" width="100" />
                                     <?php } ?>
                                     <button class="btn btn-default " type="button" onclick="BrowseServer2('Images:/','image_url_en')" >Upload</button>

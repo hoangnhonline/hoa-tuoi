@@ -79,7 +79,7 @@ $model = new Home;
     </div><!-- End #main-panel -->
     
     <div class="page-top">
-      <a href="javascript:void(0);"><img src="images/ico-top.png" class="imghover" alt="page top" width="45" height="45"></a>
+      <a href="javascript:void(0);"><img src="images/ico-top.png"  alt="page top" width="45" height="45"></a>
     </div><!-- End /.page-top -->
     
   </div><!-- End #wrapper -->

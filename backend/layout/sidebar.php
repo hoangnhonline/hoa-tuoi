@@ -133,7 +133,16 @@
                     <i class="fa fa-circle-o"></i> Nội dung footer
                 </a>
             </li>    
-                    
+             <li>
+                <a href="index.php?mod=lh&act=form" data-link="lh">
+                    <i class="fa fa-circle-o"></i> Thông tin liên hệ
+                </a>
+            </li> 
+            <li>
+                <a href="index.php?mod=block&act=list" data-link="lh">
+                    <i class="fa fa-circle-o"></i> Link footer
+                </a>
+            </li>          
           </ul>
         </li>
     </ul>

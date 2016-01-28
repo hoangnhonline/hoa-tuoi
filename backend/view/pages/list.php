@@ -27,8 +27,8 @@ $list = $model->getList($table, 0, 100);
                 <table class="table table-bordered table-striped" id="tbl_list">
                     <tbody><tr>
                         <th width="1%">No.</th>
-                        <th width="49%">Tiêu đề trang <img src="img/vn.png"></th>
-                        <th width="49%">Tiêu đề trang <img src="img/en.png"></th>
+                        <th width="49%">Tiêu đề trang - URL <img src="img/vn.png"></th>
+                        <th width="49%">Tiêu đề trang - URL <img src="img/en.png"></th>
                         <th style="width: 1%;white-space:nowrap">Thao tác</th>
                     </tr>
                     <?php
@@ -42,13 +42,15 @@ $list = $model->getList($table, 0, 100);
                         
                         <td>
                             <a style="font-size:16px" href="index.php?mod=pages&act=form&id=<?php echo $row['id']; ?>">
-                                <?php echo $row['name_vi']; ?>                                
-                            </a>                           
+                                <?php echo $row['name_vi']; ?> 
+                            </a>                     
+                            <br /><br /><?php echo $row['alias_vi']; ?>.html      
                         </td>   
                         <td>
                             <a style="font-size:16px;" href="index.php?mod=pages&act=form&id=<?php echo $row['id']; ?>">
-                                <?php echo $row['name_en']; ?>                                
+                                <?php echo $row['name_en']; ?>                               
                             </a>                           
+                            <br /><br /> <?php echo $row['alias_en']; ?>.html 
                         </td>                     
                         <td style="width: 1%;white-space:nowrap">                            
                             <a class="btn btn-info btn-xs" href="index.php?mod=pages&act=form&id=<?php echo $row['id']; ?>">
