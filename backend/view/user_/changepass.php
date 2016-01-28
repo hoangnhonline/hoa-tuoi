@@ -9,7 +9,7 @@ $detail=$model->getDetailUser($user_id);
         <div style="clear:both;margin-bottom:10px"></div>
         <div class="box box-primary">
             <div class="box-header">
-                <h3 class="box-title">Đổi mật khẩu</h3> </div>
+                <h3 class="box-title">Change password</h3> </div>
             <!-- /.box-header -->
             <!-- form start -->
             <form role="form" method="post" action="controller/User.php" id="form_changepass">
@@ -19,23 +19,23 @@ $detail=$model->getDetailUser($user_id);
                 <input type="hidden" name="act" value="changepass" />
                 <div class="box-body">
                 	<div class="form-group">
-                        <label for="exampleInputEmail1"> Mật khẩu cũ <span class="required"> ( * ) </span></label>
+                        <label for="exampleInputEmail1"> Old password <span class="required"> ( * ) </span></label>
                         <input value=""  type="password" name="old_pass" id="old_pass" class="form-control required"> 
                         <input value="<?php echo $detail['password']; ?>"  type="hidden" name="old_pass_md5" id="old_pass_md5" class="form-control required"> 
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1"> Mật khẩu mới <span class="required"> ( * ) </span></label>
+                        <label for="exampleInputEmail1"> New password <span class="required"> ( * ) </span></label>
                         <input value=""  type="password" name="password" id="password" class="form-control required"> 
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1"> Nhập lại mật khẩu mới <span class="required"> ( * ) </span></label>
+                        <label for="exampleInputEmail1"> Re-type new password <span class="required"> ( * ) </span></label>
                         <input value=""  type="password" name="re_password" id="re_password" class="form-control required"> 
                     </div>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <button class="btn btn-primary " id="btnChangePass" type="button">Save</button>
-                    <button class="btn btn-primary" type="reset" onclick="location.href='index.php'">Cancel</button>
+                    <button class="btn btn-warning" type="reset" onclick="location.href='index.php'">Cancel</button>
                 </div>
             </form>
         </div>
@@ -47,7 +47,7 @@ $detail=$model->getDetailUser($user_id);
         $('#btnChangePass').click(function(){
             var flag = true;
             if($('#old_pass').val()=='' || $('#password').val()=='' || $('#re_password').val()==''){
-                alert('Vui lòng nhập đầy đủ thông tin!'); return false;
+                alert('Please input all field!'); return false;
             }
             if($('#password').val() != $('#re_password').val()){
                 alert('Mật khẩu nhập 2 lần không giống nhau!');return false;
@@ -63,10 +63,10 @@ $detail=$model->getDetailUser($user_id);
                 },
                 success: function(data){                                                               
                    if($.trim(data)=="1"){
-                        alert('Đổi mật khẩu thành công!');
+                        alert('Change password success!');
                         $('#form_changepass').submit();
                    }else{
-                    alert('Mật khẩu cũ nhập không đúng!');return false;
+                    alert('Old password is invalid!');return false;
                    }
                     
                 }

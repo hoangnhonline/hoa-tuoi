@@ -19,7 +19,7 @@
             <div class="item-inner">
               <div class="thumb">                            
                 <a href="<?php echo $model->getAliasById('cate', $value['cate_id'], $lang); ?>/<?php echo $value['alias_'.$lang]; ?>-<?php echo $value['id']; ?>.html">
-                  <img class="lazy" data-original="<?php echo $value['image_url']; ?>" alt="<?php echo $value['name_'.$lang]; ?>" class="imghover">
+                  <img class="lazy" data-original="<?php echo $value['image_url']; ?>" alt="<?php echo $value['name_'.$lang]; ?>" >
                 </a>                         
               </div>
               <div class="caption">

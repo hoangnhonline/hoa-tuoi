@@ -56,10 +56,10 @@
               <h3 class="title"><?php echo $arrText[3]['text_'.$lang]; ?></h3>
               <div class="body-box">
                 <ul class="fsocial-list">
-                  <li><a href="#"><img src="images/ico-facebook.png" class="imghover" alt="" width="32" height="32"></a></li>
-                  <li><a href="#"><img src="images/ico-google.png" class="imghover" alt="" width="32" height="32"></a></li>
-                  <li><a href="#"><img src="images/ico-twitter.png" class="imghover" alt="" width="32" height="32"></a></li>
-                  <li><a href="#"><img src="images/ico-skype.png" class="imghover" alt="" width="32" height="33"></a></li>
+                  <li><a href="#"><img src="images/ico-facebook.png" alt="" width="32" height="32"></a></li>
+                  <li><a href="#"><img src="images/ico-google.png" alt="" width="32" height="32"></a></li>
+                  <li><a href="#"><img src="images/ico-twitter.png" alt="" width="32" height="32"></a></li>
+                  <li><a href="#"><img src="images/ico-skype.png" alt="" width="32" height="33"></a></li>
                 </ul>
               </div>
             </div>

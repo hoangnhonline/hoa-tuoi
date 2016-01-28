@@ -27,7 +27,7 @@
         <div class="article-list-sblock">
           <article class="item">
             <figure class="thumb">
-              <a href="#"><img class="lazy" data-original="uploads/post-001.jpg" alt="" class="imghover"></a>
+              <a href="#"><img class="lazy" data-original="uploads/post-001.jpg" alt="" ></a>
             </figure>
             <header>
               <h2 class="post-title"><a href="#" title="#">Ý nghĩa Hoa Hồng</a></h2>
