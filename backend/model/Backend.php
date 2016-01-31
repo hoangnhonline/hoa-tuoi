@@ -8,8 +8,8 @@ class Backend {
 
     function __construct() {
         if($_SERVER['SERVER_NAME']=='hoatuoi.dev'){
-            mysql_connect('localhost', 'root', 'root') or die("Can't connect to server");
-               mysql_select_db('hoatuoi') or die("Can't connect database");
+            mysql_connect('localhost', 'root', '') or die("Can't connect to server");
+               mysql_select_db('thietke7_hoatuoi') or die("Can't connect database");
         }else{
 			mysql_connect('localhost', 'thietke7_hoatuoi', 'huyhoang157') or die("Can't connect to server");
 			mysql_select_db('thietke7_hoatuoi') or die("Can't connect database");  
@@ -440,8 +440,9 @@ class Backend {
 
         if ($row == 1) {
             $chitiet = mysql_fetch_assoc($user);
-            $_SESSION['user_id'] = $chitiet['user_id'];
-            $_SESSION['email'] = $chitiet['email'];            
+            $_SESSION['user_id'] = $chitiet['id'];
+            $_SESSION['email'] = $chitiet['email'];  
+            $_SESSION['full_name'] = $chitiet['full_name'];  
             header("location:index.php");
         }
         else

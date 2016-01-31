@@ -1,13 +1,20 @@
 <?php
 $id = 0;
 $is_detail = false;
+$arrLink = array();
 if(isset($_GET['id'])){
     $id = (int) $_GET['id'];
     require_once "model/Backend.php";
     $model = new Backend;
     $detail = $model->getDetail("block",$id);   
     $is_detail = true;
+    $rs = mysql_query("SELECT * FROM link WHERE block_id = $id ORDER BY id ASC");
+    while($row = mysql_fetch_assoc($rs)){
+        $arrLink[] = $row;
+    }  
 }
+$current = count($arrLink);
+$balance = 7 - $current;
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -42,13 +49,14 @@ if(isset($_GET['id'])){
                         <th width="50%" style="text-align:center">Tiếng Việt <img src="img/vn.png" /></th>
                         <th width="50%" style="text-align:center">Tiếng Anh <img src="img/en.png" /></th>
                     </tr>
+                    
                     <tr>                        
                         <td>
                             <div class="form-group">
                                 <div class="col-md-12">
                                 <label>Tiêu đề</label>
 
-                                <input class="form-control" name="text_vi[1]" value="<?php echo $arrLink[0]['text_link']; ?>" />
+                                <input class="form-control" name="name_vi" value="<?php echo (!empty($detail)) ? $detail['name_vi'] : "";?>" />
                                 </div>
                             </div>
                         </td>
@@ -57,221 +65,78 @@ if(isset($_GET['id'])){
                                 <div class="col-md-12">
                                 <label>Tiêu đề</label>
 
-                                <input class="form-control" name="text_vi[1]" value="<?php echo $arrLink[0]['text_link']; ?>" />
+                                <input class="form-control" name="name_en" value="<?php echo (!empty($detail)) ? $detail['name_en']: "" ;?>" />
                                 </div>
                             </div>
                         </td>
-                    </tr>                      
+                    </tr>  
+                    <?php if(!empty($arrLink)){ 
+                        foreach ($arrLink as $key => $value) {                            
+                    ?>
                     <tr>                        
                         <td>
                             <div class="form-group">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <label>Text</label>
 
-                                    <input class="form-control" name="text_vi[1]" value="<?php echo $arrLink[0]['text_link']; ?>" />
+                                    <input class="form-control" name="text_vi[]" value="<?php echo $value['text_vi']; ?>" />
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-7">
                                 <label>&nbsp;&nbsp;&nbsp;Link</label>
 
-                                <input class="form-control" name="link_vi[1]" value="<?php echo $arrLink[0]['link_url']; ?>" />
+                                <input class="form-control" name="link_vi[]" value="<?php echo $value['link_url_vi']; ?>" />
                                 </div>
                             </div>
                         </td>
                         <td>
                            <div class="form-group">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <label>Text</label>
 
-                                    <input class="form-control" name="text_en[1]" value="<?php echo $arrLink[0]['text_link']; ?>" />
+                                    <input class="form-control" name="text_en[]" value="<?php echo $value['text_en']; ?>" />
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-7">
                                 <label>&nbsp;&nbsp;&nbsp;Link</label>
 
-                                <input class="form-control" name="link_en[1]" value="<?php echo $arrLink[0]['link_url']; ?>" />
+                                <input class="form-control" name="link_en[]" value="<?php echo $value['link_url_en']; ?>" />
                                 </div>
                             </div>
                         </td>
                     </tr>
+                    <?php } } ?>  
+                    <?php for($i = 0; $i < $balance; $i++){ ?>
                     <tr>                        
                         <td>
                             <div class="form-group">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <label>Text</label>
 
-                                    <input class="form-control" name="text_vi[1]" value="<?php echo $arrLink[0]['text_link']; ?>" />
+                                    <input class="form-control" name="text_vi[]" value="<?php echo $arrLink[0]['text_link']; ?>" />
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-7">
                                 <label>&nbsp;&nbsp;&nbsp;Link</label>
 
-                                <input class="form-control" name="link_vi[1]" value="<?php echo $arrLink[0]['link_url']; ?>" />
+                                <input class="form-control" name="link_vi[]" value="<?php echo $arrLink[0]['link_url']; ?>" />
                                 </div>
                             </div>
                         </td>
                         <td>
                            <div class="form-group">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <label>Text</label>
 
-                                    <input class="form-control" name="text_en[1]" value="<?php echo $arrLink[0]['text_link']; ?>" />
+                                    <input class="form-control" name="text_en[]" value="<?php echo $arrLink[0]['text_link']; ?>" />
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-7">
                                 <label>&nbsp;&nbsp;&nbsp;Link</label>
 
-                                <input class="form-control" name="link_en[1]" value="<?php echo $arrLink[0]['link_url']; ?>" />
+                                <input class="form-control" name="link_en[]" value="<?php echo $arrLink[0]['link_url']; ?>" />
                                 </div>
                             </div>
                         </td>
                     </tr>
-                    <tr>                        
-                        <td>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    <label>Text</label>
-
-                                    <input class="form-control" name="text_vi[1]" value="<?php echo $arrLink[0]['text_link']; ?>" />
-                                </div>
-                                <div class="col-md-8">
-                                <label>&nbsp;&nbsp;&nbsp;Link</label>
-
-                                <input class="form-control" name="link_vi[1]" value="<?php echo $arrLink[0]['link_url']; ?>" />
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                           <div class="form-group">
-                                <div class="col-md-4">
-                                    <label>Text</label>
-
-                                    <input class="form-control" name="text_en[1]" value="<?php echo $arrLink[0]['text_link']; ?>" />
-                                </div>
-                                <div class="col-md-8">
-                                <label>&nbsp;&nbsp;&nbsp;Link</label>
-
-                                <input class="form-control" name="link_en[1]" value="<?php echo $arrLink[0]['link_url']; ?>" />
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>                        
-                        <td>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    <label>Text</label>
-
-                                    <input class="form-control" name="text_vi[1]" value="<?php echo $arrLink[0]['text_link']; ?>" />
-                                </div>
-                                <div class="col-md-8">
-                                <label>&nbsp;&nbsp;&nbsp;Link</label>
-
-                                <input class="form-control" name="link_vi[1]" value="<?php echo $arrLink[0]['link_url']; ?>" />
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                           <div class="form-group">
-                                <div class="col-md-4">
-                                    <label>Text</label>
-
-                                    <input class="form-control" name="text_en[1]" value="<?php echo $arrLink[0]['text_link']; ?>" />
-                                </div>
-                                <div class="col-md-8">
-                                <label>&nbsp;&nbsp;&nbsp;Link</label>
-
-                                <input class="form-control" name="link_en[1]" value="<?php echo $arrLink[0]['link_url']; ?>" />
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>                        
-                        <td>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    <label>Text</label>
-
-                                    <input class="form-control" name="text_vi[1]" value="<?php echo $arrLink[0]['text_link']; ?>" />
-                                </div>
-                                <div class="col-md-8">
-                                <label>&nbsp;&nbsp;&nbsp;Link</label>
-
-                                <input class="form-control" name="link_vi[1]" value="<?php echo $arrLink[0]['link_url']; ?>" />
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                           <div class="form-group">
-                                <div class="col-md-4">
-                                    <label>Text</label>
-
-                                    <input class="form-control" name="text_en[1]" value="<?php echo $arrLink[0]['text_link']; ?>" />
-                                </div>
-                                <div class="col-md-8">
-                                <label>&nbsp;&nbsp;&nbsp;Link</label>
-
-                                <input class="form-control" name="link_en[1]" value="<?php echo $arrLink[0]['link_url']; ?>" />
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>                        
-                        <td>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    <label>Text</label>
-
-                                    <input class="form-control" name="text_vi[1]" value="<?php echo $arrLink[0]['text_link']; ?>" />
-                                </div>
-                                <div class="col-md-8">
-                                <label>&nbsp;&nbsp;&nbsp;Link</label>
-
-                                <input class="form-control" name="link_vi[1]" value="<?php echo $arrLink[0]['link_url']; ?>" />
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                           <div class="form-group">
-                                <div class="col-md-4">
-                                    <label>Text</label>
-
-                                    <input class="form-control" name="text_en[1]" value="<?php echo $arrLink[0]['text_link']; ?>" />
-                                </div>
-                                <div class="col-md-8">
-                                <label>&nbsp;&nbsp;&nbsp;Link</label>
-
-                                <input class="form-control" name="link_en[1]" value="<?php echo $arrLink[0]['link_url']; ?>" />
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>                        
-                        <td>
-                            <div class="form-group">
-                                <div class="col-md-4">
-                                    <label>Text</label>
-
-                                    <input class="form-control" name="text_vi[1]" value="<?php echo $arrLink[0]['text_link']; ?>" />
-                                </div>
-                                <div class="col-md-8">
-                                <label>&nbsp;&nbsp;&nbsp;Link</label>
-
-                                <input class="form-control" name="link_vi[1]" value="<?php echo $arrLink[0]['link_url']; ?>" />
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                           <div class="form-group">
-                                <div class="col-md-4">
-                                    <label>Text</label>
-
-                                    <input class="form-control" name="text_en[1]" value="<?php echo $arrLink[0]['text_link']; ?>" />
-                                </div>
-                                <div class="col-md-8">
-                                <label>&nbsp;&nbsp;&nbsp;Link</label>
-
-                                <input class="form-control" name="link_en[1]" value="<?php echo $arrLink[0]['link_url']; ?>" />
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
+                    <?php } ?>
+                   
                     <tr>                        
                         <td colspan="2">
                             <button class="btn btn-primary" id="btnSave" type="submit" >Save</button>

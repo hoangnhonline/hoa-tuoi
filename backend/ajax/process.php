@@ -42,6 +42,28 @@ if($action=="updateOrder"){
 	}
 	
 }	
+if($action == "getCateByMenuType"){
+	$menu_type = $_POST['menu_type'];
+	$cateParentArr = $model->getListCateTree(1);
+	foreach ($cateParentArr as $key1 => $value1) {
+		if($value1['menu_type'] != $menu_type){
+			unset($cateParentArr[$key1]);
+		}
+	}?>
+	<option value="-1" selected>Tất cả</option>
+        <?php foreach ($cateParentArr as $key => $value) {
+            ?>
+        <option value="<?php echo $value['id']; ?>" ><?php echo $value['name_vi']; ?></option>
+            <?php if(!empty($value['child'])){ 
+                foreach($value['child'] as $child){
+            ?>
+            <option value="<?php echo $child['id']; ?>"><?php echo $value['name_vi']; ?> / <?php echo $child['name_vi']; ?></option>
+            <?php } } ?>
+        <?php
+        }?>
+	<?php
+
+}
 if($action == "getCate"){
 	$cate_type_id = $_POST['cate_type_id'];
 	$product_id = isset($_POST['id']) ? $_POST['product_id'] : 0;

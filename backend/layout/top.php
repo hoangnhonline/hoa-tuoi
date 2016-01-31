@@ -25,7 +25,7 @@
 
                                 <i class="glyphicon glyphicon-user"></i>
 
-                                <span><?php echo $_SESSION['email']; ?> <i class="caret"></i></span>
+                                <span><?php echo $_SESSION['full_name']; ?> <i class="caret"></i></span>
 
                             </a>
 
@@ -35,7 +35,9 @@
 
                                     <div class="pull-right">
 
-                                        <!--<a href="index.php?mod=user&act=changepass" class="btn btn-default btn-flat" style="color:red">Đổi mật khẩu</a>-->
+                                        <a href="index.php?mod=user&act=changepass" class="btn btn-default btn-flat" style="color:red">
+                                            Đổi mật khẩu
+                                        </a>
 
                                     </div>
 
@@ -46,7 +48,7 @@
 
                                     <div class="pull-right">
 
-                                        <a href="logout.php" class="btn btn-default btn-flat" style="color:red">Sign out</a>
+                                        <a href="logout.php" class="btn btn-default btn-flat" style="color:red">Đăng xuất</a>
 
                                     </div>
 

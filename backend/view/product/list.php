@@ -27,6 +27,12 @@ if (isset($_GET['cate_type_id']) && $_GET['cate_type_id'] > 0) {
 } else {
     $arrCustom['cate_type_id'] = 1;
 }
+if (isset($_GET['menu_type']) && $_GET['menu_type'] > 0) {
+    $menu_type = $_GET['menu_type'];
+    
+}else{
+    $menu_type = -1;
+}
 $cate_type_id = $arrCustom['cate_type_id'];
 $detailCateType = $model->getDetail('cate_type', $cate_type_id); 
 
@@ -75,7 +81,7 @@ $cateTypeArr = $model->getListCateType();
             <div class="col-md-12">
                 <div class="box_search">
                 <form method="get" id="formSearch" name="formSearch"> 
-                    <div class="col-md-3">
+                    <div class=" <?php if($cate_type_id==1) echo 'col-md-2';else echo 'col-md-3'; ?>">
                          <div class="form-group">
                             <label for="name">Loại sản phẩm</label>
                              <select class="form-control change-submit"  name="cate_type_id" id="cate_type_id">
@@ -86,9 +92,20 @@ $cateTypeArr = $model->getListCateType();
                                 }?>
                             </select>
                         </div>
-                    </div>                                       
-                
-                    <div class="col-md-3">
+                    </div>                        
+                    <?php if($arrCustom['cate_type_id'] == 1){ ?>               
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="name">Thuộc menu</label>
+                             <select class="form-control"  name="menu_type" id="menu_type">
+                                <option value="-1" <?php if($menu_type == -1) echo "selected"; ?>>Tất cả</option>
+                                <option value="1" <?php if($menu_type == 1) echo "selected"; ?>>Menu ngang</option>
+                                <option value="2" <?php if($menu_type == 2) echo "selected"; ?>>Menu dọc</option>
+                            </select>
+                        </div>
+                    </div>
+                    <?php } ?>
+                    <div class=" <?php if($cate_type_id==1) echo 'col-md-2';else echo 'col-md-3'; ?>">
                          <div class="form-group">
                             <label for="name">Danh mục cha</label>
                             <select class="form-control change-submit"  name="parent_id" id="parent_id">
@@ -279,3 +296,21 @@ $(document).ready(function(){
 }
 
 </style>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#menu_type').change(function(){
+        $.ajax({
+            url: "ajax/process.php",
+            type: "POST",
+            async: false,
+            data: {
+                action : 'getCateByMenuType',
+                menu_type : $('#menu_type').val()                
+            },
+            success: function(data){
+                $('#parent_id').html(data);
+            }
+        }); 
+    });
+});
+</script>

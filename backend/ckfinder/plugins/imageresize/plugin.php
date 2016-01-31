@@ -2,8 +2,8 @@
 /*
 * CKFinder
 * ========
-* http://ckfinder.com
-* Copyright (C) 2007-2010, CKSource - Frederico Knabben. All rights reserved.
+* http://cksource.com/ckfinder
+* Copyright (C) 2007-2014, CKSource - Frederico Knabben. All rights reserved.
 *
 * The software, this file and its contents are subject to the CKFinder
 * License. Please read the license.txt file before using, installing, copying,
@@ -30,14 +30,14 @@ class CKFinder_Connector_CommandHandler_ImageResize extends CKFinder_Connector_C
         if (isset($GLOBALS['config']['plugin_imageresize'])) {
             $config = $GLOBALS['config']['plugin_imageresize'];
         }
-        /*if (!isset($config['smallThumb'])) {
+        if (!isset($config['smallThumb'])) {
             $config['smallThumb'] = "90x90";
         }
         if (!isset($config['mediumThumb'])) {
             $config['mediumThumb'] = "120x120";
-        }*/
+        }
         if (!isset($config['largeThumb'])) {
-            $config['largeThumb'] = "190x190";
+            $config['largeThumb'] = "180x180";
         }
         return $config;
     }

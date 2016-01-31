@@ -142,7 +142,12 @@
                 <a href="index.php?mod=block&act=list" data-link="lh">
                     <i class="fa fa-circle-o"></i> Link footer
                 </a>
-            </li>          
+            </li>    
+            <li>
+                <a href="index.php?mod=user&act=list" data-link="user">
+                    <i class="fa fa-circle-o"></i> Users
+                </a>
+            </li>           
           </ul>
         </li>
     </ul>

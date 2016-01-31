@@ -253,26 +253,33 @@ $(function(){
 
 </script>
 <script type="text/javascript">
-var editor = CKEDITOR.replace( 'content',{
-                            uiColor : '#9AB8F3',
-                            language:'vi',
-                            skin:'office2003',
-                            filebrowserImageBrowseUrl : 'ckfinder/ckfinder.html?Type=Images',
-                            filebrowserFlashBrowseUrl : 'ckfinder/ckfinder.html?Type=Flash',
-                            filebrowserImageUploadUrl :'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-                            filebrowserFlashUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
-
-                            toolbar:[
-                            ['Source','-','Save'],
-                            ['Copy','Paste','PasteText','PasteFromWord'],
-                            ['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
-                            ['NumberedList','BulletedList'],
-                            ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
-                            ['Link','Unlink','Anchor','Image'],                           
-                            ['Styles','Format','Font','FontSize'],
-                            ['TextColor','BGColor']                         
-                            ]
-                        });
+CKEDITOR.replace( 'content',{
+            filebrowserImageBrowseUrl : 'ckfinder/ckfinder.html?Type=hinh',
+            filebrowserFlashBrowseUrl : 'ckfinder/ckfinder.html?Type=Flash',
+            filebrowserImageUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+            filebrowserFlashUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
+            filebrowserBrowseUrl : 'ckfinder/ckfinder.html',
+            width: 800,
+    }
+);
+CKEDITOR.replace( 'content_en',{
+            filebrowserImageBrowseUrl : 'ckfinder/ckfinder.html?Type=hinh',
+            filebrowserFlashBrowseUrl : 'ckfinder/ckfinder.html?Type=Flash',
+            filebrowserImageUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+            filebrowserFlashUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
+            filebrowserBrowseUrl : 'ckfinder/ckfinder.html',
+            width: 800,
+    }
+);
+CKEDITOR.instances.noidung.on('afterCommandExec', handleAfterCommandExec);
+function handleAfterCommandExec(event)
+{
+    var commandName = event.data.name;
+    if (commandName=='button1') {
+    alert(commandName);
+    CKEDITOR.instances.noidung.insertHtml('<b>aa</b>');
+    }
+}
 /*
 var editor = CKEDITOR.replace( 'content',{
 
@@ -306,59 +313,4 @@ var editor = CKEDITOR.replace( 'content',{
 
 });     
 */
-</script>
-<script type="text/javascript">
-var editor2 = CKEDITOR.replace( 'content_en',{
-                            uiColor : '#9AB8F3',
-                            language:'vi',
-                            skin:'office2003',
-                            filebrowserImageBrowseUrl : 'ckfinder/ckfinder.html?Type=Images',
-                            filebrowserFlashBrowseUrl : 'ckfinder/ckfinder.html?Type=Flash',
-                            filebrowserImageUploadUrl :'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-                            filebrowserFlashUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
-
-                            toolbar:[
-                            ['Source','-','Save'],
-                            ['Copy','Paste','PasteText','PasteFromWord'],
-                            ['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
-                            ['NumberedList','BulletedList'],
-                            ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
-                            ['Link','Unlink','Anchor','Image'],                           
-                            ['Styles','Format','Font','FontSize'],
-                            ['TextColor','BGColor']                         
-                            ]
-                        });
-/*
-var editor = CKEDITOR.replace( 'content_en',{
-
-    uiColor : '#9AB8F3',
-
-    language:'en',
-
-    height:300,
-
-    skin:'office2003',      
-
-    filebrowserFlashBrowseUrl: 'ckfinder/ckfinder.html?Type=Flash',    
-
-    filebrowserFlashUploadUrl: 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
-
-    toolbar:[
-
-    ['Source','-','Bold','Italic','Underline','Strike'],   
-    ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote','CreateDiv'],       
-
-    ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
-
-    ['Link','Unlink','Anchor','TextColor','BGColor'],['Maximize', 'ShowBlocks','-','About']
-
-    ['Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
-
-    ['Styles','Format','Font','FontSize']    
-
-    ]
-
-});     
-*/
-
 </script>
