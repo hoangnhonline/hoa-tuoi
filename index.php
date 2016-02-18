@@ -21,10 +21,10 @@ $model = new Home;
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Home page</title>
+<title><?php echo $meta_title; ?></title>
 <base href="http://<?php echo $_SERVER['SERVER_NAME']; ?>" />
-<meta name="description" content="">
-<meta name="keywords" content="">
+<meta name="description" content="<?php echo $meta_desc; ?>">
+<meta name="keywords" content="<?php echo $meta_keyword; ?>">
 <meta name="robots" content="index,follow" />
 
 <!-- Loading Google Web fonts-->
@@ -70,7 +70,7 @@ $model = new Home;
     
               <?php include "page/".$mod.".php"; ?>
               
-              <?php include "blocks/sidebar.php"; ?>
+              <?php if($mod != "contact") include "blocks/sidebar.php"; ?>
               
             </div><!-- End /.row -->
           </div><!-- End /.container -->   

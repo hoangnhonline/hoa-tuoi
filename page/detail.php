@@ -5,7 +5,7 @@
 
     <section class="breadcrumb">
       <ul class="clearfix">
-        <li><a href="<?php echo "http://".$_SERVER['SERVER_NAME']; ?>">Trang chủ</a></li>
+        <li><a href="<?php echo "http://".$_SERVER['SERVER_NAME']; ?>"><?php echo $arrText[16]['text_'.$lang]; ?></a></li>
         <?php 
         if($parent_id > 0){
         ?>

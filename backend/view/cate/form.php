@@ -153,7 +153,7 @@ if($cate_type_id > 0){
                                 $show_menu = 1;
                                }
                             ?>                     
-                            <div class="col-md-4">                                
+                            <div class="col-md-6">                                
                                 <div class="checkbox">
                                   <input type="checkbox" <?php if($show_menu == 1) echo "checked"; ?> value="1" name="show_menu"><label>&nbsp;Hiện trên menu</label>
                                 </div>
@@ -166,19 +166,19 @@ if($cate_type_id > 0){
                                     $is_new = $is_hot = 0;
                                }
                             ?>                     
-                            <div class="col-md-4">                                
+                             <!--<div class="col-md-4">                                
                                 <div class="checkbox">
                                   <input type="checkbox" <?php if($is_new == 1) echo "checked"; ?> value="1" name="is_new" id="is_new"><label>Mẫu hoa mới</label>
                                 </div>
-                            </div>
-                            <div class="col-md-4">                                
+                            </div>-->
+                            <div class="col-md-6">                                
                                 <div class="checkbox">
                                   <input type="checkbox" <?php if($is_hot == 1) echo "checked"; ?> value="1" name="is_hot" id="is_hot"><label>Danh mục HOT (trang chủ)</label>
                                 </div>
                             </div>
                         </td>
                     </tr>
-                    <tr>
+                    <!--<tr>
                         <td>Hình ảnh</td>
                         <td colspan="2">
                             <div class="form-group">                            
@@ -199,7 +199,7 @@ if($cate_type_id > 0){
 
                         </div>
                         </td>
-                    </tr> 
+                    </tr> -->
                     <tr>
                         <td>Meta Title</td>
                         <td>

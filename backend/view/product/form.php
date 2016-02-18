@@ -230,6 +230,24 @@ if($cate_type_id > 0){
                         </td>
                     </tr>
                     <tr>
+                        <td>Ghi chú 1</td>
+                        <td>
+                            <textarea class="form-control" name="note_1_vi" rows="3" id="note_1_vi"><?php if(isset($detail)) echo $detail['note_1_vi']; ?></textarea>                            
+                        </td>
+                        <td>
+                            <textarea class="form-control" name="note_1_en" rows="3" id="note_1_en"><?php if(isset($detail)) echo $detail['note_1_en']; ?></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ghi chú 2</td>
+                        <td>
+                            <textarea class="form-control" name="note_2_vi" rows="3" id="note_2_vi"><?php if(isset($detail)) echo $detail['note_2_vi']; ?></textarea>                            
+                        </td>
+                        <td>
+                            <textarea class="form-control" name="note_2_en" rows="3" id="note_2_en"><?php if(isset($detail)) echo $detail['note_2_en']; ?></textarea>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Meta Title</td>
                         <td>
                             <input type="text" name="meta_title_vi" id="meta_title_vi" value="<?php if(isset($detail)) echo $detail['meta_title_vi']; ?>" class="form-control">
@@ -508,5 +526,41 @@ CKEDITOR.replace('content_en',{
             height:300
     }
 );  
+CKEDITOR.replace('note_1_vi',{
+            filebrowserImageBrowseUrl : 'ckfinder/ckfinder.html?Type=hinh',
+            filebrowserFlashBrowseUrl : 'ckfinder/ckfinder.html?Type=Flash',
+            filebrowserImageUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+            filebrowserFlashUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
+            filebrowserBrowseUrl : 'ckfinder/ckfinder.html',            
+            height:200
+    }
+); 
+CKEDITOR.replace('note_1_en',{
+            filebrowserImageBrowseUrl : 'ckfinder/ckfinder.html?Type=hinh',
+            filebrowserFlashBrowseUrl : 'ckfinder/ckfinder.html?Type=Flash',
+            filebrowserImageUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+            filebrowserFlashUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
+            filebrowserBrowseUrl : 'ckfinder/ckfinder.html',            
+            height:200
+    }
+); 
+CKEDITOR.replace('note_2_vi',{
+            filebrowserImageBrowseUrl : 'ckfinder/ckfinder.html?Type=hinh',
+            filebrowserFlashBrowseUrl : 'ckfinder/ckfinder.html?Type=Flash',
+            filebrowserImageUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+            filebrowserFlashUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
+            filebrowserBrowseUrl : 'ckfinder/ckfinder.html',            
+            height:200
+    }
+); 
+CKEDITOR.replace('note_2_en',{
+            filebrowserImageBrowseUrl : 'ckfinder/ckfinder.html?Type=hinh',
+            filebrowserFlashBrowseUrl : 'ckfinder/ckfinder.html?Type=Flash',
+            filebrowserImageUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+            filebrowserFlashUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
+            filebrowserBrowseUrl : 'ckfinder/ckfinder.html',            
+            height:200
+    }
+); 
 
 </script>

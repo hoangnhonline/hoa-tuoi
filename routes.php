@@ -59,22 +59,34 @@ function checkCat($uri) {
     //$uri = str_replace(".html", '', $uri);
     $object_id = 0;
     $city_id = $district_id = $type_id = $price_id = "";
-    $arrTmp = explode('/',$uri);    
-    unset($arrTmp[0]);
-    if (preg_match($p_detail, $uri)) {
-        $mod = "detail";
-    }elseif(preg_match($p_cate, $uri) || preg_match($p_parent_cate, $uri) ){
-        $mod = "cate";        
-    }elseif(strpos($uri, 'trang/')){
-        $mod = "page";        
-    }elseif(strpos($uri, 'tin-tuc')){
-        $mod = "news";        
-    }elseif(strpos($uri, 'chi-tiet-tin')){
+    //var_dump($uri);    
+    if(strpos($uri, 'trang/') > 0 || strpos($uri, 'page/') > 0){
+        $mod = "pages";
+    }elseif(strpos($uri, 'lien-he.html') > 0 || strpos($uri, 'contact.html') > 0){
+        $mod = "contact";
+    }elseif(strpos($uri, 'tin-tuc.html') > 0 || strpos($uri, 'news.html') > 0){
+        $mod = "news";
+    }elseif(strpos($uri, 'chi-tiet-tin') > 0 || strpos($uri, 'news-detail') > 0){
         $mod = "news-detail";
     }else{
-        $mod = "home";     
-    }   
-    
+        $arrTmp = explode('/',$uri);    
+        unset($arrTmp[0]);
+        if (preg_match($p_detail, $uri)) {
+            $mod = "detail";
+        }elseif(preg_match($p_cate, $uri) || preg_match($p_parent_cate, $uri) ){
+            $mod = "cate";        
+        }elseif(strpos($uri, 'trang/')){
+            $mod = "page";        
+        }elseif(strpos($uri, 'tin-tuc')){
+            $mod = "news";        
+        }elseif(strpos($uri, 'chi-tiet-tin')){
+            $mod = "news-detail";
+        }else{
+            $mod = "home";     
+        }   
+    }
+    //if(strpos(, needle))
+    //var_dump($mod);
     return array("mod" =>$mod);
 }
 
@@ -100,9 +112,6 @@ switch ($mod) {
         */
         $seo = $model->getDetailSeo(4);        
         
-        break;    
-    case "contact": 
-        $seo = $model->getDetailSeo(3);              
         break;
     case "info" : 
         $seo = $model->getDetailSeo(8);
@@ -118,14 +127,13 @@ switch ($mod) {
 	    $product_id = (int) end($tmp);
         
         $seo = $detail = $model->getDetail("product", $product_id);
-        
         break;
     case "news-detail":        
-        $article_alias = $tmp_uri[2];        
+        $article_alias = $tmp_uri[2];
         $tmp = explode("-", $article_alias);        
-        $id = (int) end($tmp);
-        $detail = $model->getDetail('articles', $id);
-        $seo = $detail;
+        $article_id_curr = $id = (int) end($tmp);
+
+        $seo = $detailArr = $model->getDetail('articles', $id);        
 	    break; 
     case "content":        
         $page_id = $object_id; 
@@ -141,13 +149,25 @@ switch ($mod) {
         
         $arrTotal = $model->getListProduct($cate_type_id, $parent_id, $cate_id, array(), -1, -1, 1);        
         $page = 1;
-        $productArr = $model->getListProduct($cate_type_id, $parent_id, $cate_id, array(), 0, $phantrang, 1);
+        $productArr = $model->getListProduct($cate_type_id, $parent_id, $cate_id, array(), 0, $phantrang, 1);       
+        if($cate_id == 0){
+            $seo = $model->getDetail('cate', $parent_id);
+        }else{
+            $seo = $model->getDetail('cate', $cate_id);
+        }        
         break;
-    case "page":
+    case "pages":
+       
+        if(isset($tmp_uri[2])){
+            $page_alias = $tmp_uri[2];
+            $page_id = $model->getIdByAlias('pages', $page_alias, $lang);
+        }         
+        $detailArr = $seo = $model->getDetail('pages', $page_id);
         
-        $detailArr = $seo = $model->getDetailPageByAlias($alias);
-        //$rs_article = $model->getDetail('pages', $page_id);
-        //$arrDetailPage = mysql_fetch_assoc($rs_article);
+        break;
+     case "contact":
+        
+        $detailArr = $seo = $model->getDetail('pages', 9);        
         break;
     default :    
         $seo = $model->getDetailSeo(1);
@@ -169,4 +189,9 @@ switch ($mod) {
                    
         break;
 }
+
+$meta_title = $seo['meta_title_'.$lang];
+$meta_desc = $seo['meta_description_'.$lang];
+$meta_keyword = $seo['meta_keyword_'.$lang];
+
 ?>

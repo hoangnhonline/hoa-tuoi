@@ -1727,6 +1727,15 @@ input[type="text"], input[type="password"], select { }
   color: #444;
   text-decoration: underline;
 }
+.fnav-col li a:hover {
+  color: #fff !important;
+}
+.fnav-col li:before {
+  font-family: FontAwesome;
+  content: "\f105";
+  padding-right: 5px;
+  color: #ffff00;
+}
 
 /* Footer block */
 .fcontact-info .hotline i {

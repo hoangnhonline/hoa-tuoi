@@ -3,8 +3,8 @@
 class Home {
     function __construct() {
 		if($_SERVER['SERVER_NAME']=='hoatuoi.dev'){
-            mysql_connect('localhost', 'root', 'root') or die("Can't connect to server");
-            mysql_select_db('hoatuoi') or die("Can't connect database");
+            mysql_connect('localhost', 'root', '') or die("Can't connect to server");
+            mysql_select_db('thietke7_hoatuoi') or die("Can't connect database");
         }else{
             mysql_connect('localhost', 'thietke7_hoatuoi', 'huyhoang157') or die("Can't connect to server");
             mysql_select_db('thietke7_hoatuoi') or die("Can't connect database");
@@ -26,7 +26,14 @@ class Home {
         $row = mysql_fetch_assoc($rs);
         return $row;
     }
-
+    function getListRelatedNews($article_id, $cate_id){
+        $arrReturn = array();
+        $sql = mysql_query("SELECT * FROM articles WHERE id <> $article_id AND cate_id = $cate_id ORDER BY id DESC LIMIT 0, 5");
+        while($row = mysql_fetch_assoc($sql)){
+            $arrReturn[$row['id']] = $row;
+        }
+        return $arrReturn;
+    }
     function getListBannerByPosition($position_id){
         $arrReturn = array();
         $sql = mysql_query("SELECT * FROM banner WHERE position_id = $position_id");
@@ -402,7 +409,15 @@ class Home {
             $this->logError($arrLog);
         }
     }
-    
+    function getListLinkFooter($block_id){
+        $arr = array();
+        $sql = "SELECT block.name_vi as block_name_vi, block.name_en as block_name_en, link.* FROM block, link WHERE block.id = $block_id AND link.block_id = $block_id ";
+        $rs = mysql_query($sql);
+        while($row = mysql_fetch_assoc($rs)){
+            $arr[] = $row;
+        }
+        return $arr;
+    }
     function logError($arrLog){
         $time = date('d-m-Y H:i:s');
          ////put content to file

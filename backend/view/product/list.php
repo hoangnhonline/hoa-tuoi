@@ -97,7 +97,7 @@ $cateTypeArr = $model->getListCateType();
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="name">Thuộc menu</label>
-                             <select class="form-control"  name="menu_type" id="menu_type">
+                             <select class="form-control change-submit"  name="menu_type" id="menu_type">
                                 <option value="-1" <?php if($menu_type == -1) echo "selected"; ?>>Tất cả</option>
                                 <option value="1" <?php if($menu_type == 1) echo "selected"; ?>>Menu ngang</option>
                                 <option value="2" <?php if($menu_type == 2) echo "selected"; ?>>Menu dọc</option>

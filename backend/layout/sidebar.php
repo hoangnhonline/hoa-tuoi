@@ -139,10 +139,15 @@
                 </a>
             </li> 
             <li>
-                <a href="index.php?mod=block&act=list" data-link="lh">
+                <a href="index.php?mod=block&act=list" data-link="block">
                     <i class="fa fa-circle-o"></i> Link footer
                 </a>
-            </li>    
+            </li> 
+            <li>
+                <a href="index.php?mod=social&act=list" data-link="social">
+                    <i class="fa fa-circle-o"></i> Kết nối social
+                </a>
+            </li>   
             <li>
                 <a href="index.php?mod=user&act=list" data-link="user">
                     <i class="fa fa-circle-o"></i> Users

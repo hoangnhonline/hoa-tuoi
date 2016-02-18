@@ -23,31 +23,41 @@
         
           <div class="col-md-3 col-sm-6">
             <div class="footer-block">
-              <h3 class="title"><?php echo $arrText[5]['text_'.$lang]; ?></h3>
+              <?php 
+              $block1Arr = $model->getListLinkFooter(2);
+              if(!empty($block1Arr)){              
+              ?>
+               <h3 class="title"><?php echo $block1Arr[0]['block_name_'.$lang]; ?></h3>
               <div class="body-box">
                 <ul class="fnav-col">
-                  <li><a href="#">Giới thiệu</a></li>
-                  <li><a href="#">Tin tức</a></li>
-                  <li><a href="#">Tuyển dụng</a></li>
-                  <li><a href="#">Cách chăm sóc hoa</a></li>
-                  <li><a href="#">Liên hệ</a></li>
+                  <?php foreach ($block1Arr as $key => $value) {
+
+                   ?>
+                  <li>
+                    <a href="<?php if(!in_array($value['text_en'], array('News', 'Contact', 'Flowers care tips'))) { echo $lang == 'vi' ? "trang/" : "page/" ; }; ?><?php echo $value['link_url_'.$lang]; ?>"><?php echo $value['text_'.$lang]; ?></a></li>
+                  <?php } ?>                  
                 </ul>
               </div>
+              <?php } ?>
             </div>
           </div>
           
           <div class="col-md-3 col-sm-6">
             <div class="footer-block">
-              <h3 class="title"><?php echo $arrText[4]['text_'.$lang]; ?></h3>
+              <?php 
+              $block2Arr = $model->getListLinkFooter(1);
+              if(!empty($block2Arr)){              
+              ?>
+              <h3 class="title"><?php echo $block2Arr[0]['block_name_'.$lang]; ?></h3>
               <div class="body-box">
                 <ul class="fnav-col">
-                  <li><a href="#">Thắc mắc và khiếu nại</a></li>
-                  <li><a href="#">Cam kết hài lòng 100%</a></li>
-                  <li><a href="#">Hướng dẫn thanh toán</a></li>
-                  <li><a href="#">Chính sách và điều khoản</a></li>
-                  <li><a href="#">Câu hỏi thường gặp (FAQs)</a></li>
+                  <?php foreach ($block2Arr as $key => $value) {
+                  ?>
+                  <li><a href="<?php echo $lang == 'vi' ? "trang/" : "page/" ;?><?php echo $value['link_url_'.$lang]; ?>"><?php echo $value['text_'.$lang]; ?></a></li>
+                  <?php } ?>
                 </ul>
               </div>
+              <?php } ?>
             </div>
           </div>
           
@@ -56,10 +66,10 @@
               <h3 class="title"><?php echo $arrText[3]['text_'.$lang]; ?></h3>
               <div class="body-box">
                 <ul class="fsocial-list">
-                  <li><a href="#"><img src="images/ico-facebook.png" alt="" width="32" height="32"></a></li>
-                  <li><a href="#"><img src="images/ico-google.png" alt="" width="32" height="32"></a></li>
-                  <li><a href="#"><img src="images/ico-twitter.png" alt="" width="32" height="32"></a></li>
-                  <li><a href="#"><img src="images/ico-skype.png" alt="" width="32" height="33"></a></li>
+                  <li><a href="<?php echo $arrText[23]['text_'.$lang]; ?>"><img src="images/ico-facebook.png" alt="" width="32" height="32"></a></li>
+                  <li><a href="<?php echo $arrText[24]['text_'.$lang]; ?>"><img src="images/ico-google.png" alt="" width="32" height="32"></a></li>
+                  <li><a href="<?php echo $arrText[25]['text_'.$lang]; ?>"><img src="images/ico-twitter.png" alt="" width="32" height="32"></a></li>
+                  <li><a href="<?php echo $arrText[26]['text_'.$lang]; ?>"><img src="images/ico-skype.png" alt="" width="32" height="33"></a></li>
                 </ul>
               </div>
             </div>
@@ -70,10 +80,7 @@
               <h3 class="title"><?php echo $arrText[2]['text_'.$lang]; ?></span></h3>
               <div class="body-box">
                 <div class="fcontact-info">
-                  <p><i class="fa fa-home"></i> <?php echo $arrText[11]['text_'.$lang]; ?></p>
-                  <p class="hotline"><i class="fa fa-mobile"></i> <?php echo $arrText[12]['text_'.$lang]; ?></p>
-                  <p><i class="fa fa-reply"></i> <?php echo $arrText[13]['text_'.$lang]; ?></p>
-                  <p><i class="fa fa-external-link-square"></i> <?php echo $arrText[14]['text_'.$lang]; ?></p>
+                  <p><?php echo $arrText[11]['text_'.$lang]; ?></p>                  
                 </div>
               </div>
             </div>

@@ -164,7 +164,9 @@ class Backend {
                     }
                 }
             }
-            
+            if($table == "text"){
+                $sql.= " WHERE id NOT IN (23, 24, 25, 26) ";
+            }
             if($order == 1){
                 $sql .= " ORDER BY display_order ASC ";
             }else{
@@ -173,7 +175,7 @@ class Backend {
 
             if ($limit > 0 && $offset >= 0)
                 $sql .= " LIMIT $offset,$limit";
-            //echo $sql."<br>";
+            
             $rs = mysql_query($sql) or die(mysql_error());
             while($row = mysql_fetch_assoc($rs)){
                $arrResult['data'][$row['id']] = $row;
@@ -185,7 +187,14 @@ class Backend {
             $this->logError($arrLog);
         }
     }
-
+    function getListSocial(){
+        $sql = "SELECT * FROM text WHERE id IN (23,24,25,26)";
+        $rs = mysql_query($sql) or die(mysql_error());
+        while($row = mysql_fetch_assoc($rs)){
+           $arrResult[$row['id']] = $row;
+        }     
+        return $arrResult;
+    }
     function getListArray($table,$offset = -1 , $limit = -1, $arrCustom = array(), $order = 0){
         try{
             $arrResult = array();

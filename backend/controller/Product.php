@@ -25,6 +25,12 @@ $arrData['price_sale'] = str_replace(",", "", $price_sale);
 $arrData['content_vi'] = addslashes($_POST['content_vi']);
 $arrData['content_en'] = addslashes($_POST['content_en']);
 
+$arrData['note_1_vi'] = addslashes($_POST['note_1_vi']);
+$arrData['note_1_en'] = addslashes($_POST['note_1_en']);
+
+$arrData['note_2_vi'] = addslashes($_POST['note_2_vi']);
+$arrData['note_2_en'] = addslashes($_POST['note_2_en']);
+
 $image_url_upload = $_FILES['image_url_upload'];
 $image_url = "";
 if(($image_url_upload['name']!='')){
@@ -87,7 +93,7 @@ if($id > 0) {
 
 	$arrData['updated_at'] = time();
 
-	$id = $model->insert($table, $arrData);	
+	$id = $model->insert($table, $arrData);
 
 }
 mysql_query("DELETE FROM product_cate WHERE product_id = $id");
